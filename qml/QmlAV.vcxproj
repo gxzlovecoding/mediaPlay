@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4BBAA3D3-D6EE-3202-88B4-CF466B043ADA}</ProjectGuid>
+    <RootNamespace>QmlAV</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\lib_win_\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <IntermediateDirectory>..\.obj\QmlAV_win_\</IntermediateDirectory>
+    <PrimaryOutput>QmlAV</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\lib_win_\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <IntermediateDirectory>..\.obj\QmlAVd_win_\</IntermediateDirectory>
+    <PrimaryOutput>QmlAVd</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\lib_win_\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QmlAV</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</PostBuildEventUseInBuild>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\lib_win_\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QmlAVd</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>"..\src";"F:\qtspace\mediaPlay";"..\src\QtAV";".";"F:\qtspace\mediaPlay";"QmlAV";"F:\qtspace\mediaPlay\qml\..\srccompat\msvc";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore";"..\.moc\5.3.1\QmlAV";C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\.obj\QmlAV_win_\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;_CRT_SECURE_NO_WARNINGS;BUILD_QMLAV_LIB;__STDC_CONSTANT_MACROS;QT_NO_DEBUG;QT_PLUGIN;QT_QUICK_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_GUI_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;F:\qtspace\mediaPlay\lib_win_\QtAV1.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;F:\qtspace\mediaPlay\lib_win_;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <LinkDLL>true</LinkDLL>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\QmlAV.dll</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;_CRT_SECURE_NO_WARNINGS;BUILD_QMLAV_LIB;__STDC_CONSTANT_MACROS;QT_NO_DEBUG;QT_PLUGIN;QT_QUICK_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>
+if errorlevel 1 goto VCEnd
+-$(COPY_FILE) F:\qtspace\mediaPlay\lib_win_\QmlAV.dll F:\qtspace\mediaPlay\bin\QtAV\</Command>
+      <Message>
+-$(COPY_FILE) F:\qtspace\mediaPlay\lib_win_\QmlAV.dll F:\qtspace\mediaPlay\bin\QtAV\</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>"..\src";"F:\qtspace\mediaPlay";"..\src\QtAV";".";"F:\qtspace\mediaPlay";"QmlAV";"F:\qtspace\mediaPlay\qml\..\srccompat\msvc";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore";"..\.moc\5.3.1\QmlAVd";C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\.obj\QmlAVd_win_\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;_CRT_SECURE_NO_WARNINGS;BUILD_QMLAV_LIB;__STDC_CONSTANT_MACROS;QT_PLUGIN;QT_QUICK_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;F:\qtspace\mediaPlay\lib_win_\QtAVd1.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;F:\qtspace\mediaPlay\lib_win_;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <LinkDLL>true</LinkDLL>
+      <OutputFile>$(OutDir)\QmlAVd.dll</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;_CRT_SECURE_NO_WARNINGS;BUILD_QMLAV_LIB;__STDC_CONSTANT_MACROS;QT_PLUGIN;QT_QUICK_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>
+if errorlevel 1 goto VCEnd
+-$(COPY_FILE) F:\qtspace\mediaPlay\lib_win_\QmlAVd.dll F:\qtspace\mediaPlay\bin\QtAV\</Command>
+      <Message>
+-$(COPY_FILE) F:\qtspace\mediaPlay\lib_win_\QmlAVd.dll F:\qtspace\mediaPlay\bin\QtAV\</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\.moc\5.3.1\QmlAV\moc_MediaMetaData.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QmlAV\moc_QmlAVPlayer.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QmlAV\moc_QQuickItemRenderer.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QmlAV\moc_QuickSubtitle.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QmlAV\moc_QuickSubtitleItem.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QmlAV\moc_QuickVideoPreview.cpp" />
+    <ClCompile Include="MediaMetaData.cpp" />
+    <ClCompile Include="QQuickItemRenderer.cpp" />
+    <ClCompile Include="QmlAVPlayer.cpp" />
+    <ClCompile Include="QuickSubtitle.cpp" />
+    <ClCompile Include="QuickSubtitleItem.cpp" />
+    <ClCompile Include="QuickVideoPreview.cpp" />
+    <ClCompile Include="SGVideoNode.cpp" />
+    <ClCompile Include="plugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="QmlAV\Export.h" />
+    <CustomBuild Include="QmlAV\MediaMetaData.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_NO_DEBUG -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing MediaMetaData.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAVd" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing MediaMetaData.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QmlAV\QQuickItemRenderer.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_NO_DEBUG -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QQuickItemRenderer.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAVd" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QQuickItemRenderer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QmlAV\private\QQuickItemRenderer_p.h" />
+    <CustomBuild Include="QmlAV\QmlAVPlayer.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_NO_DEBUG -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QmlAVPlayer.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAVd" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QmlAVPlayer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QmlAV\QuickSubtitle.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_NO_DEBUG -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QuickSubtitle.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAVd" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QuickSubtitle.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QmlAV\QuickSubtitleItem.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_NO_DEBUG -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QuickSubtitleItem.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAVd" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QuickSubtitleItem.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QmlAV\QuickVideoPreview.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_NO_DEBUG -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QuickVideoPreview.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAVd" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QuickVideoPreview.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QmlAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QmlAV\SGVideoNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QmlAV\plugin.moc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">plugin.cpp;$(QTDIR)\bin\moc.exe;.\plugin.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "plugin.cpp" -o "F:\qtspace\mediaPlay\.moc\5.3.1\QmlAV\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_NO_DEBUG -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing plugin.cpp...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">F:\qtspace\mediaPlay\.moc\5.3.1\QmlAV\plugin.moc;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;.\plugin.cpp</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing plugin.cpp...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QmlAV\%(Filename).moc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "plugin.cpp" -o "..\.moc\5.3.1\QmlAV\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I.\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\src\QtAV" "-I." "-I.\QmlAV" "-IF:\qtspace\mediaPlay\qml\..\srccompat\msvc" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQuick" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtQml" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtNetwork" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\.moc\5.3.1\QmlAVd" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+    </CustomBuild>
+    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QmlAVd\plugin.moc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">plugin.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\moc.exe  -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QMLAV_LIB -D__STDC_CONSTANT_MACROS -DQT_PLUGIN -DQT_QUICK_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/mkspecs/win32-msvc2013 -IF:/qtspace/mediaPlay/qml -IF:/qtspace/mediaPlay/src -IF:/qtspace/mediaPlay -IF:/qtspace/mediaPlay/src/QtAV -IF:/qtspace/mediaPlay/qml -IF:/qtspace/mediaPlay -IF:/qtspace/mediaPlay/qml/QmlAV -IF:/qtspace/mediaPlay/srccompat/msvc -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtQuick -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtQml -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtNetwork -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtGui -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtCore plugin.cpp -o F:\qtspace\mediaPlay\.moc\5.3.1\QmlAVd\plugin.moc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC plugin.cpp</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\qtspace\mediaPlay\.moc\5.3.1\QmlAVd\plugin.moc;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_Win32="msvc2013_opengl" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

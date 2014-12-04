@@ -1,0 +1,702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F33A4207-A525-3202-B264-979D175C2B09}</ProjectGuid>
+    <RootNamespace>QtAV</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\lib_win_\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <IntermediateDirectory>..\.obj\QtAV_win_\</IntermediateDirectory>
+    <PrimaryOutput>QtAV1</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\lib_win_\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <IntermediateDirectory>..\.obj\QtAVd_win_\</IntermediateDirectory>
+    <PrimaryOutput>QtAVd1</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\lib_win_\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">QtAV1</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</PostBuildEventUseInBuild>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\lib_win_\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">QtAVd1</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>"$(QTDIR)\include";".";"F:\qtspace\mediaPlay";"QtAV";"compat\msvc";"..\contrib\libchardet\src";"..\contrib\capi";"cuda";"cuda\dllapi";"$(QTDIR)\include\QtWidgets";"$(QTDIR)\include\QtGui";"$(QTDIR)\include\QtCore";"..\.moc\5.3.1\QtAV";$(QTDIR)\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\.obj\QtAV_win_\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QTAV_HAVE_WIDGETS=1;_CRT_SECURE_NO_WARNINGS;BUILD_QTAV_LIB;__STDC_CONSTANT_MACROS;QTAV_HAVE_CHARDET=1;BUILD_CHARDET_STATIC;QTAV_HAVE_CAPI=1;BUILD_CAPI_STATIC;QTAV_HAVE_AVRESAMPLE=1;QTAV_HAVE_DSOUND=1;QTAV_HAVE_CUDA=1;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;user32.lib;gdi32.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;avresample.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkDLL>true</LinkDLL>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\QtAV1.dll</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <Version>1.41</Version>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QTAV_HAVE_WIDGETS=1;_CRT_SECURE_NO_WARNINGS;BUILD_QTAV_LIB;__STDC_CONSTANT_MACROS;QTAV_HAVE_CHARDET=1;BUILD_CHARDET_STATIC;QTAV_HAVE_CAPI=1;BUILD_CAPI_STATIC;QTAV_HAVE_AVRESAMPLE=1;QTAV_HAVE_DSOUND=1;QTAV_HAVE_CUDA=1;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy  "$(TargetPath)" "..\bin"</Command>
+      <Message>Copy QtAV1.dll to ..\bin</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>"$(QTDIR)\include";".";"F:\qtspace\mediaPlay";"QtAV";"compat\msvc";"..\contrib\libchardet\src";"..\contrib\capi";"cuda";"cuda\dllapi";"$(QTDIR)\include\QtWidgets";"$(QTDIR)\include\QtGui";"$(QTDIR)\include\QtCore";"..\.moc\5.3.1\QtAVd";$(QTDIR)\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\.obj\QtAVd_win_\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QTAV_HAVE_WIDGETS=1;_CRT_SECURE_NO_WARNINGS;BUILD_QTAV_LIB;__STDC_CONSTANT_MACROS;QTAV_HAVE_CHARDET=1;BUILD_CHARDET_STATIC;QTAV_HAVE_CAPI=1;BUILD_CAPI_STATIC;QTAV_HAVE_AVRESAMPLE=1;QTAV_HAVE_DSOUND=1;QTAV_HAVE_CUDA=1;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;user32.lib;gdi32.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;avresample.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkDLL>true</LinkDLL>
+      <OutputFile>$(OutDir)\QtAVd1.dll</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <Version>1.41</Version>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QTAV_HAVE_WIDGETS=1;_CRT_SECURE_NO_WARNINGS;BUILD_QTAV_LIB;__STDC_CONSTANT_MACROS;QTAV_HAVE_CHARDET=1;BUILD_CHARDET_STATIC;QTAV_HAVE_CAPI=1;BUILD_CAPI_STATIC;QTAV_HAVE_AVRESAMPLE=1;QTAV_HAVE_DSOUND=1;QTAV_HAVE_CUDA=1;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy  "$(TargetPath)" "..\bin"</Command>
+      <Message>Copy QtAVd1.dll to ..\bin</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AudioOutput.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AudioThread.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AVClock.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AVDecoder.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AVDemuxer.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AVDemuxThread.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AVPlayer.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_AVThread.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_Filter.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_FilterManager.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_GraphicsItemRenderer.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_LibAVFilter.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_OpenGLVideo.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_OutputSet.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_PlayerSubtitle.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_ShaderManager.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_Subtitle.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_SubtitleFilter.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_VideoCapture.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_VideoFrameExtractor.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_VideoOutput.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_VideoOutputEventFilter.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_VideoThread.cpp" />
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_WidgetRenderer.cpp" />
+    <ClCompile Include="AVClock.cpp" />
+    <ClCompile Include="AVCompat.cpp" />
+    <ClCompile Include="codec\AVDecoder.cpp" />
+    <ClCompile Include="AVDemuxThread.cpp" />
+    <ClCompile Include="AVDemuxer.cpp" />
+    <ClCompile Include="AVError.cpp" />
+    <ClCompile Include="GeneratedFiles\qrc_QtAV.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_shaders.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="output\AVOutput.cpp" />
+    <ClCompile Include="AVPlayer.cpp" />
+    <ClCompile Include="AVPlayerPrivate.cpp" />
+    <ClCompile Include="AVThread.cpp" />
+    <ClCompile Include="codec\audio\AudioDecoder.cpp" />
+    <ClCompile Include="AudioFormat.cpp" />
+    <ClCompile Include="AudioFrame.cpp" />
+    <ClCompile Include="output\audio\AudioOutput.cpp" />
+    <ClCompile Include="output\audio\AudioOutputDSound.cpp" />
+    <ClCompile Include="output\audio\AudioOutputTypes.cpp" />
+    <ClCompile Include="AudioResampler.cpp" />
+    <ClCompile Include="AudioResamplerLibav.cpp" />
+    <ClCompile Include="AudioResamplerTypes.cpp" />
+    <ClCompile Include="AudioThread.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\CharDistribution.cpp" />
+    <ClCompile Include="subtitle\CharsetDetector.cpp" />
+    <ClCompile Include="ColorTransform.cpp" />
+    <ClCompile Include="CommonTypes.cpp" />
+    <ClCompile Include="filter\Filter.cpp" />
+    <ClCompile Include="filter\FilterContext.cpp" />
+    <ClCompile Include="filter\FilterManager.cpp" />
+    <ClCompile Include="Frame.cpp" />
+    <ClCompile Include="utils\GPUMemCopy.cpp" />
+    <ClCompile Include="output\video\GraphicsItemRenderer.cpp" />
+    <ClCompile Include="ImageConverter.cpp" />
+    <ClCompile Include="ImageConverterFF.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\JpCntx.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\LangBulgarianModel.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\LangCyrillicModel.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\LangGreekModel.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\LangHebrewModel.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\LangHungarianModel.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\LangThaiModel.cpp" />
+    <ClCompile Include="filter\LibAVFilter.cpp" />
+    <ClCompile Include="utils\Logger.cpp" />
+    <ClCompile Include="utils\OpenGLHelper.cpp" />
+    <ClCompile Include="output\video\OpenGLRendererBase.cpp" />
+    <ClCompile Include="OpenGLVideo.cpp" />
+    <ClCompile Include="output\OutputSet.cpp" />
+    <ClCompile Include="Packet.cpp" />
+    <ClCompile Include="subtitle\PlainText.cpp" />
+    <ClCompile Include="subtitle\PlayerSubtitle.cpp" />
+    <ClCompile Include="QAVIOContext.cpp" />
+    <ClCompile Include="output\video\QPainterRenderer.cpp" />
+    <ClCompile Include="QtAV_Global.cpp" />
+    <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="Statistics.cpp" />
+    <ClCompile Include="subtitle\Subtitle.cpp" />
+    <ClCompile Include="filter\SubtitleFilter.cpp" />
+    <ClCompile Include="subtitle\SubtitleProcessor.cpp" />
+    <ClCompile Include="subtitle\SubtitleProcessorFFmpeg.cpp" />
+    <ClCompile Include="VideoCapture.cpp" />
+    <ClCompile Include="codec\video\VideoDecoder.cpp" />
+    <ClCompile Include="codec\video\VideoDecoderCUDA.cpp" />
+    <ClCompile Include="codec\video\VideoDecoderFFmpeg.cpp" />
+    <ClCompile Include="codec\video\VideoDecoderFFmpegHW.cpp" />
+    <ClCompile Include="codec\video\VideoDecoderTypes.cpp" />
+    <ClCompile Include="VideoFormat.cpp" />
+    <ClCompile Include="VideoFrame.cpp" />
+    <ClCompile Include="VideoFrameExtractor.cpp" />
+    <ClCompile Include="output\video\VideoOutput.cpp" />
+    <ClCompile Include="output\video\VideoOutputEventFilter.cpp" />
+    <ClCompile Include="output\video\VideoRenderer.cpp" />
+    <ClCompile Include="output\video\VideoRendererTypes.cpp" />
+    <ClCompile Include="VideoShader.cpp" />
+    <ClCompile Include="VideoThread.cpp" />
+    <ClCompile Include="output\video\WidgetRenderer.cpp" />
+    <ClCompile Include="..\contrib\capi\capi.cpp" />
+    <ClCompile Include="cuda\cuda_api.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\entry\impl.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsBig5Prober.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsCharSetProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsEUCJPProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsEUCKRProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsEUCTWProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsEscCharsetProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsEscSM.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsGB2312Prober.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsHebrewProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsLatin1Prober.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsMBCSGroupProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsMBCSSM.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsSBCSGroupProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsSBCharSetProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsSJISProber.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsUTF8Prober.cpp" />
+    <ClCompile Include="..\contrib\libchardet\src\nsUniversalDetector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="QtAV\AVClock.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AVClock.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AVClock.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\private\AVCompat.h" />
+    <CustomBuild Include="QtAV\AVDecoder.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AVDecoder.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AVDecoder.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\private\AVDecoder_p.h" />
+    <CustomBuild Include="AVDemuxThread.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AVDemuxThread.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AVDemuxThread.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QtAV\AVDemuxer.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AVDemuxer.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AVDemuxer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\AVError.h" />
+    <ClInclude Include="QtAV\AVOutput.h" />
+    <ClInclude Include="QtAV\private\AVOutput_p.h" />
+    <CustomBuild Include="QtAV\AVPlayer.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AVPlayer.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AVPlayer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="AVPlayerPrivate.h" />
+    <CustomBuild Include="AVThread.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AVThread.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AVThread.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="AVThread_p.h" />
+    <ClInclude Include="QtAV\AudioDecoder.h" />
+    <ClInclude Include="QtAV\AudioFormat.h" />
+    <ClInclude Include="QtAV\AudioFrame.h" />
+    <CustomBuild Include="QtAV\AudioOutput.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AudioOutput.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AudioOutput.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\AudioOutputTypes.h" />
+    <ClInclude Include="QtAV\private\AudioOutput_p.h" />
+    <ClInclude Include="QtAV\AudioResampler.h" />
+    <ClInclude Include="QtAV\AudioResamplerTypes.h" />
+    <ClInclude Include="QtAV\private\AudioResampler_p.h" />
+    <CustomBuild Include="AudioThread.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AudioThread.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing AudioThread.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="utils\BlockingQueue.h" />
+    <ClInclude Include="..\contrib\libchardet\src\CharDistribution.h" />
+    <ClInclude Include="subtitle\CharsetDetector.h" />
+    <ClInclude Include="QtAV\ColorTransform.h" />
+    <ClInclude Include="QtAV\CommonTypes.h" />
+    <ClInclude Include="QtAV\FactoryDefine.h" />
+    <CustomBuild Include="QtAV\Filter.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing Filter.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing Filter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\FilterContext.h" />
+    <CustomBuild Include="filter\FilterManager.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing FilterManager.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing FilterManager.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\private\Filter_p.h" />
+    <ClInclude Include="QtAV\Frame.h" />
+    <ClInclude Include="QtAV\private\Frame_p.h" />
+    <ClInclude Include="utils\GPUMemCopy.h" />
+    <CustomBuild Include="QtAV\GraphicsItemRenderer.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing GraphicsItemRenderer.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing GraphicsItemRenderer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\ImageConverter.h" />
+    <ClInclude Include="QtAV\ImageConverterTypes.h" />
+    <ClInclude Include="QtAV\private\ImageConverter_p.h" />
+    <ClInclude Include="..\contrib\libchardet\src\JpCntx.h" />
+    <CustomBuild Include="QtAV\LibAVFilter.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing LibAVFilter.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing LibAVFilter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="utils\Logger.h" />
+    <ClInclude Include="utils\OpenGLHelper.h" />
+    <ClInclude Include="QtAV\OpenGLRendererBase.h" />
+    <ClInclude Include="QtAV\private\OpenGLRendererBase_p.h" />
+    <CustomBuild Include="QtAV\OpenGLVideo.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing OpenGLVideo.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing OpenGLVideo.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="output\OutputSet.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing OutputSet.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing OutputSet.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\Packet.h" />
+    <ClInclude Include="subtitle\PlainText.h" />
+    <CustomBuild Include="QtAV\private\PlayerSubtitle.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing PlayerSubtitle.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing PlayerSubtitle.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QAVIOContext.h" />
+    <ClInclude Include="QtAV\QPainterRenderer.h" />
+    <ClInclude Include="QtAV\private\QPainterRenderer_p.h" />
+    <ClInclude Include="QtAV\QtAV.h" />
+    <ClInclude Include="QtAV\QtAV_Global.h" />
+    <CustomBuild Include="ShaderManager.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing ShaderManager.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ShaderManager.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="utils\SharedPtr.h" />
+    <ClInclude Include="QtAV\Statistics.h" />
+    <CustomBuild Include="QtAV\Subtitle.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing Subtitle.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing Subtitle.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QtAV\SubtitleFilter.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing SubtitleFilter.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing SubtitleFilter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\private\SubtitleProcessor.h" />
+    <ClInclude Include="QtAV\SurfaceInterop.h" />
+    <CustomBuild Include="QtAV\VideoCapture.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoCapture.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoCapture.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\VideoDecoder.h" />
+    <ClInclude Include="QtAV\VideoDecoderFFmpegHW.h" />
+    <ClInclude Include="QtAV\private\VideoDecoderFFmpegHW_p.h" />
+    <ClInclude Include="QtAV\VideoDecoderTypes.h" />
+    <ClInclude Include="QtAV\private\VideoDecoder_p.h" />
+    <ClInclude Include="QtAV\VideoFormat.h" />
+    <ClInclude Include="QtAV\VideoFrame.h" />
+    <CustomBuild Include="QtAV\VideoFrameExtractor.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoFrameExtractor.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoFrameExtractor.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QtAV\VideoOutput.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoOutput.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoOutput.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="output\video\VideoOutputEventFilter.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoOutputEventFilter.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoOutputEventFilter.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="QtAV\VideoRenderer.h" />
+    <ClInclude Include="QtAV\VideoRendererTypes.h" />
+    <ClInclude Include="QtAV\private\VideoRenderer_p.h" />
+    <ClInclude Include="QtAV\VideoShader.h" />
+    <ClInclude Include="QtAV\private\VideoShader_p.h" />
+    <CustomBuild Include="VideoThread.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoThread.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoThread.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="QtAV\WidgetRenderer.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing WidgetRenderer.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "..\.moc\5.3.1\QtAV\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing WidgetRenderer.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="..\contrib\capi\capi.h" />
+    <ClInclude Include="..\contrib\libchardet\src\chardet.h" />
+    <ClInclude Include="cuda\cuda_api.h" />
+    <ClInclude Include="QtAV\dptr.h" />
+    <ClInclude Include="QtAV\private\factory.h" />
+    <ClInclude Include="cuda\helper_cuda.h" />
+    <ClInclude Include="QtAV\private\mkid.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsBig5Prober.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsCharSetProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsCodingStateMachine.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsEUCJPProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsEUCKRProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsEUCTWProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsEscCharsetProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsGB2312Prober.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsHebrewProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsLatin1Prober.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsMBCSGroupProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsPkgInt.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsSBCSGroupProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsSBCharSetProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsSJISProber.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsUTF8Prober.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nsUniversalDetector.h" />
+    <ClInclude Include="..\contrib\libchardet\src\nscore.h" />
+    <ClInclude Include="cuda\dllapi\nv_inc.h" />
+    <ClInclude Include="QtAV\private\prepost.h" />
+    <ClInclude Include="..\contrib\libchardet\src\prmem.h" />
+    <ClInclude Include="QtAV\private\singleton.h" />
+    <ClInclude Include="QtAV\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderCUDA.moc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">codec\video\VideoDecoderCUDA.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/mkspecs/win32-msvc2013 -IF:/qtspace/mediaPlay/src -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include -IF:/qtspace/mediaPlay/src -IF:/qtspace/mediaPlay -IF:/qtspace/mediaPlay/src/QtAV -IF:/qtspace/mediaPlay/src/compat/msvc -IF:/qtspace/mediaPlay/contrib/libchardet/src -IF:/qtspace/mediaPlay/contrib/capi -IF:/qtspace/mediaPlay/src/cuda -IF:/qtspace/mediaPlay/src/cuda/dllapi -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtWidgets -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtGui -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtCore codec\video\VideoDecoderCUDA.cpp -o F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderCUDA.moc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC codec\video\VideoDecoderCUDA.cpp</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderCUDA.moc;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderFFmpeg.moc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">codec\video\VideoDecoderFFmpeg.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/mkspecs/win32-msvc2013 -IF:/qtspace/mediaPlay/src -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include -IF:/qtspace/mediaPlay/src -IF:/qtspace/mediaPlay -IF:/qtspace/mediaPlay/src/QtAV -IF:/qtspace/mediaPlay/src/compat/msvc -IF:/qtspace/mediaPlay/contrib/libchardet/src -IF:/qtspace/mediaPlay/contrib/capi -IF:/qtspace/mediaPlay/src/cuda -IF:/qtspace/mediaPlay/src/cuda/dllapi -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtWidgets -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtGui -IC:/qt/qt5.3.1/5.3/msvc2013_opengl/include/QtCore codec\video\VideoDecoderFFmpeg.cpp -o F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderFFmpeg.moc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC codec\video\VideoDecoderFFmpeg.cpp</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderFFmpeg.moc;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\.moc\5.3.1\QtAV\VideoDecoderCUDA.moc">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;.\codec\video\VideoDecoderCUDA.cpp</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoDecoderCUDA.cpp...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\%(Filename).moc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "codec\video\VideoDecoderCUDA.cpp" -o "..\.moc\5.3.1\QtAV\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;.\codec\video\VideoDecoderCUDA.cpp</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoDecoderCUDA.cpp...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\%(Filename).moc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "codec\video\VideoDecoderCUDA.cpp" -o "..\.moc\5.3.1\QtAV\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+    </CustomBuild>
+    <CustomBuild Include="..\.moc\5.3.1\QtAV\VideoDecoderFFmpeg.moc">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;.\codec\video\VideoDecoderFFmpeg.cpp</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoDecoderFFmpeg.cpp...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\.moc\5.3.1\QtAV\%(Filename).moc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "codec\video\VideoDecoderFFmpeg.cpp" -o "..\.moc\5.3.1\QtAV\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAVd" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;.\codec\video\VideoDecoderFFmpeg.cpp</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoDecoderFFmpeg.cpp...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\.moc\5.3.1\QtAV\%(Filename).moc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "codec\video\VideoDecoderFFmpeg.cpp" -o "..\.moc\5.3.1\QtAV\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -DQTAV_HAVE_WIDGETS=1 -D_CRT_SECURE_NO_WARNINGS -DBUILD_QTAV_LIB -D__STDC_CONSTANT_MACROS -DQTAV_HAVE_CHARDET=1 -DBUILD_CHARDET_STATIC -DQTAV_HAVE_CAPI=1 -DBUILD_CAPI_STATIC -DQTAV_HAVE_AVRESAMPLE=1 -DQTAV_HAVE_DSOUND=1 -DQTAV_HAVE_CUDA=1 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_WINDLL "-I$(QTDIR)\include" "-I." "-IF:\qtspace\mediaPlay" "-I.\QtAV" "-I.\compat\msvc" "-I.\..\contrib\libchardet\src" "-I.\..\contrib\capi" "-I.\cuda" "-I.\cuda\dllapi" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\.moc\5.3.1\QtAV" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
+    </CustomBuild>
+    <None Include="i18n\QtAV_zh_CN.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="QtAV.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath);.\i18n\QtAV_zh_CN.qm;.\QtAV.svg;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);.\i18n\QtAV_zh_CN.qm;.\QtAV.svg;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="QtAV.svg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="i18n\QtAV_zh_CN.qm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="shaders\planar.f.glsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="shaders\rgb.f.glsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+    <CustomBuild Include="shaders\shaders.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath);.\shaders\planar.f.glsl;.\shaders\rgb.f.glsl;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);.\shaders\planar.f.glsl;.\shaders\rgb.f.glsl;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="F:\qtspace\mediaPlay\src\QtAV_resource.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ResourceCompile>
+    <ResourceCompile Include="F:\qtspace\mediaPlay\src\QtAVd_resource.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_Win32="msvc2013_opengl" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

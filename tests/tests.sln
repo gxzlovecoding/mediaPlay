@@ -1,0 +1,50 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ao", "F:/qtspace/mediaPlay/tests/ao\ao.vcxproj", "{A1508A32-7173-36CC-8B6D-02AA9C4A61EC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decoder", "F:/qtspace/mediaPlay/tests/decoder\decoder.vcxproj", "{91BC4922-FA9E-367E-BC12-AA7BCBBEC5EF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "extract", "F:/qtspace/mediaPlay/tests/extract\extract.vcxproj", "{32CB9058-F7AD-31E4-B519-4B500205EA09}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qiodevice", "F:/qtspace/mediaPlay/tests/qiodevice\qiodevice.vcxproj", "{2609A9CF-917F-307E-B47F-CEB11C81C922}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "subtitle", "F:/qtspace/mediaPlay/tests/subtitle\subtitle.vcxproj", "{79BF4622-C87E-3FDA-9039-00E134A3371D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "playerthread", "F:/qtspace/mediaPlay/tests/playerthread\playerthread.vcxproj", "{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1508A32-7173-36CC-8B6D-02AA9C4A61EC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A1508A32-7173-36CC-8B6D-02AA9C4A61EC}.Debug|Win32.Build.0 = Debug|Win32
+		{A1508A32-7173-36CC-8B6D-02AA9C4A61EC}.Release|Win32.ActiveCfg = Release|Win32
+		{A1508A32-7173-36CC-8B6D-02AA9C4A61EC}.Release|Win32.Build.0 = Release|Win32
+		{91BC4922-FA9E-367E-BC12-AA7BCBBEC5EF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{91BC4922-FA9E-367E-BC12-AA7BCBBEC5EF}.Debug|Win32.Build.0 = Debug|Win32
+		{91BC4922-FA9E-367E-BC12-AA7BCBBEC5EF}.Release|Win32.ActiveCfg = Release|Win32
+		{91BC4922-FA9E-367E-BC12-AA7BCBBEC5EF}.Release|Win32.Build.0 = Release|Win32
+		{32CB9058-F7AD-31E4-B519-4B500205EA09}.Debug|Win32.ActiveCfg = Debug|Win32
+		{32CB9058-F7AD-31E4-B519-4B500205EA09}.Debug|Win32.Build.0 = Debug|Win32
+		{32CB9058-F7AD-31E4-B519-4B500205EA09}.Release|Win32.ActiveCfg = Release|Win32
+		{32CB9058-F7AD-31E4-B519-4B500205EA09}.Release|Win32.Build.0 = Release|Win32
+		{2609A9CF-917F-307E-B47F-CEB11C81C922}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2609A9CF-917F-307E-B47F-CEB11C81C922}.Debug|Win32.Build.0 = Debug|Win32
+		{2609A9CF-917F-307E-B47F-CEB11C81C922}.Release|Win32.ActiveCfg = Release|Win32
+		{2609A9CF-917F-307E-B47F-CEB11C81C922}.Release|Win32.Build.0 = Release|Win32
+		{79BF4622-C87E-3FDA-9039-00E134A3371D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{79BF4622-C87E-3FDA-9039-00E134A3371D}.Debug|Win32.Build.0 = Debug|Win32
+		{79BF4622-C87E-3FDA-9039-00E134A3371D}.Release|Win32.ActiveCfg = Release|Win32
+		{79BF4622-C87E-3FDA-9039-00E134A3371D}.Release|Win32.Build.0 = Release|Win32
+		{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}.Debug|Win32.Build.0 = Debug|Win32
+		{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}.Release|Win32.ActiveCfg = Release|Win32
+		{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
