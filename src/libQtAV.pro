@@ -17,6 +17,13 @@ greaterThan(QT_MAJOR_VERSION, 4) {
   }
 }
 CONFIG *= qtav-buildlib
+
+INCLUDEPATH +=F:\3rd-party\ffmpeg-2.3.3-mingw+msvc-x86+x64\include
+LIBPATH +=F:\3rd-party\ffmpeg-2.3.3-mingw+msvc-x86+x64\lib
+
+INCLUDEPATH +=F:\3rd-party\portaudio-v19_msvc2013-x86+x64\include
+LIBPATH +=F:\3rd-party\portaudio-v19_msvc2013-x86+x64\lib\x86
+
 INCLUDEPATH += $$[QT_INSTALL_HEADERS]
 #release: DEFINES += QT_NO_DEBUG_OUTPUT
 #var with '_' can not pass to pri?

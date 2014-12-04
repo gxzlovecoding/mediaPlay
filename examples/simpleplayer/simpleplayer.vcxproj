@@ -54,6 +54,9 @@
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">simpleplayer</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>"..\..\src";"F:\qtspace\mediaPlay";"..\..\src\QtAV";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtOpenGL";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtWidgets";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore";"..\..\.moc\5.3.1\simpleplayer";C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

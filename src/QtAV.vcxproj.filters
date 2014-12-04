@@ -92,6 +92,9 @@
     <ClCompile Include="output\audio\AudioOutputDSound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="output\audio\AudioOutputPortAudio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="output\audio\AudioOutputTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -129,6 +132,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Frame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="output\video\GLWidgetRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="output\video\GLWidgetRenderer2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utils\GPUMemCopy.cpp">
@@ -356,6 +365,12 @@
     <ClCompile Include="..\.moc\5.3.1\QtAV\moc_FilterManager.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_GLWidgetRenderer.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\.moc\5.3.1\QtAV\moc_GLWidgetRenderer2.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\.moc\5.3.1\QtAV\moc_GraphicsItemRenderer.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -511,6 +526,12 @@
     <ClInclude Include="QtAV\private\Frame_p.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="QtAV\GLWidgetRenderer.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QtAV\GLWidgetRenderer2.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="utils\GPUMemCopy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
