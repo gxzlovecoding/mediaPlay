@@ -64,4 +64,6 @@ Release
 *moc_*
 *.moc
 *qrc_res.cpp
+*.sdf
+*.opensdf
 
