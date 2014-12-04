@@ -66,4 +66,5 @@ Release
 *qrc_res.cpp
 *.sdf
 *.opensdf
+GeneratedFiles/
 
