@@ -291,10 +291,14 @@ bool AVDemuxer::readFrame()
         started_ = true;
         emit started();
     }
+
+	/*
     if (stream_idx != videoStream() && stream_idx != audioStream() && stream_idx != subtitleStream()) {
         //qWarning("[AVDemuxer] unknown stream index: %d", stream_idx);
         return false;
     }
+	*/
+
     pkt->hasKeyFrame = !!(packet.flags & AV_PKT_FLAG_KEY);
     // what about marking packet as invalid and do not use isCorrupt?
     pkt->isCorrupt = !!(packet.flags & AV_PKT_FLAG_CORRUPT);

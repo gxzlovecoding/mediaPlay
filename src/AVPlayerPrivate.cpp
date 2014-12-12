@@ -59,25 +59,29 @@ AVPlayer::Private::Private()
     , timer_id(-1)
     , read_thread(0)
     , clock(new AVClock(AVClock::AudioClock))
-    , vo(0)
-    , ao(0)
-    , adec(0)
-    , vdec(0)
-    , athread(0)
-    , vthread(0)
     , vcapture(0)
     , speed(1.0)
-    , ao_enabled(true)
-    , vos(0)
-    , aos(0)
     , brightness(0)
     , contrast(0)
     , saturation(0)
     , seeking(false)
     , seek_target(0)
     , interrupt_timeout(30000)
-    , mute(false)
+	, totalProgam(0)
 {
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		vos[i] = 0;
+		aos[i] = 0;
+		adec[i] = 0;
+		vdec[i] = 0;
+		athread[i] = 0;
+		vthread[i] = 0;
+		ao[i] = 0;
+		ao_enabled[i] = true;
+		mute[i] = false;
+	}
+
     demuxer.setInterruptTimeout(interrupt_timeout);
     /*
      * reset_state = true;
@@ -113,28 +117,31 @@ AVPlayer::Private::Private()
 }
 AVPlayer::Private::~Private() {
     // TODO: scoped ptr
-    if (ao) {
-        delete ao;
-        ao = 0;
-    }
-    if (adec) {
-        delete adec;
-        adec = 0;
-    }
-    if (vdec) {
-        delete vdec;
-        vdec = 0;
-    }
-    if (vos) {
-        vos->clearOutputs();
-        delete vos;
-        vos = 0;
-    }
-    if (aos) {
-        aos->clearOutputs();
-        delete aos;
-        aos = 0;
-    }
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		if (ao[i]) {
+			delete ao[i];
+			ao[i] = 0;
+		}
+		if (adec[i]) {
+			delete adec[i];
+			adec[i] = 0;
+		}
+		if (vdec[i]) {
+			delete vdec[i];
+			vdec[i] = 0;
+		}
+		if (vos[i]) {
+			vos[i]->clearOutputs();
+			delete vos[i];
+			vos[i] = 0;
+		}
+		if (aos[i]) {
+			aos[i]->clearOutputs();
+			delete aos[i];
+			aos[i] = 0;
+		}
+	}
     if (vcapture) {
         delete vcapture;
         vcapture = 0;
@@ -161,8 +168,13 @@ void AVPlayer::Private::initStatistics(AVPlayer *player)
     //fmt_ctx->duration may be AV_NOPTS_VALUE. AVDemuxer.duration deals with this case
     statistics.start_time = QTime(0, 0, 0).addMSecs(int(player->mediaStartPosition()));
     statistics.duration = QTime(0, 0, 0).addMSecs((int)player->duration());
+
+	// add later
+	/*
     if (vdec)
         statistics.video.decoder = VideoDecoderFactory::name(vdec->id()).c_str();
+	*/
+
     statistics.metadata.clear();
     AVDictionaryEntry *tag = NULL;
     while ((tag = av_dict_get(fmt_ctx->metadata, "", tag, AV_DICT_IGNORE_SUFFIX))) {
@@ -238,167 +250,186 @@ void AVPlayer::Private::initStatistics(AVPlayer *player)
 
 bool AVPlayer::Private::setupAudioThread(AVPlayer *player)
 {
-    AVCodecContext *aCodecCtx = demuxer.audioCodecContext();
-    if (!aCodecCtx) {
-        return false;
-    }
-    qDebug("has audio");
-    if (!adec) {
-        adec = new AudioDecoder();
-        connect(adec, SIGNAL(error(QtAV::AVError)), player, SIGNAL(error(QtAV::AVError)));
-    }
-    adec->setCodecContext(aCodecCtx);
-    adec->setOptions(ac_opt);
-    if (!adec->open()) {
-        AVError e(AVError::AudioCodecNotFound);
-        qWarning() << e.string();
-        emit player->error(e);
-        return false;
-    }
-    //TODO: setAudioOutput() like vo
-    if (!ao && ao_enabled) {
-        foreach (AudioOutputId aoid, ao_ids) {
-            qDebug("trying audio output '%s'", AudioOutputFactory::name(aoid).c_str());
-            ao = AudioOutputFactory::create(aoid);
-            if (ao) {
-                qDebug("audio output found.");
-                break;
-            }
-        }
-    }
-    if (!ao) {
-        // TODO: only when no audio stream or user disable audio stream. running an audio thread without sound is waste resource?
-        //masterClock()->setClockType(AVClock::ExternalClock);
-        //return;
-    } else {
-        ao->close();
-        correct_audio_channels(aCodecCtx);
-        AudioFormat af;
-        af.setSampleRate(aCodecCtx->sample_rate);
-        af.setSampleFormatFFmpeg(aCodecCtx->sample_fmt);
-        // 5, 6, 7 channels may not play
-        if (aCodecCtx->channels > 2)
-            af.setChannelLayout(ao->preferredChannelLayout());
-        else
-            af.setChannelLayoutFFmpeg(aCodecCtx->channel_layout);
-        //af.setChannels(aCodecCtx->channels);
-        // FIXME: workaround. planar convertion crash now!
-        if (af.isPlanar()) {
-            af.setSampleFormat(ao->preferredSampleFormat());
-        }
-        if (!ao->isSupported(af)) {
-            if (!ao->isSupported(af.sampleFormat())) {
-                af.setSampleFormat(ao->preferredSampleFormat());
-            }
-            if (!ao->isSupported(af.channelLayout())) {
-                af.setChannelLayout(ao->preferredChannelLayout());
-            }
-        }
-        ao->setAudioFormat(af);
-        if (!ao->open()) {
-            //could not open audio device. use extrenal clock
-            delete ao;
-            ao = 0;
-            return false;
-        }
-    }
-    if (ao)
-        adec->resampler()->setOutAudioFormat(ao->audioFormat());
-    adec->resampler()->inAudioFormat().setSampleFormatFFmpeg(aCodecCtx->sample_fmt);
-    adec->resampler()->inAudioFormat().setSampleRate(aCodecCtx->sample_rate);
-    adec->resampler()->inAudioFormat().setChannels(aCodecCtx->channels);
-    adec->resampler()->inAudioFormat().setChannelLayoutFFmpeg(aCodecCtx->channel_layout);
-    adec->prepare();
-    if (!athread) {
-        qDebug("new audio thread");
-        athread = new AudioThread(player);
-        athread->setClock(clock);
-        athread->setStatistics(&statistics);
-        athread->setOutputSet(aos);
-        qDebug("demux thread setAudioThread");
-        read_thread->setAudioThread(athread);
-        //reconnect if disconnected
-        QList<Filter*> filters = FilterManager::instance().audioFilters(player);
-        //TODO: isEmpty()==false but size() == 0 in debug mode, it's a Qt bug? we can not just foreach without check empty in debug mode
-        if (filters.size() > 0) {
-            foreach (Filter *filter, filters) {
-                athread->installFilter(filter);
-            }
-        }
-    }
-    athread->setDecoder(adec);
-    player->setAudioOutput(ao);
-    int queue_min = 0.61803*qMax<qreal>(24.0, statistics.video_only.fps_guess);
-    int queue_max = int(1.61803*(qreal)queue_min); //about 1 second
-    athread->packetQueue()->setThreshold(queue_min);
-    athread->packetQueue()->setCapacity(queue_max);
+	QList<int> audioList = demuxer.audioStreams();
+
+	int index = 0;
+	for (QList<int>::iterator it = audioList.begin(); it != audioList.end(); it++, index++)
+	{
+		// TODO all audio will be add
+		AVCodecContext *aCodecCtx = demuxer.audioCodecContext(*it);
+		if (!aCodecCtx) {
+			return false;
+		}
+		qDebug("has audio");
+		if (!adec[index]) {
+			adec[index] = new AudioDecoder();
+			connect(adec[index], SIGNAL(error(QtAV::AVError)), player, SIGNAL(error(QtAV::AVError)));
+		}
+		adec[index]->setCodecContext(aCodecCtx);
+		adec[index]->setOptions(ac_opt);
+		if (!adec[index]->open()) {
+			AVError e(AVError::AudioCodecNotFound);
+			qWarning() << e.string();
+			emit player->error(e);
+			return false;
+		}
+		//TODO: setAudioOutput() like vo
+		if (!ao[index] && ao_enabled) {
+			foreach(AudioOutputId aoid, ao_ids) {
+				qDebug("trying audio output '%s'", AudioOutputFactory::name(aoid).c_str());
+				ao[index] = AudioOutputFactory::create(aoid);
+				if (ao[index]) {
+					qDebug("audio output found.");
+					break;
+				}
+			}
+		}
+		if (!ao[index]) {
+			// TODO: only when no audio stream or user disable audio stream. running an audio thread without sound is waste resource?
+			//masterClock()->setClockType(AVClock::ExternalClock);
+			//return;
+		}
+		else {
+			ao[index]->close();
+			correct_audio_channels(aCodecCtx);
+			AudioFormat af;
+			af.setSampleRate(aCodecCtx->sample_rate);
+			af.setSampleFormatFFmpeg(aCodecCtx->sample_fmt);
+			// 5, 6, 7 channels may not play
+			if (aCodecCtx->channels > 2)
+				af.setChannelLayout(ao[index]->preferredChannelLayout());
+			else
+				af.setChannelLayoutFFmpeg(aCodecCtx->channel_layout);
+			//af.setChannels(aCodecCtx->channels);
+			// FIXME: workaround. planar convertion crash now!
+			if (af.isPlanar()) {
+				af.setSampleFormat(ao[index]->preferredSampleFormat());
+			}
+			if (!ao[index]->isSupported(af)) {
+				if (!ao[index]->isSupported(af.sampleFormat())) {
+					af.setSampleFormat(ao[index]->preferredSampleFormat());
+				}
+				if (!ao[index]->isSupported(af.channelLayout())) {
+					af.setChannelLayout(ao[index]->preferredChannelLayout());
+				}
+			}
+			ao[index]->setAudioFormat(af);
+			if (!ao[index]->open()) {
+				//could not open audio device. use extrenal clock
+				delete ao[index];
+				ao[index] = 0;
+				return false;
+			}
+		}
+		if (ao[index])
+			adec[index]->resampler()->setOutAudioFormat(ao[index]->audioFormat());
+		adec[index]->resampler()->inAudioFormat().setSampleFormatFFmpeg(aCodecCtx->sample_fmt);
+		adec[index]->resampler()->inAudioFormat().setSampleRate(aCodecCtx->sample_rate);
+		adec[index]->resampler()->inAudioFormat().setChannels(aCodecCtx->channels);
+		adec[index]->resampler()->inAudioFormat().setChannelLayoutFFmpeg(aCodecCtx->channel_layout);
+		adec[index]->prepare();
+		if (!athread[index]) {
+			qDebug("new audio thread");
+			athread[index] = new AudioThread(player);
+			athread[index]->setClock(clock);
+			// just the first program add statistics
+			if (index == 0)
+				athread[index]->setStatistics(&statistics);
+			athread[index]->setOutputSet(aos[index]);
+			qDebug("demux thread setAudioThread");
+			read_thread->setAudioThread(athread[index], *it, index);
+			//reconnect if disconnected
+			QList<Filter*> filters = FilterManager::instance().audioFilters(player);
+			//TODO: isEmpty()==false but size() == 0 in debug mode, it's a Qt bug? we can not just foreach without check empty in debug mode
+			if (filters.size() > 0) {
+				foreach(Filter *filter, filters) {
+					athread[index]->installFilter(filter);
+				}
+			}
+		}
+		athread[index]->setDecoder(adec[index]);
+		player->setAudioOutput(ao[index],index);
+		int queue_min = 0.61803*qMax<qreal>(24.0, statistics.video_only.fps_guess);
+		int queue_max = int(1.61803*(qreal)queue_min); //about 1 second
+		athread[index]->packetQueue()->setThreshold(queue_min);
+		athread[index]->packetQueue()->setCapacity(queue_max);
+	}
     return true;
 }
 
 bool AVPlayer::Private::setupVideoThread(AVPlayer *player)
 {
-    AVCodecContext *vCodecCtx = demuxer.videoCodecContext();
-    if (!vCodecCtx) {
-        return false;
-    }
-    /*
-    if (!vdec) {
-        vdec = VideoDecoderFactory::create(VideoDecoderId_FFmpeg);
-    }
-    */
-    if (vdec) {
-        vdec->disconnect();
-        delete vdec;
-        vdec = 0;
-    }
-    foreach(VideoDecoderId vid, vc_ids) {
-        qDebug("**********trying video decoder: %s...", VideoDecoderFactory::name(vid).c_str());
-        VideoDecoder *vd = VideoDecoderFactory::create(vid);
-        if (!vd) {
-            continue;
-        }
-        //vd->isAvailable() //TODO: the value is wrong now
-        vd->setCodecContext(vCodecCtx);
-        vd->setOptions(vc_opt);
-        if (vd->prepare() && vd->open()) {
-            vdec = vd;
-            qDebug("**************Video decoder found");
-            break;
-        }
-        delete vd;
-    }
-    if (!vdec) {
-        // DO NOT emit error signals in VideoDecoder::open(). 1 signal is enough
-        AVError e(AVError::VideoCodecNotFound);
-        qWarning() << e.string();
-        emit player->error(e);
-        return false;
-    }
-    connect(vdec, SIGNAL(error(QtAV::AVError)), player, SIGNAL(error(QtAV::AVError)));
+	QList<int> videoList = demuxer.videoStreams();
 
-    if (!vthread) {
-        vthread = new VideoThread(player);
-        vthread->setClock(clock);
-        vthread->setStatistics(&statistics);
-        vthread->setVideoCapture(vcapture);
-        vthread->setOutputSet(vos);
-        read_thread->setVideoThread(vthread);
+	int index = 0;
+	for (QList<int>::iterator it = videoList.begin(); it != videoList.end(); it++, index++)
+	{
+		AVCodecContext *vCodecCtx = demuxer.videoCodecContext(*it);
+		if (!vCodecCtx) {
+			//return false;
+			continue;
+		}
+		/*
+		if (!vdec) {
+		vdec = VideoDecoderFactory::create(VideoDecoderId_FFmpeg);
+		}
+		*/
+		if (vdec[index]) {
+			vdec[index]->disconnect();
+			delete vdec[index];
+			vdec[index] = 0;
+		}
+		foreach(VideoDecoderId vid, vc_ids) {
+			qDebug("**********trying video decoder: %s...", VideoDecoderFactory::name(vid).c_str());
+			VideoDecoder *vd = VideoDecoderFactory::create(vid);
+			if (!vd) {
+				continue;
+			}
+			//vd->isAvailable() //TODO: the value is wrong now
+			vd->setCodecContext(vCodecCtx);
+			vd->setOptions(vc_opt);
+			if (vd->prepare() && vd->open()) {
+				vdec[index] = vd;
+				qDebug("**************Video decoder found");
+				break;
+			}
+			delete vd;
+		}
+		if (!vdec) {
+			// DO NOT emit error signals in VideoDecoder::open(). 1 signal is enough
+			AVError e(AVError::VideoCodecNotFound);
+			qWarning() << e.string();
+			emit player->error(e);
+			return false;
+		}
+		connect(vdec[index], SIGNAL(error(QtAV::AVError)), player, SIGNAL(error(QtAV::AVError)));
 
-        QList<Filter*> filters = FilterManager::instance().videoFilters(player);
-        if (filters.size() > 0) {
-            foreach (Filter *filter, filters) {
-                vthread->installFilter(filter);
-            }
-        }
-    }
-    vthread->setDecoder(vdec);
-    vthread->setBrightness(brightness);
-    vthread->setContrast(contrast);
-    vthread->setSaturation(saturation);
-    int queue_min = 0.61803*qMax<qreal>(24.0, statistics.video_only.fps_guess);
-    int queue_max = int(1.61803*(qreal)queue_min); //about 1 second
-    vthread->packetQueue()->setThreshold(queue_min);
-    vthread->packetQueue()->setCapacity(queue_max);
+		if (!vthread[index]) {
+			vthread[index] = new VideoThread(player);
+			vthread[index]->setClock(clock);
+			// just the first program add statistics
+			if (index == 0)
+				vthread[index]->setStatistics(&statistics);
+			vthread[index]->setVideoCapture(vcapture);
+			vthread[index]->setOutputSet(vos[index]);
+			read_thread->setVideoThread(vthread[index], *it, index);
+
+			QList<Filter*> filters = FilterManager::instance().videoFilters(player);
+			if (filters.size() > 0) {
+				foreach(Filter *filter, filters) {
+					vthread[index]->installFilter(filter);
+				}
+			}
+		}
+		vthread[index]->setDecoder(vdec[index]);
+		vthread[index]->setBrightness(brightness);
+		vthread[index]->setContrast(contrast);
+		vthread[index]->setSaturation(saturation);
+		int queue_min = 0.61803*qMax<qreal>(24.0, statistics.video_only.fps_guess);
+		int queue_max = int(1.61803*(qreal)queue_min); //about 1 second
+		vthread[index]->packetQueue()->setThreshold(queue_min);
+		vthread[index]->packetQueue()->setCapacity(queue_max);
+	}
     return true;
 }
 

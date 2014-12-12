@@ -112,18 +112,18 @@ public:
     AVDemuxer demuxer;
     AVDemuxThread *read_thread;
     AVClock *clock;
-    VideoRenderer *vo; //list? // TODO: remove
-    AudioOutput *ao; // TODO: remove
-    AudioDecoder *adec;
-    VideoDecoder *vdec;
-    AudioThread *athread;
-    VideoThread *vthread;
+    //VideoRenderer *vo; //list? // TODO: remove
+	AudioOutput *ao[MAX_PROGRAM]; // TODO: remove
+	AudioDecoder *adec[MAX_PROGRAM];
+	VideoDecoder *vdec[MAX_PROGRAM];
+	AudioThread *athread[MAX_PROGRAM];
+	VideoThread *vthread[MAX_PROGRAM];
 
     VideoCapture *vcapture;
     Statistics statistics;
     qreal speed;
-    bool ao_enabled;
-    OutputSet *vos, *aos;
+	bool ao_enabled[MAX_PROGRAM];
+	OutputSet *vos[MAX_PROGRAM], *aos[MAX_PROGRAM];
     QVector<VideoDecoderId> vc_ids;
     QVector<AudioOutputId> ao_ids;
     int brightness, contrast, saturation;
@@ -133,7 +133,8 @@ public:
     bool seeking;
     qint64 seek_target;
     qint64 interrupt_timeout;
-    bool mute;
+	bool mute[MAX_PROGRAM];
+	int totalProgam;
 };
 
 } //namespace QtAV

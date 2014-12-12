@@ -174,13 +174,13 @@ public:
     bool isPlaying() const;
     bool isPaused() const;
     // TODO: use id as parameter and return ptr?
-    void addVideoRenderer(VideoRenderer *renderer);
-    void removeVideoRenderer(VideoRenderer *renderer);
+	void addVideoRenderer(VideoRenderer *renderer, int index = 0);
+	void removeVideoRenderer(VideoRenderer *renderer, int index = 0);
     void clearVideoRenderers();
-    void setRenderer(VideoRenderer* renderer);
-    VideoRenderer* renderer();
-    QList<VideoRenderer*> videoOutputs();
-    void setAudioOutput(AudioOutput* ao);
+	void setRenderer(VideoRenderer* renderer, int index = 0);
+	VideoRenderer* renderer(int index = 0);
+	QList<VideoRenderer*> videoOutputs(int index = 0);
+	void setAudioOutput(AudioOutput* ao, int index = 0);
     //default has 1 audiooutput
     //void addAudioOutput(AudioOutput* ao);
     //void removeAudioOutput(AudioOutput* ao);
@@ -190,11 +190,11 @@ public:
      * So signals/slots is a better solution.
      * TODO: AudioOutput.audioFormatChanged (signal)---AudioResampler.setOutAudioFormat (slot)
      */
-    AudioOutput* audio();
-    void enableAudio(bool enable = true);
-    void disableAudio(bool disable = true);
-    void setMute(bool mute);
-    bool isMute() const;
+	AudioOutput* audio(int index = 0);
+	void enableAudio(bool enable = true, int index = 0);
+	void disableAudio(bool disable = true, int index = 0);
+	void setMute(bool mute, int index = 0);
+	bool isMute(int index = 0) const;
     /*!
      * \brief setSpeed set playing speed.
      * \param speed  speed > 0. 1.0: normal speed

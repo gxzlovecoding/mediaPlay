@@ -62,8 +62,11 @@ AVPlayer::AVPlayer(QObject *parent) :
     QObject(parent)
   , d(new Private())
 {
-    d->vos = new OutputSet(this);
-    d->aos = new OutputSet(this);
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		d->vos[i] = new OutputSet(this);
+		d->aos[i] = new OutputSet(this);
+	}
     connect(this, SIGNAL(started()), this, SLOT(onStarted()));
     /*
      * call stop() before the window(d->vo) closed to stop the waitcondition
@@ -98,7 +101,7 @@ AVClock* AVPlayer::masterClock()
     return d->clock;
 }
 
-void AVPlayer::addVideoRenderer(VideoRenderer *renderer)
+void AVPlayer::addVideoRenderer(VideoRenderer *renderer, int index)
 {
     if (!renderer) {
         qWarning("add a null renderer!");
@@ -114,21 +117,24 @@ void AVPlayer::addVideoRenderer(VideoRenderer *renderer)
             voo->installEventFilter(new VideoOutputEventFilter(renderer));
     }
 #endif //QTAV_HAVE(WIDGETS)
-    d->vos->addOutput(renderer);
+	d->vos[index]->addOutput(renderer);
 }
 
-void AVPlayer::removeVideoRenderer(VideoRenderer *renderer)
+void AVPlayer::removeVideoRenderer(VideoRenderer *renderer, int index)
 {
-    d->vos->removeOutput(renderer);
+    d->vos[index]->removeOutput(renderer);
 }
 
 void AVPlayer::clearVideoRenderers()
 {
-    d->vos->clearOutputs();
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		d->vos[i]->clearOutputs();
+	}
 }
 
 //TODO: check components compatiblity(also when change the filter chain)
-void AVPlayer::setRenderer(VideoRenderer *r)
+void AVPlayer::setRenderer(VideoRenderer *r, int index)
 {
     VideoRenderer *vo = renderer();
     if (vo && r) {
@@ -144,76 +150,78 @@ void AVPlayer::setRenderer(VideoRenderer *r)
         return;
     r->resizeRenderer(r->rendererSize()); //IMPORTANT: the swscaler will resize
     r->setStatistics(&d->statistics);
-    addVideoRenderer(r);
+    addVideoRenderer(r, index);
 }
 
-VideoRenderer *AVPlayer::renderer()
+VideoRenderer *AVPlayer::renderer(int index)
 {
     //QList assert empty in debug mode
-    if (!d->vos || d->vos->outputs().isEmpty())
+    if (!d->vos[index] || d->vos[index]->outputs().isEmpty())
         return 0;
-    return static_cast<VideoRenderer*>(d->vos->outputs().last());
+    return static_cast<VideoRenderer*>(d->vos[index]->outputs().last());
 }
 
-QList<VideoRenderer*> AVPlayer::videoOutputs()
+QList<VideoRenderer*> AVPlayer::videoOutputs(int index)
 {
     if (!d->vos)
         return QList<VideoRenderer*>();
     QList<VideoRenderer*> vos;
-    vos.reserve(d->vos->outputs().size());
-    foreach (AVOutput *out, d->vos->outputs()) {
+	vos.reserve(d->vos[index]->outputs().size());
+	foreach(AVOutput *out, d->vos[index]->outputs()) {
         vos.append(static_cast<VideoRenderer*>(out));
     }
     return vos;
 }
 
-void AVPlayer::setAudioOutput(AudioOutput* ao)
+void AVPlayer::setAudioOutput(AudioOutput* ao, int index)
 {
-    d->setAVOutput(d->ao, ao, d->athread);
+	d->setAVOutput(d->ao[index], ao, d->athread[index]);
 }
 
-AudioOutput* AVPlayer::audio()
+AudioOutput* AVPlayer::audio(int index)
 {
-    return d->ao;
+    return d->ao[index];
 }
 
-void AVPlayer::enableAudio(bool enable)
+void AVPlayer::enableAudio(bool enable, int index)
 {
-    d->ao_enabled = enable;
+    d->ao_enabled[index] = enable;
 }
 
-void AVPlayer::disableAudio(bool disable)
+void AVPlayer::disableAudio(bool disable, int index)
 {
-    d->ao_enabled = !disable;
+	d->ao_enabled[index] = !disable;
 }
 
-void AVPlayer::setMute(bool mute)
+void AVPlayer::setMute(bool mute, int index)
 {
-    if (d->mute == mute)
+    if (d->mute[index] == mute)
         return;
-    d->mute = mute;
+    d->mute[index] = mute;
     emit muteChanged();
-    if (!d->ao)
+    if (!d->ao[index])
         return;
-    if (d->ao->isMute() == isMute())
+	if (d->ao[index]->isMute() == isMute())
         return;
-    d->ao->setMute(mute);
+	d->ao[index]->setMute(mute);
 }
 
-bool AVPlayer::isMute() const
+bool AVPlayer::isMute(int index) const
 {
-    return d->mute;
+    return d->mute[index];
 }
 
 void AVPlayer::setSpeed(qreal speed)
 {
+	int index = 0;
+
     if (speed == d->speed)
         return;
     d->speed = speed;
     //TODO: check clock type?
-    if (d->ao && d->ao->isAvailable()) {
+	if (d->ao[index] && d->ao[index]->isAvailable()) {
         qDebug("set speed %.2f", d->speed);
-        d->ao->setSpeed(d->speed);
+		d->ao[index]->setSpeed(d->speed);
     }
     masterClock()->setSpeed(d->speed);
     emit speedChanged(d->speed);
@@ -250,33 +258,38 @@ const Statistics& AVPlayer::statistics() const
 
 bool AVPlayer::installAudioFilter(Filter *filter)
 {
+	int index = 0;
     if (!FilterManager::instance().registerAudioFilter(filter, this)) {
         return false;
     }
-    if (!d->athread)
+    if (!d->athread[index])
         return false; //install later when avthread created
-    return d->athread->installFilter(filter);
+    return d->athread[index]->installFilter(filter);
 }
 
 bool AVPlayer::installVideoFilter(Filter *filter)
 {
+	int index = 0;
+
     if (!FilterManager::instance().registerVideoFilter(filter, this)) {
         return false;
     }
-    if (!d->vthread)
+	if (!d->vthread[index])
         return false; //install later when avthread created
-    return d->vthread->installFilter(filter);
+	return d->vthread[index]->installFilter(filter);
 }
 
 bool AVPlayer::uninstallFilter(Filter *filter)
 {
+	int index = 0;
+
     if (!FilterManager::instance().unregisterFilter(filter)) {
         qWarning("unregister filter %p failed", filter);
         //return false;
     }
-    AVThread *avthread = d->vthread;
+	AVThread *avthread = d->vthread[index];
     if (!avthread || !avthread->filters().contains(filter)) {
-        avthread = d->athread;
+		avthread = d->athread[index];
     }
     if (!avthread || !avthread->filters().contains(filter)) {
         return false;
@@ -421,9 +434,11 @@ bool AVPlayer::play(const QString& path)
 // TODO: check repeat status?
 bool AVPlayer::isPlaying() const
 {
+	int index = 0;
+
     return (d->read_thread &&d->read_thread->isRunning())
-            || (d->athread && d->athread->isRunning())
-            || (d->vthread && d->vthread->isRunning());
+		|| (d->athread[index] && d->athread[index]->isRunning())
+		|| (d->vthread[index] && d->vthread[index]->isRunning());
 }
 
 void AVPlayer::togglePause()
@@ -433,21 +448,25 @@ void AVPlayer::togglePause()
 
 void AVPlayer::pause(bool p)
 {
+	int index = 0;
+
     //pause thread. check pause state?
     d->read_thread->pause(p);
-    if (d->athread)
-        d->athread->pause(p);
+	if (d->athread[index])
+		d->athread[index]->pause(p);
     if (d->vthread)
-        d->vthread->pause(p);
+		d->vthread[index]->pause(p);
     d->clock->pause(p);
     emit paused(p);
 }
 
 bool AVPlayer::isPaused() const
 {
+	int index = 0;
+
     return (d->read_thread && d->read_thread->isPaused())
-            || (d->athread && d->athread->isPaused())
-            || (d->vthread && d->vthread->isPaused());
+		|| (d->athread[index] && d->athread[index]->isPaused())
+		|| (d->vthread[index] && d->vthread[index]->isPaused());
 }
 
 MediaStatus AVPlayer::mediaStatus() const
@@ -494,15 +513,17 @@ bool AVPlayer::load(const QString &path, bool reload)
 
 bool AVPlayer::load(bool reload)
 {
+	int index = 0;
+
     // TODO: call unload if reload?
     if (mediaStatus() == QtAV::LoadingMedia) //async loading
         return true;
     if (isLoaded()) {
         // release codec ctx. if not loaded, they are released by avformat. TODO: always let avformat release them?
-        if (d->adec)
-            d->adec->setCodecContext(0);
-        if (d->vdec)
-            d->vdec->setCodecContext(0);
+		if (d->adec[index])
+			d->adec[index]->setCodecContext(0);
+		if (d->vdec[index])
+			d->vdec[index]->setCodecContext(0);
     }
     d->loaded = false;
     if (!d->current_source.isValid()) {
@@ -541,10 +562,13 @@ void AVPlayer::loadInternal()
     // release codec ctx
     //close decoders here to make sure open and close in the same thread if not async load
     if (isLoaded()) {
-        if (d->adec)
-            d->adec->setCodecContext(0);
-        if (d->vdec)
-            d->vdec->setCodecContext(0);
+		for (int i = 0; i < MAX_PROGRAM; i++)
+		{
+			if (d->adec[i])
+				d->adec[i]->setCodecContext(0);
+			if (d->vdec[i])
+				d->vdec[i]->setCodecContext(0);
+		}
     }
     if (d->current_source.type() == QVariant::String) {
         d->loaded = d->demuxer.loadFile(d->current_source.toString());
@@ -589,16 +613,19 @@ void AVPlayer::unloadInternal()
     if (isPlaying())
         stop();
 
-    if (d->adec) {
-        d->adec->setCodecContext(0);
-        delete d->adec;
-        d->adec = 0;
-    }
-    if (d->vdec) {
-        d->vdec->setCodecContext(0);
-        delete d->vdec;
-        d->vdec = 0;
-    }
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		if (d->adec[i]) {
+			d->adec[i]->setCodecContext(0);
+			delete d->adec[i];
+			d->adec[i] = 0;
+		}
+		if (d->vdec[i]) {
+			d->vdec[i]->setCodecContext(0);
+			delete d->vdec[i];
+			d->vdec[i] = 0;
+		}
+	}
     d->demuxer.close();
 }
 
@@ -690,6 +717,8 @@ qint64 AVPlayer::position() const
 
 void AVPlayer::setPosition(qint64 position)
 {
+	int index = 0;
+
     if (!isPlaying())
         return;
     if (position < 0)
@@ -697,12 +726,13 @@ void AVPlayer::setPosition(qint64 position)
     d->seeking = true;
     d->seek_target = position;
     qreal s = (qreal)position/1000.0;
+
     // TODO: check flag accurate seek
-    if (d->athread) {
-        d->athread->skipRenderUntil(s);
+	if (d->athread[index]) {
+		d->athread[index]->skipRenderUntil(s);
     }
-    if (d->vthread) {
-        d->vthread->skipRenderUntil(s);
+	if (d->vthread[index]) {
+		d->vthread[index]->skipRenderUntil(s);
     }
     masterClock()->updateValue(double(position)/1000.0); //what is duration == 0
     masterClock()->updateExternalClock(position); //in msec. ignore usec part using t/1000
@@ -894,19 +924,27 @@ void AVPlayer::playInternal()
 
     if (!d->setupAudioThread(this)) {
         d->read_thread->setAudioThread(0); //set 0 before delete. ptr is used in demux thread when set 0
-        if (d->athread) {
-            qDebug("release audio thread.");
-            delete d->athread;
-            d->athread = 0;//shared ptr?
-        }
+
+		for (int i = 0; i < MAX_PROGRAM; i++)
+		{
+			if (d->athread[i]) {
+				qDebug("release audio thread.");
+				delete d->athread[i];
+				d->athread[i] = 0;//shared ptr?
+			}
+		}
     }
     if (!d->setupVideoThread(this)) {
         d->read_thread->setVideoThread(0); //set 0 before delete. ptr is used in demux thread when set 0
-        if (d->vthread) {
-            qDebug("release video thread.");
-            delete d->vthread;
-            d->vthread = 0;//shared ptr?
-        }
+
+		for (int i = 0; i < MAX_PROGRAM; i++)
+		{
+			if (d->vthread[i]) {
+				qDebug("release video thread.");
+				delete d->vthread[i];
+				d->vthread[i] = 0;//shared ptr?
+			}
+		}
     }
     if (!d->athread && !d->vthread) {
         d->loaded = false;
@@ -917,16 +955,19 @@ void AVPlayer::playInternal()
     d->initStatistics(this);
 
     // from previous play()
-    if (d->demuxer.audioCodecContext() && d->athread) {
-        qDebug("Starting audio thread...");
-        d->athread->start();
-        d->athread->waitForReady();
-    }
-    if (d->demuxer.videoCodecContext() && d->vthread) {
-        qDebug("Starting video thread...");
-        d->vthread->start();
-        d->vthread->waitForReady();
-    }
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		if (d->demuxer.audioCodecContext() && d->athread[i]) {
+			qDebug("Starting audio thread...");
+			d->athread[i]->start();
+			d->athread[i]->waitForReady();
+		}
+		if (d->demuxer.videoCodecContext() && d->vthread[i]) {
+			qDebug("Starting video thread...");
+			d->vthread[i]->start();
+			d->vthread[i]->waitForReady();
+		}
+	}
     if (startPosition() > 0 && startPosition() < mediaStopPosition() && d->last_position <= 0) {
         d->demuxer.seek((qint64)startPosition());
     }
@@ -1005,16 +1046,21 @@ void AVPlayer::stopNotifyTimer()
 
 void AVPlayer::onStarted()
 {
-    //TODO: check clock type?
-    if (d->ao && d->ao->isAvailable()) {
-        d->ao->setSpeed(d->speed);
-    }
-    masterClock()->setSpeed(d->speed);
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		//TODO: check clock type?
+		if (d->ao[i] && d->ao[i]->isAvailable()) {
+			d->ao[i]->setSpeed(d->speed);
+		}
+		masterClock()->setSpeed(d->speed);
 
-    if (!d->ao)
-        return;
-    if (d->ao->isMute() != isMute())
-        d->ao->setMute(isMute());
+		if (!d->ao[i])
+		{
+			continue;
+		}
+		if (d->ao[i]->isMute() != isMute())
+			d->ao[i]->setMute(isMute());
+	}
 }
 
 // TODO: doc about when the state will be reset
@@ -1160,9 +1206,13 @@ void AVPlayer::setBrightness(int val)
         return;
     d->brightness = val;
     emit brightnessChanged(d->brightness);
-    if (d->vthread) {
-        d->vthread->setBrightness(val);
-    }
+
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		if (d->vthread[i]) {
+			d->vthread[i]->setBrightness(val);
+		}
+	}
 }
 
 int AVPlayer::contrast() const
@@ -1176,9 +1226,13 @@ void AVPlayer::setContrast(int val)
         return;
     d->contrast = val;
     emit contrastChanged(d->contrast);
-    if (d->vthread) {
-        d->vthread->setContrast(val);
-    }
+
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		if (d->vthread[i]) {
+			d->vthread[i]->setContrast(val);
+		}
+	}
 }
 
 int AVPlayer::hue() const
@@ -1202,9 +1256,13 @@ void AVPlayer::setSaturation(int val)
         return;
     d->saturation = val;
     emit saturationChanged(d->saturation);
-    if (d->vthread) {
-        d->vthread->setSaturation(val);
-    }
+
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		if (d->vthread[i]) {
+			d->vthread[i]->setSaturation(val);
+		}
+	}
 }
 
 } //namespace QtAV

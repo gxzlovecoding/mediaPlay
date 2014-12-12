@@ -1,38 +1,34 @@
-/******************************************************************************
-    Simple Player:  this file is part of QtAV examples
-    Copyright (C) 2012-2014 Wang Bin <wbsecg1@gmail.com>
-
-*   This file is part of QtAV
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-******************************************************************************/
 #include <QApplication>
 
 #include <QtAV/AVPlayer.h>
-#include <QtAV/WidgetRenderer.h>
+#include <QtAV/GLWidgetRenderer2.h>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QtAV::WidgetRenderer renderer;
-    renderer.show();
-    renderer.setWindowTitle("minimal player--QtAV " + QtAV_Version_String_Long() + " wbsecg1@gmail.com");
-    QtAV::AVPlayer player;
-    player.setRenderer(&renderer);
 
-    if (argc > 1)
-        player.play(a.arguments().last());
+	QtAV::GLWidgetRenderer2 renderer1;
+	QtAV::GLWidgetRenderer2 renderer2;
+    renderer1.show();
+	renderer2.show();
+    renderer1.setWindowTitle("1");
+	renderer2.setWindowTitle("2");
+    QtAV::AVPlayer player;
+	//player.videoOutputs().append(&renderer1);
+	player.addVideoRenderer(&renderer1,8);
+
+	//player.videoOutputs().append(&renderer2);
+	//player.removeVideoRenderer(&renderer1);
+	player.addVideoRenderer(&renderer2,1);
+	
+    //player.setRenderer(&renderer1);
+	//player.setRenderer(&renderer2);
+
+    //if (argc > 1)
+    //    player.play(a.arguments().last());
+	player.play("F:\\qtspace\\mediaPlay\\lib_win_\\aa.ts");
+	//player.play("F:\\movie\\ALAN_HACKEN.mp4");
+	//player.play("F:\\movie\\1.ts");
 
     return a.exec();
 }

@@ -319,30 +319,34 @@ void VideoThread::run()
         d.render_pts0 = 0;
         frame.setTimestamp(pts);
         frame.setImageConverter(d.conv);
-        Q_ASSERT(d.statistics);
-        d.statistics->video.current_time = QTime(0, 0, 0).addMSecs(int(pts * 1000.0)); //TODO: is it expensive?
-        //TODO: add current time instead of pts
-        d.statistics->video_only.putPts(pts);
-        {
-            QMutexLocker locker(&d.mutex);
-            Q_UNUSED(locker);
-            if (!d.filters.isEmpty()) {
-                //sort filters by format. vo->defaultFormat() is the last
-                foreach (Filter *filter, d.filters) {
-                    if (d.stop) {
-                        break;
-                    }
-                    VideoFilter *vf = static_cast<VideoFilter*>(filter);
-                    if (!vf->isEnabled())
-                        continue;
-                    vf->prepareContext(d.filter_context, d.statistics, &frame);
-                    vf->apply(d.statistics, &frame);
-                    //frame may be changed
-                    frame.setImageConverter(d.conv);
-                    frame.setTimestamp(pts);
-                }
-            }
-        }
+        
+		if (d.statistics)
+		{
+			Q_ASSERT(d.statistics);
+			d.statistics->video.current_time = QTime(0, 0, 0).addMSecs(int(pts * 1000.0)); //TODO: is it expensive?
+			//TODO: add current time instead of pts
+			d.statistics->video_only.putPts(pts);
+			{
+				QMutexLocker locker(&d.mutex);
+				Q_UNUSED(locker);
+				if (!d.filters.isEmpty()) {
+					//sort filters by format. vo->defaultFormat() is the last
+					foreach(Filter *filter, d.filters) {
+						if (d.stop) {
+							break;
+						}
+						VideoFilter *vf = static_cast<VideoFilter*>(filter);
+						if (!vf->isEnabled())
+							continue;
+						vf->prepareContext(d.filter_context, d.statistics, &frame);
+						vf->apply(d.statistics, &frame);
+						//frame may be changed
+						frame.setImageConverter(d.conv);
+						frame.setTimestamp(pts);
+					}
+				}
+			}
+		}
 
         //while can pause, processNextTask, not call outset.puase which is deperecated
         while (d.outputSet->canPauseThread()) {

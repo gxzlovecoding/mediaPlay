@@ -27,6 +27,8 @@
 #include <QtCore/qglobal.h>
 #include "dptr.h"
 
+#define MAX_PROGRAM	16
+
 #if defined(BUILD_QTAV_LIB)
 #  undef Q_AV_EXPORT
 #  define Q_AV_EXPORT Q_DECL_EXPORT
