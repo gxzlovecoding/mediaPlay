@@ -2,11 +2,17 @@
 
 #include <QtAV/AVPlayer.h>
 #include <QtAV/GLWidgetRenderer2.h>
+#include "videogroup.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+	VideoGroup wall;
+
+	wall.play("F:\\movie\\ALAN_HACKEN.mp4");
+
+	/*
 	QtAV::GLWidgetRenderer2 renderer1;
 	QtAV::GLWidgetRenderer2 renderer2;
     renderer1.show();
@@ -26,9 +32,10 @@ int main(int argc, char *argv[])
 
     //if (argc > 1)
     //    player.play(a.arguments().last());
-	player.play("F:\\qtspace\\mediaPlay\\lib_win_\\aa.ts");
+	player.play("F:\\project\\multi\\save_2000.ts");
 	//player.play("F:\\movie\\ALAN_HACKEN.mp4");
 	//player.play("F:\\movie\\1.ts");
+	*/
 
     return a.exec();
 }
