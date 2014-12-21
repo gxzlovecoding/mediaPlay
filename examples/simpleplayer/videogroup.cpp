@@ -72,6 +72,9 @@ VideoGroup::~VideoGroup()
 void VideoGroup::play(const QString &file)
 {
 	mpPlayer->play(file);
+	//TODO 第一个是接口是预显示第一帧。
+
+	//TODO 真正设置好每个画面对应某个节目后才开始播放。
 }
 
 void VideoGroup::openLocalFile()
@@ -109,12 +112,11 @@ void VideoGroup::updateScreen(int num)
 		// 窗口增加
 		while (mRenderers.size() < num)
 		{
-			//VideoRendererId v = VideoRendererId_GLWidget2;// 这个不会删除后显示不了 VideoRendererId_Widget;
-			VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
+			VideoRendererId v = VideoRendererId_GLWidget2;// 这个不会删除后显示不了 VideoRendererId_Widget;
+			//VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
 
 			VideoRenderer* renderer = VideoRendererFactory::create(v);
 			mRenderers.append(renderer);
-			mpPlayer->addVideoRenderer(renderer);
 			renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);
 			renderer->widget()->setWindowFlags(renderer->widget()->windowFlags() | Qt::FramelessWindowHint);
 		}
@@ -125,7 +127,8 @@ void VideoGroup::updateScreen(int num)
 		while (mRenderers.size() > num)
 		{
 			VideoRenderer *r = mRenderers.takeLast();
-			mpPlayer->removeVideoRenderer(r);
+			// TODO 删除这个窗口前，把这个窗口从播放线程中释放。
+			//mpPlayer->removeVideoRenderer(r);
 			if (view)
 			{
 				view->layout()->removeWidget(r->widget());
@@ -137,21 +140,16 @@ void VideoGroup::updateScreen(int num)
 	if (mRenderers.size() == 2)
 	{
 		((QGridLayout*)view->layout())->addWidget(mRenderers.at(0)->widget(), 0, 0);
-		mpPlayer->addVideoRenderer(mRenderers.at(0));
 
 		((QGridLayout*)view->layout())->addWidget(mRenderers.at(1)->widget(), 0, 1);
-		mpPlayer->addVideoRenderer(mRenderers.at(1));
 	}
 	else if (mRenderers.size() == 3)
 	{
 		((QGridLayout*)view->layout())->addWidget(mRenderers.at(0)->widget(),0 , 0, 1, 2);
-		mpPlayer->addVideoRenderer(mRenderers.at(0));
 
 		((QGridLayout*)view->layout())->addWidget(mRenderers.at(1)->widget(), 1, 0);
-		mpPlayer->addVideoRenderer(mRenderers.at(1));
 
 		((QGridLayout*)view->layout())->addWidget(mRenderers.at(2)->widget(), 1, 1);
-		mpPlayer->addVideoRenderer(mRenderers.at(2));
 	}
 	else
 	{
@@ -159,7 +157,6 @@ void VideoGroup::updateScreen(int num)
 		{
 			((QGridLayout*)view->layout())->addWidget(mRenderers.at(i)->widget(),
 				i / (int)sqrt((double)mRenderers.size()), i % (int)(sqrt((double)mRenderers.size())));
-			mpPlayer->addVideoRenderer(mRenderers.at(i));
 		}
 	}
 }
