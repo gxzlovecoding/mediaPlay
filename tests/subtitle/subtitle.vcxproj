@@ -75,7 +75,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;$(QTDIR)\include\qtmain.lib;$(QTDIR)\include\Qt5Core.lib;F:\qtspace\mediaPlay\lib_win_\QtAV1.lib;$(QTDIR)\include\Qt5OpenGL.lib;$(QTDIR)\include\Qt5Widgets.lib;$(QTDIR)\include\Qt5Gui.lib;$(QTDIR)\include\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>;;$(QTDIR)\lib;F:\qtspace\mediaPlay\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;..\..\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>

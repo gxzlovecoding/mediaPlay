@@ -58,7 +58,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>"F:\3rd-party\ffmpeg-2.3.3-mingw+msvc-x86+x64\include";"F:\3rd-party\portaudio-v19_msvc2013-x86+x64\include";"$(QTDIR)\include";".";"F:\qtspace\mediaPlay";"QtAV";"compat\msvc";"..\contrib\libchardet\src";"..\contrib\capi";"cuda";"cuda\dllapi";"$(QTDIR)\include\QtOpenGL";"$(QTDIR)\include\QtWidgets";"$(QTDIR)\include\QtGui";"$(QTDIR)\include\QtCore";"..\.moc\5.3.1\QtAV";$(QTDIR)\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\3rd-party\ffmpeg-2.3.3-mingw+msvc-x86+x64\include;..\..\3rd-party\portaudio-v19_msvc2013-x86+x64\include;moc;$(QTDIR)\include;.;QtAV;compat\msvc;..\contrib\libchardet\src;..\contrib\capi;cuda;cuda\dllapi;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>..\.obj\QtAV_win_\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -76,8 +76,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;user32.lib;gdi32.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;avresample.lib;portaudio.lib;$(QTDIR)\lib\Qt5OpenGL.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;F:\3rd-party\ffmpeg-2.3.3-mingw+msvc-x86+x64\lib;F:\3rd-party\portaudio-v19_msvc2013-x86+x64\lib\x86;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;user32.lib;gdi32.lib;avcodec.lib;avformat.lib;avutil.lib;swscale.lib;avresample.lib;portaudio.lib;Qt5OpenGL.lib;Qt5Widgets.lib;Qt5Gui.lib;Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;..\..\3rd-party\ffmpeg-2.3.3-mingw+msvc-x86+x64\lib;..\..\3rd-party\portaudio-v19_msvc2013-x86+x64\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>

@@ -4,7 +4,7 @@
 #  include <winver.h>
 # endif
 
-IDI_ICON1	ICON	DISCARDABLE	"F:\\qtspace\\mediaPlay\\src\\QtAV.ico"
+IDI_ICON1	ICON	DISCARDABLE	"QtAV.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 1,4,1,0
