@@ -97,7 +97,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>"..\..\src";"F:\qtspace\mediaPlay";"..\..\src\QtAV";"..\common";"..\..\examples";"F:\qtspace\mediaPlay\examples\common\common";".";"$(QTDIR)\include";"$(QTDIR)\include\QtOpenGL";"$(QTDIR)\include\QtWidgets";"$(QTDIR)\include\QtGui";"$(QTDIR)\include\QtCore";"..\..\.moc\5.3.1\player";$(QTDIR)\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src;..\..\src\QtAV;..\common;moc;..\..\examples;.;$(QTDIR)\include;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>..\..\.obj\player_win_\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -115,8 +115,8 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;$(QTDIR)\lib\qtmaind.lib;$(QTDIR)\lib\Qt5Cored.lib;F:\qtspace\mediaPlay\lib_win_\QtAVd1.lib;F:\qtspace\mediaPlay\lib_win_\commond1.lib;$(QTDIR)\lib\Qt5OpenGLd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(QTDIR)\lib;$(QTDIR)\lib;F:\qtspace\mediaPlay\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;qtmaind.lib;$(QTDIR)\lib\Qt5Cored.lib;QtAVd1.lib;commond1.lib;$(QTDIR)\lib\Qt5OpenGLd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;..\..\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -367,16 +367,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\..\.moc\5.3.1\player\DecoderConfigPage.moc">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;.\config\DecoderConfigPage.cpp</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing DecoderConfigPage.cpp...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\.moc\5.3.1\player\%(Filename).moc</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "config\DecoderConfigPage.cpp" -o "..\..\.moc\5.3.1\player\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB "-I.\..\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\..\src\QtAV" "-I.\..\common" "-I.\..\..\examples" "-IF:\qtspace\mediaPlay\examples\common\common" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\..\.moc\5.3.1\player" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;.\config\DecoderConfigPage.cpp</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing DecoderConfigPage.cpp...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\.moc\5.3.1\player\%(Filename).moc</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "config\DecoderConfigPage.cpp" -o "..\..\.moc\5.3.1\player\%(Filename).moc"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I.\..\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\..\src\QtAV" "-I.\..\common" "-I.\..\..\examples" "-IF:\qtspace\mediaPlay\examples\common\common" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\..\.moc\5.3.1\player" "-I$(QTDIR)\mkspecs\win32-msvc2013"</Command>
-    </CustomBuild>
+    <None Include="moc\DecoderConfigPage.moc" />
     <None Include="res\player_zh_CN.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -476,7 +467,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="F:\qtspace\mediaPlay\examples\player\player_resource.rc" />
+    <ResourceCompile Include="player_resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

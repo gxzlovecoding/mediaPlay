@@ -4,7 +4,7 @@
 #include <QtCore/QList>
 #include <QtAV/AVPlayer.h>
 #include <QtAV/WidgetRenderer.h>
-#include <QPushButton>
+#include <QtWidgets/QPushButton>
 
 class VideoGroup : public QObject
 {

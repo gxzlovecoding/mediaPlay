@@ -140,6 +140,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="F:\qtspace\mediaPlay\examples\QMLPlayer\QMLPlayer_resource.rc" />
+    <ResourceCompile Include="QMLPlayer_resource.rc" />
   </ItemGroup>
 </Project>

@@ -233,10 +233,10 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="F:\qtspace\mediaPlay\examples\common\common_resource.rc">
+    <ResourceCompile Include="common_resource.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ResourceCompile>
-    <ResourceCompile Include="F:\qtspace\mediaPlay\examples\common\commond_resource.rc">
+    <ResourceCompile Include="commond_resource.rc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ResourceCompile>
   </ItemGroup>

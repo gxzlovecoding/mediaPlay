@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>"..\..\src";"F:\qtspace\mediaPlay";"..\..\src\QtAV";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtOpenGL";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtWidgets";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore";"..\..\.moc\5.3.1\videowall";C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"..\..\src";"F:\qtspace\mediaPlay";"..\..\src\QtAV";"$(QTDIR)\include";"$(QTDIR)\include\QtOpenGL";"$(QTDIR)\include\QtWidgets";"$(QTDIR)\include\QtGui";"$(QTDIR)\include\QtCore";"..\..\.moc\5.3.1\videowall";C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>..\..\.obj\videowall_win_\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -74,8 +74,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\qtmain.lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Core.lib;F:\qtspace\mediaPlay\lib_win_\QtAV1.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5OpenGL.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Widgets.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Gui.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib;$(QTDIR)\lib;F:\qtspace\mediaPlay\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;$(QTDIR)\include\qtmain.lib;$(QTDIR)\include\Qt5Core.lib;F:\qtspace\mediaPlay\lib_win_\QtAV1.lib;$(QTDIR)\include\Qt5OpenGL.lib;$(QTDIR)\include\Qt5Widgets.lib;$(QTDIR)\include\Qt5Gui.lib;$(QTDIR)\include\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;F:\qtspace\mediaPlay\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -97,7 +97,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>"..\..\src";"F:\qtspace\mediaPlay";"..\..\src\QtAV";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtOpenGL";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtWidgets";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui";"C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore";"..\..\.moc\5.3.1\videowall";C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src;..\..\src\QtAV;$(QTDIR)\include;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>..\..\.obj\videowall_win_\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -115,8 +115,8 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\qtmaind.lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Cored.lib;F:\qtspace\mediaPlay\lib_win_\QtAVd1.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5OpenGLd.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Widgetsd.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Guid.lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib;$(QTDIR)\lib;F:\qtspace\mediaPlay\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;gdi32.lib;user32.lib;qtmaind.lib;Qt5Cored.lib;QtAVd1.lib;Qt5OpenGLd.lib;Qt5Widgetsd.lib;Qt5Guid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\lib_win_;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -147,9 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="VideoWall.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I.\..\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\..\src\QtAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtOpenGL" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtWidgets" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\..\.moc\5.3.1\videowall" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I.\..\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\..\src\QtAV" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\..\.moc\5.3.1\videowall" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing VideoWall.h...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB "-I.\..\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\..\src\QtAV" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtOpenGL" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtWidgets" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\..\..\.moc\5.3.1\videowall" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -D_CRT_SECURE_NO_WARNINGS -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB "-I.\..\..\src" "-IF:\qtspace\mediaPlay" "-I.\..\..\src\QtAV" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtCore" "-I.\..\..\.moc\5.3.1\videowall" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing VideoWall.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>

@@ -249,6 +249,9 @@
     <None Include="res\player_zh_CN.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="moc\DecoderConfigPage.moc">
+      <Filter>Generated Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="theme\button-fastforward.png">
@@ -313,11 +316,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="F:\qtspace\mediaPlay\examples\player\player_resource.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="..\..\.moc\5.3.1\player\DecoderConfigPage.moc">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
+    <ResourceCompile Include="player_resource.rc" />
   </ItemGroup>
 </Project>

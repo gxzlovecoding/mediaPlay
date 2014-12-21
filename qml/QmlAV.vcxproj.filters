@@ -100,11 +100,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QmlAV\plugin.moc">
+    <None Include="moc\plugin.moc">
       <Filter>Generated Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QmlAVd\plugin.moc">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
+    </None>
   </ItemGroup>
 </Project>
