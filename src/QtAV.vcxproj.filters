@@ -419,6 +419,12 @@
     <ClCompile Include="GeneratedFiles\qrc_shaders.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="output\video\OpenGLWindowRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="output\video\OpenGLWidgetRenderer.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QtAV\AVClock.h">
@@ -760,24 +766,16 @@
     <ClInclude Include="QtAV\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="..\.moc\5.3.1\QtAV\VideoDecoderCUDA.moc">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\.moc\5.3.1\QtAV\VideoDecoderFFmpeg.moc">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderCUDA.moc">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="F:\qtspace\mediaPlay\.moc\5.3.1\QtAVd\VideoDecoderFFmpeg.moc">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="i18n\QtAV_zh_CN.ts">
       <Filter>Translation Files</Filter>
+    </None>
+    <None Include="moc\VideoDecoderCUDA.moc">
+      <Filter>Generated Files</Filter>
+    </None>
+    <None Include="moc\VideoDecoderFFmpeg.moc">
+      <Filter>Generated Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -801,7 +799,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="F:\qtspace\mediaPlay\src\QtAV_resource.rc" />
-    <ResourceCompile Include="F:\qtspace\mediaPlay\src\QtAVd_resource.rc" />
+    <ResourceCompile Include="QtAV_resource.rc" />
+    <ResourceCompile Include="QtAVd_resource.rc" />
   </ItemGroup>
 </Project>
