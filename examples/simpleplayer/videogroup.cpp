@@ -12,7 +12,7 @@ using namespace QtAV;
 
 VideoGroup::VideoGroup(QObject *parent) :
 QObject(parent)
-, r(3), c(3), view(0)
+, view(0)
 {
 	mpPlayer = new AVPlayer(this);
 
@@ -44,22 +44,6 @@ QObject(parent)
 	
 	mpBar->resize(200, 25);
 
-	m_currentScreenIndex = 4;
-	int tempSupportScreen[6] = { 1, 2, 3, 4, 9, 16 };
-	memcpy(m_supportScreen, tempSupportScreen, sizeof(tempSupportScreen));
-
-	for (int i = 0; i < r; ++i) {
-		for (int j = 0; j < c; ++j) {
-			//VideoRendererId v = VideoRendererId_GLWidget2;// 这个不会删除后显示不了 VideoRendererId_Widget;
-			VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
-
-			VideoRenderer* renderer = VideoRendererFactory::create(v);
-			mRenderers.append(renderer);
-			renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);
-			renderer->widget()->setWindowFlags(renderer->widget()->windowFlags() | Qt::FramelessWindowHint);
-		}
-	}
-
 	view = new QWidget;
 	view->resize(qApp->desktop()->size());
 	QGridLayout *layout = new QGridLayout;
@@ -69,13 +53,11 @@ QObject(parent)
 	layout->setContentsMargins(0, 0, 0, 0);
 	view->setLayout(layout);
 
-	for (int i = 0; i < mRenderers.size(); ++i)
-	{
-		int x = i / cols();
-		int y = i%cols();
-		((QGridLayout*)view->layout())->addWidget(mRenderers.at(i)->widget(), x, y);
-		mpPlayer->addVideoRenderer(mRenderers.at(i));
-	}
+	m_currentScreenIndex = 4;
+	int tempSupportScreen[6] = { 1, 2, 3, 4, 9, 16 };
+	memcpy(m_supportScreen, tempSupportScreen, sizeof(tempSupportScreen));
+	updateScreen(m_supportScreen[m_currentScreenIndex]);
+
 	view->setMaximumSize(800, 200);
 	view->show();
 
@@ -85,26 +67,6 @@ VideoGroup::~VideoGroup()
 {
 	delete view;
 	delete mpBar;
-}
-
-void VideoGroup::setRows(int n)
-{
-	r = n;
-}
-
-void VideoGroup::setCols(int n)
-{
-	c = n;
-}
-
-int VideoGroup::rows() const
-{
-	return r;
-}
-
-int VideoGroup::cols() const
-{
-	return c;
 }
 
 void VideoGroup::play(const QString &file)
@@ -123,68 +85,44 @@ void VideoGroup::openLocalFile()
 
 void VideoGroup::addRenderer()
 {
-	/*
-	r = 2;
-	c = 2;
-	for (int i = 0; i < r; ++i) {
-	for (int j = 0; j < c; ++j) {
-	//VideoRendererId v = VideoRendererId_GLWidget2;// 这个不会删除后显示不了 VideoRendererId_Widget;
-	VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
-
-	VideoRenderer* renderer = VideoRendererFactory::create(v);
-	mRenderers.append(renderer);
-	renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);
-	renderer->widget()->setWindowFlags(renderer->widget()->windowFlags() | Qt::FramelessWindowHint);
-	}
-	}
-
-
-	for (int i = 0; i < mRenderers.size(); ++i)
-	{
-	int x = i / cols();
-	int y = i%cols();
-	((QGridLayout*)view->layout())->addWidget(mRenderers.at(i)->widget(), x, y);
-	mpPlayer->addVideoRenderer(mRenderers.at(i));
-	}
-	*/
-
-	//VideoRendererId v = VideoRendererId_GLWidget2;// 这个不会删除后显示不了 VideoRendererId_Widget;
-	VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
-
-	VideoRenderer* renderer = VideoRendererFactory::create(v);
-	mRenderers = mpPlayer->videoOutputs();
-	mRenderers.append(renderer);
-	renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);
-	Qt::WindowFlags wf = renderer->widget()->windowFlags();
-	wf |= Qt::FramelessWindowHint;
-
-	renderer->widget()->setWindowFlags(wf);
-	int w = view ? view->frameGeometry().width() / c : qApp->desktop()->width() / c;
-	int h = view ? view->frameGeometry().height() / r : qApp->desktop()->height() / r;
-	renderer->widget()->resize(w, h);
-	mpPlayer->addVideoRenderer(renderer);
-	int i = (mRenderers.size() - 1) / cols();
-	int j = (mRenderers.size() - 1) % cols();
-
-	if (view) 
-	{
-		((QGridLayout*)view->layout())->addWidget(renderer->widget(), i, j);
-		view->show();
-	}
-	else 
-	{
-		renderer->widget()->move(j*w, i*h);
-		renderer->widget()->show();
-	}
-	//updateROI();
+	m_currentScreenIndex = m_currentScreenIndex < 4 ? m_currentScreenIndex + 1 : m_currentScreenIndex;
+	int currentScreen = m_supportScreen[m_currentScreenIndex];
+	updateScreen(currentScreen);
 }
 
 void VideoGroup::removeRenderer()
 {
+	m_currentScreenIndex = m_currentScreenIndex > 0 ? m_currentScreenIndex - 1 : m_currentScreenIndex;
+	int currentScreen = m_supportScreen[m_currentScreenIndex];
+	updateScreen(currentScreen);
+}
+
+void VideoGroup::updateScreen(int num)
+{
+	if (mRenderers.size() == num)
 	{
-		m_currentScreenIndex = m_currentScreenIndex > 0 ? m_currentScreenIndex - 1 : m_currentScreenIndex;
-		int currentScreen = m_supportScreen[m_currentScreenIndex];
-		while (mRenderers.size() > currentScreen)
+		// 窗口不变
+		return;
+	}
+	else if (mRenderers.size() < num)
+	{
+		// 窗口增加
+		while (mRenderers.size() < num)
+		{
+			//VideoRendererId v = VideoRendererId_GLWidget2;// 这个不会删除后显示不了 VideoRendererId_Widget;
+			VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
+
+			VideoRenderer* renderer = VideoRendererFactory::create(v);
+			mRenderers.append(renderer);
+			mpPlayer->addVideoRenderer(renderer);
+			renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);
+			renderer->widget()->setWindowFlags(renderer->widget()->windowFlags() | Qt::FramelessWindowHint);
+		}
+	}
+	else
+	{
+		// 窗口减少
+		while (mRenderers.size() > num)
 		{
 			VideoRenderer *r = mRenderers.takeLast();
 			mpPlayer->removeVideoRenderer(r);
@@ -194,7 +132,7 @@ void VideoGroup::removeRenderer()
 			}
 			delete r;
 		}
-	}	
+	}
 
 	if (mRenderers.size() == 2)
 	{
@@ -214,7 +152,6 @@ void VideoGroup::removeRenderer()
 
 		((QGridLayout*)view->layout())->addWidget(mRenderers.at(2)->widget(), 1, 1);
 		mpPlayer->addVideoRenderer(mRenderers.at(2));
-		return;
 	}
 	else
 	{
@@ -225,20 +162,4 @@ void VideoGroup::removeRenderer()
 			mpPlayer->addVideoRenderer(mRenderers.at(i));
 		}
 	}
-
-	return;
-}
-
-void VideoGroup::updateROI()
-{
-	return;
-	if (mRenderers.isEmpty())
-		return;
-	
-	foreach(VideoRenderer *renderer, mRenderers) 
-	{
-		renderer->setRegionOfInterest(0, 0, 0, 0);
-	}
-	
-	return;
 }

@@ -6,27 +6,24 @@
 #include <QtAV/WidgetRenderer.h>
 #include <QtWidgets/QPushButton>
 
+#define MAX_SCREEN 16
+
 class VideoGroup : public QObject
 {
 	Q_OBJECT
 public:
 	explicit VideoGroup(QObject *parent = 0);
 	~VideoGroup();
-	void setRows(int n);
-	void setCols(int n);
-	int rows() const;
-	int cols() const;
 
 	void play(const QString& file);
-	void updateROI();
 
-	public slots:
+public slots:
 	void openLocalFile();
 	void addRenderer();
 	void removeRenderer();
 
 private:
-	int r, c;
+	void updateScreen(int num);
 	int timer_id;
 	QtAV::AVPlayer *mpPlayer;
 	QWidget *view;
