@@ -96,6 +96,15 @@ AVPlayer::~AVPlayer()
     }
 }
 
+VideoFrame AVPlayer::getFirstFrame(int index)
+{
+	if ((d->vos[index]))
+		return d->vos[index]->m_firstFrame;
+	// TODO else»áå´»ú
+}
+
+
+
 AVClock* AVPlayer::masterClock()
 {
     return d->clock;

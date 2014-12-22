@@ -79,11 +79,17 @@ void VideoGroup::play(const QString &file)
 
 void VideoGroup::openLocalFile()
 {
+	/*
 	QString file = QFileDialog::getOpenFileName(0, tr("Open a video"));
 	if (file.isEmpty())
 		return;
 	mpPlayer->stop();
 	mpPlayer->play(file);
+	*/
+	for (int i = 0; i < mRenderers.size(); i++)
+	{
+		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
+	}
 }
 
 void VideoGroup::addRenderer()

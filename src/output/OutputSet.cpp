@@ -30,6 +30,7 @@ OutputSet::OutputSet(AVPlayer *player):
   , mCanPauseThread(false)
   , mpPlayer(player)
   , mPauseCount(0)
+  , isFirstFrame(true)
 {
 }
 
@@ -57,6 +58,12 @@ QList<AVOutput *> OutputSet::outputs()
 
 void OutputSet::sendVideoFrame(const VideoFrame &frame)
 {
+	if (isFirstFrame)
+	{
+		m_firstFrame = frame.clone();
+		isFirstFrame = false;
+	}
+
     if (mOutputs.isEmpty())
         return;
     foreach(AVOutput *output, mOutputs) {

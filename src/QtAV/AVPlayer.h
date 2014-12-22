@@ -59,6 +59,8 @@ public:
     explicit AVPlayer(QObject *parent = 0);
     ~AVPlayer();
 
+	VideoFrame getFirstFrame(int index = 0);
+
     //NOT const. This is the only way to access the clock.
     AVClock* masterClock();
     // If path is different from previous one, the stream to play will be reset to default.

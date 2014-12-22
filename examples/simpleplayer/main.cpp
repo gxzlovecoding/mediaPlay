@@ -11,8 +11,9 @@ int main(int argc, char *argv[])
 	VideoGroup wall;
 
 	//wall.play("F:\\movie\\ALAN_HACKEN.mp4");
-	wall.play("C:\\workspace\\3rd-party\\movie\\mul.ts");
-
+	//wall.play("C:\\workspace\\3rd-party\\movie\\mul.ts");
+	wall.play("C:\\workspace\\3rd-party\\movie\\trailer-mpeg2.mpg");
+	
 	/*
 	QtAV::GLWidgetRenderer2 renderer1;
 	QtAV::GLWidgetRenderer2 renderer2;

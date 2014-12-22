@@ -27,6 +27,7 @@
 #include <QtCore/QWaitCondition>
 #include "QtAV/QtAV_Global.h"
 #include "QtAV/AVOutput.h"
+#include <QtAV/VideoFrame.h>
 
 namespace QtAV {
 
@@ -65,6 +66,7 @@ public:
      * 2. shortcut for AVOutput.pause(false)
      */
     void resumeThread();
+	VideoFrame m_firstFrame;
 
 public slots:
     //connect to renderer->aboutToClose(). test whether delete on close
@@ -77,6 +79,8 @@ private:
     QList<AVOutput*> mOutputs;
     QMutex mMutex;
     QWaitCondition mCond; //pause
+
+	bool isFirstFrame;
 };
 
 } //namespace QtAV
