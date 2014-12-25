@@ -400,7 +400,7 @@ void VideoThread::run()
         d.outputSet->sendVideoFrame(frame); //TODO: group by format, convert group by group
         d.outputSet->unlock();
 
-        emit frameDelivered();
+        emit frameDelivered(this);
 
         d.capture->setPosition(pts);
         // TODO: capture yuv frames

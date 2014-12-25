@@ -77,6 +77,11 @@ void VideoGroup::play(const QString &file)
 	//TODO 真正设置好每个画面对应某个节目后才开始播放。
 }
 
+void VideoGroup::preload(const QString& file)
+{
+	mpPlayer->preLoad(file);
+}
+
 void VideoGroup::openLocalFile()
 {
 	/*

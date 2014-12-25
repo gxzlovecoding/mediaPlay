@@ -50,6 +50,8 @@ public:
     //AVDemuxer* demuxer
     bool isPaused() const;
     bool isEnd() const;
+
+	void setPreLoad(bool flag);
 public slots:
     void stop(); //TODO: remove it?
     void pause(bool p);
@@ -57,10 +59,12 @@ public slots:
 
 Q_SIGNALS:
     void requestClockPause(bool value);
+	void onPreLoadSuccess();
 
 private slots:
-    void frameDeliveredSeekOnPause();
-    void frameDeliveredNextFrame();
+	void frameDeliveredSeekOnPause(AVThread*);
+	void frameDeliveredNextFrame(AVThread*);
+	void onFirstFrameDelivered(AVThread*);
 
 protected:
     virtual void run();
@@ -94,6 +98,8 @@ private:
 
     QAtomicInt nb_next_frame;
     friend class SeekTask;
+
+	bool m_isPreLoad;
 };
 
 } //namespace QtAV

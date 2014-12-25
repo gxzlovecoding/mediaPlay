@@ -83,6 +83,7 @@ AVPlayer::AVPlayer(QObject *parent) :
     //direct connection can not sure slot order?
     connect(d->read_thread, SIGNAL(finished()), this, SLOT(stopFromDemuxerThread()));
     connect(d->read_thread, SIGNAL(requestClockPause(bool)), masterClock(), SLOT(pause(bool)), Qt::DirectConnection);
+	connect(d->read_thread, SIGNAL(onPreLoadSuccess()), this, SLOT(onPreLoadSuccess()));
 
     d->vcapture = new VideoCapture(this);
 }
@@ -431,6 +432,19 @@ bool AVPlayer::captureVideo()
     }
     d->vcapture->request();
     return true;
+}
+
+void AVPlayer::onPreLoadSuccess()
+{
+	this->pause(true);
+}
+
+bool AVPlayer::preLoad(const QString& path)
+{
+	setFile(path);
+	d->read_thread->setPreLoad(true);
+	play();
+	return true;
 }
 
 bool AVPlayer::play(const QString& path)

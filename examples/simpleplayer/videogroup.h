@@ -16,6 +16,7 @@ public:
 	~VideoGroup();
 
 	void play(const QString& file);
+	void preload(const QString& file);
 
 public slots:
 	void openLocalFile();

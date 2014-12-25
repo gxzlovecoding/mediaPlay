@@ -267,7 +267,7 @@ void AudioThread::run()
                 ao->play();
                 d.clock->updateValue(ao->timestamp());
 
-                emit frameDelivered();
+                emit frameDelivered(this);
             } else {
                 d.clock->updateDelay(delay += chunk_delay);
 

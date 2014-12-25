@@ -63,6 +63,7 @@ AVDemuxThread::AVDemuxThread(QObject *parent) :
   , end(true)
   , demuxer(0)
   , nb_next_frame(0)
+  , m_isPreLoad(false)
 {
 	for (int i = 0; i < MAX_PROGRAM; i++)
 	{
@@ -78,6 +79,7 @@ AVDemuxThread::AVDemuxThread(AVDemuxer *dmx, QObject *parent) :
     QThread(parent)
   , paused(false)
   , end(true)
+  , m_isPreLoad(false)
 {
 	for (int i = 0; i < MAX_PROGRAM; i++)
 	{
@@ -88,6 +90,27 @@ AVDemuxThread::AVDemuxThread(AVDemuxer *dmx, QObject *parent) :
     setDemuxer(dmx);
     seek_tasks.setCapacity(1);
     seek_tasks.blockFull(false);
+}
+
+void AVDemuxThread::setPreLoad(bool flag)
+{
+	m_isPreLoad = flag;
+}
+
+void AVDemuxThread::onFirstFrameDelivered(AVThread* thread)
+{
+	static QSet<AVThread*> programLoadFirstFrameList;
+
+	if (programLoadFirstFrameList.find(thread) != programLoadFirstFrameList.end())
+		return;
+
+	disconnect(thread, SIGNAL(frameDelivered()), this, SLOT(onFirstFrameDelivered()));
+	programLoadFirstFrameList.insert(thread);
+	if (this->demuxer->videoStreams().size() == programLoadFirstFrameList.size())
+	{
+		m_isPreLoad = false;
+		emit onPreLoadSuccess();
+	}
 }
 
 void AVDemuxThread::setDemuxer(AVDemuxer *dmx)
@@ -126,6 +149,12 @@ void AVDemuxThread::setVideoThread(AVThread *thread, int stream_id, int index)
 	}
 
     setAVThread(video_thread[index], thread);
+
+	//如果要预加载，就增加监控
+	if (m_isPreLoad)
+	{
+		connect(video_thread[index], SIGNAL(frameDelivered(AVThread*)), this, SLOT(onFirstFrameDelivered(AVThread*)), Qt::DirectConnection);
+	}
 }
 
 AVThread* AVDemuxThread::videoThread(int index)
@@ -212,7 +241,7 @@ void AVDemuxThread::seekInternal(qint64 pos)
 			thread->pause(false);
 			pauseInternal(false);
 			// direct connection is fine here
-			connect(thread, SIGNAL(frameDelivered()), this, SLOT(frameDeliveredSeekOnPause()), Qt::DirectConnection);
+			connect(thread, SIGNAL(frameDelivered(AVThread*)), this, SLOT(frameDeliveredSeekOnPause(AVThread*)), Qt::DirectConnection);
 			need_direct_connection = true;
 		}
 	}
@@ -327,7 +356,7 @@ void AVDemuxThread::nextFrame()
 			t->pause(false);
 			t->packetQueue()->blockFull(false);
 			if (!connected) {
-				connect(t, SIGNAL(frameDelivered()), this, SLOT(frameDeliveredNextFrame()), Qt::DirectConnection);
+				connect(t, SIGNAL(frameDelivered(AVThread*)), this, SLOT(frameDeliveredNextFrame(AVThread*)), Qt::DirectConnection);
 				connected = true;
 			}
 		}
@@ -346,13 +375,13 @@ void AVDemuxThread::nextFrame()
     pauseInternal(false);
 }
 
-void AVDemuxThread::frameDeliveredSeekOnPause()
+void AVDemuxThread::frameDeliveredSeekOnPause(AVThread*)
 {
 	for (int i = 0; i < MAX_PROGRAM; i++)
 	{
 		AVThread *thread = video_thread[i] ? video_thread[i] : audio_thread[i];
 		Q_ASSERT(thread);
-		disconnect(thread, SIGNAL(frameDelivered()), this, SLOT(frameDeliveredSeekOnPause()));
+		disconnect(thread, SIGNAL(frameDelivered(AVThread*)), this, SLOT(frameDeliveredSeekOnPause(AVThread*)));
 
 		if (user_paused) {
 			pause(true); // restore pause state
@@ -363,7 +392,7 @@ void AVDemuxThread::frameDeliveredSeekOnPause()
 	}
 }
 
-void AVDemuxThread::frameDeliveredNextFrame()
+void AVDemuxThread::frameDeliveredNextFrame(AVThread*)
 {
 	for (int i = 0; i < MAX_PROGRAM; i++)
 	{
@@ -377,7 +406,7 @@ void AVDemuxThread::frameDeliveredNextFrame()
 #endif
 			return;
 		}
-		disconnect(thread, SIGNAL(frameDelivered()), this, SLOT(frameDeliveredNextFrame()));
+		disconnect(thread, SIGNAL(frameDelivered(AVThread*)), this, SLOT(frameDeliveredNextFrame(AVThread*)));
 		if (user_paused) {
 			pause(true); // restore pause state
 			emit requestClockPause(true); // need direct connection
@@ -484,7 +513,7 @@ void AVDemuxThread::run()
          * stream data: aavavvavvavavavavavavavavvvaavavavava, it's ok
          */
         //TODO: use cache queue, take from cache queue if not empty?
-        
+
 		if (audioStreamId_ProgramIndex.find(index) != audioStreamId_ProgramIndex.end())
 		{
 			int programIndex = *audioStreamId_ProgramIndex.find(index);
@@ -520,6 +549,7 @@ void AVDemuxThread::run()
 				video_thread[programIndex]->packetQueue()->put(pkt); //affect audio_thread
             }
         } else { //subtitle
+			//TODO 会不会内存泄露？
             continue;
         }
     }

@@ -90,7 +90,7 @@ public slots:
     void nextAndPause(); //process 1 frame and pause
 
 Q_SIGNALS:
-    void frameDelivered();
+	void frameDelivered(AVThread*);
 
 protected:
     AVThread(AVThreadPrivate& d, QObject *parent = 0);

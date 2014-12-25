@@ -61,6 +61,8 @@ public:
 
 	VideoFrame getFirstFrame(int index = 0);
 
+	bool preLoad(const QString& path);
+
     //NOT const. This is the only way to access the clock.
     AVClock* masterClock();
     // If path is different from previous one, the stream to play will be reset to default.
@@ -258,6 +260,7 @@ public:
     // avfilter_init_dict
 
 public slots:
+	void onPreLoadSuccess();
     void togglePause();
     void pause(bool p);
     /*!

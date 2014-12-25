@@ -12,7 +12,9 @@ int main(int argc, char *argv[])
 
 	//wall.play("F:\\movie\\ALAN_HACKEN.mp4");
 	//wall.play("C:\\workspace\\3rd-party\\movie\\mul.ts");
-	wall.play("C:\\workspace\\3rd-party\\movie\\trailer-mpeg2.mpg");
+	//wall.play("C:\\workspace\\3rd-party\\movie\\trailer-mpeg2.mpg");
+	//wall.preload("C:\\workspace\\3rd-party\\movie\\trailer-mpeg2.mpg");
+	wall.preload("C:\\workspace\\3rd-party\\movie\\mul.ts");
 	
 	/*
 	QtAV::GLWidgetRenderer2 renderer1;

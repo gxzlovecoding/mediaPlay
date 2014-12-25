@@ -80,7 +80,7 @@ private:
     QMutex mMutex;
     QWaitCondition mCond; //pause
 
-	bool isFirstFrame;
+	bool m_preloadSuccess;
 };
 
 } //namespace QtAV
