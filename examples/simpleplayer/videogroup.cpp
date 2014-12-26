@@ -71,7 +71,9 @@ VideoGroup::~VideoGroup()
 
 void VideoGroup::play(const QString &file)
 {
-	mpPlayer->play(file);
+	qint64 pos = 0;
+	mpPlayer->seek(pos);
+	//mpPlayer->play(file);
 	//TODO 第一个是接口是预显示第一帧。
 
 	//TODO 真正设置好每个画面对应某个节目后才开始播放。
@@ -84,16 +86,10 @@ void VideoGroup::preload(const QString& file)
 
 void VideoGroup::openLocalFile()
 {
-	/*
-	QString file = QFileDialog::getOpenFileName(0, tr("Open a video"));
-	if (file.isEmpty())
-		return;
-	mpPlayer->stop();
-	mpPlayer->play(file);
-	*/
-	for (int i = 0; i < mRenderers.size(); i++)
+	for (int i = 0; i < mpPlayer->videoStreamCount(); i++)
 	{
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
+		mpPlayer->setRenderer(mRenderers[i], i);
 	}
 }
 
