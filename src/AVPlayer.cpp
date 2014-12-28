@@ -135,12 +135,9 @@ void AVPlayer::removeVideoRenderer(VideoRenderer *renderer, int index)
     d->vos[index]->removeOutput(renderer);
 }
 
-void AVPlayer::clearVideoRenderers()
+void AVPlayer::clearVideoRenderers(int index)
 {
-	for (int i = 0; i < MAX_PROGRAM; i++)
-	{
-		d->vos[i]->clearOutputs();
-	}
+	d->vos[index]->clearOutputs();
 }
 
 //TODO: check components compatiblity(also when change the filter chain)
@@ -155,7 +152,7 @@ void AVPlayer::setRenderer(VideoRenderer *r, int index)
             r->setOutAspectRatio(vo->outAspectRatio());
         }
     }
-    clearVideoRenderers();
+    clearVideoRenderers(index);
     if (!r)
         return;
     r->resizeRenderer(r->rendererSize()); //IMPORTANT: the swscaler will resize

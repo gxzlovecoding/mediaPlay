@@ -86,7 +86,7 @@ void VideoGroup::preload(const QString& file)
 
 void VideoGroup::openLocalFile()
 {
-	for (int i = 0; i < mpPlayer->videoStreamCount(); i++)
+	for (int i = 0; i < m_supportScreen[m_currentScreenIndex] && i < mpPlayer->videoStreamCount(); i++)
 	{
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
 		mpPlayer->setRenderer(mRenderers[i], i);

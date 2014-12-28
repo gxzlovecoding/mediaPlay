@@ -180,7 +180,7 @@ public:
     // TODO: use id as parameter and return ptr?
 	void addVideoRenderer(VideoRenderer *renderer, int index = 0);
 	void removeVideoRenderer(VideoRenderer *renderer, int index = 0);
-    void clearVideoRenderers();
+    void clearVideoRenderers(int index = 0);
 	void setRenderer(VideoRenderer* renderer, int index = 0);
 	VideoRenderer* renderer(int index = 0);
 	QList<VideoRenderer*> videoOutputs(int index = 0);
