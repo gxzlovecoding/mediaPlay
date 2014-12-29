@@ -434,6 +434,7 @@ bool AVPlayer::captureVideo()
 void AVPlayer::onPreLoadSuccess()
 {
 	this->pause(true);
+	emit preloadSuccess();
 }
 
 bool AVPlayer::preLoad(const QString& path)

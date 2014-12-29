@@ -34,6 +34,7 @@ QObject(parent)
 	connect(mpPause, SIGNAL(toggled(bool)), mpPlayer, SLOT(pause(bool)));
 	connect(mpAdd, SIGNAL(clicked()), SLOT(addRenderer()));
 	connect(mpRemove, SIGNAL(clicked()), SLOT(removeRenderer()));
+	connect(mpPlayer, SIGNAL(preloadSuccess()), this, SLOT(preloadSuccess()));
 
 	mpBar->layout()->addWidget(mpOpen);
 	mpBar->layout()->addWidget(mpPlay);
@@ -84,13 +85,17 @@ void VideoGroup::preload(const QString& file)
 	mpPlayer->preLoad(file);
 }
 
-void VideoGroup::openLocalFile()
+void VideoGroup::preloadSuccess()
 {
 	for (int i = 0; i < m_supportScreen[m_currentScreenIndex] && i < mpPlayer->videoStreamCount(); i++)
 	{
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
 		mpPlayer->setRenderer(mRenderers[i], i);
 	}
+}
+
+void VideoGroup::openLocalFile()
+{
 }
 
 void VideoGroup::addRenderer()

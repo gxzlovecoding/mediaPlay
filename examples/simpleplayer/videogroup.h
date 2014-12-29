@@ -22,6 +22,7 @@ public slots:
 	void openLocalFile();
 	void addRenderer();
 	void removeRenderer();
+	void preloadSuccess();
 
 private:
 	void updateScreen(int num);

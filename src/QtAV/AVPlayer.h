@@ -319,6 +319,7 @@ public slots:
     void setSaturation(int val);
 
 signals:
+	void preloadSuccess();
     void autoLoadChanged();
     void asyncLoadChanged();
     void muteChanged();
