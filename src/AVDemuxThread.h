@@ -52,6 +52,7 @@ public:
     bool isEnd() const;
 
 	void setPreLoad(bool flag);
+	bool programEnable[MAX_PROGRAM];
 public slots:
     void stop(); //TODO: remove it?
     void pause(bool p);

@@ -69,6 +69,7 @@ AVDemuxThread::AVDemuxThread(QObject *parent) :
 	{
 		audio_thread[i] = 0;
 		video_thread[i] = 0;
+		programEnable[i] = false;
 	}
 
     seek_tasks.setCapacity(1);
@@ -85,6 +86,7 @@ AVDemuxThread::AVDemuxThread(AVDemuxer *dmx, QObject *parent) :
 	{
 		audio_thread[i] = 0;
 		video_thread[i] = 0;
+		programEnable[i] = false;
 	}
 
     setDemuxer(dmx);
@@ -149,6 +151,7 @@ void AVDemuxThread::setVideoThread(AVThread *thread, int stream_id, int index)
 	}
 
     setAVThread(video_thread[index], thread);
+	programEnable[index] = true;
 
 	//如果要预加载，就增加监控
 	if (m_isPreLoad)
@@ -514,14 +517,14 @@ void AVDemuxThread::run()
          */
         //TODO: use cache queue, take from cache queue if not empty?
 
-		if (audioStreamId_ProgramIndex.find(index) != audioStreamId_ProgramIndex.end())
+		if (!m_isPreLoad && audioStreamId_ProgramIndex.find(index) != audioStreamId_ProgramIndex.end())
 		{
 			int programIndex = *audioStreamId_ProgramIndex.find(index);
             /* if vqueue if not blocked and full, and aqueue is empty, then put to
              * vqueue will block demuex thread
              */
 			if (audio_thread[programIndex]->packetQueue()) {
-				if (!audio_thread[programIndex] || !audio_thread[programIndex]->isRunning()) {
+				if (!audio_thread[programIndex] || !programEnable[programIndex] || !audio_thread[programIndex]->isRunning()) {
 					audio_thread[programIndex]->packetQueue()->clear();
                     continue;
                 }
@@ -538,12 +541,12 @@ void AVDemuxThread::run()
 		else if (videoStreamId_ProgramIndex.find(index) != videoStreamId_ProgramIndex.end()) {
 			int programIndex = *videoStreamId_ProgramIndex.find(index);
 			if (video_thread[programIndex]->packetQueue()) {
-				if (!video_thread[programIndex] || !video_thread[programIndex]->isRunning()) {
+				if (!video_thread[programIndex] || !programEnable[programIndex] || !video_thread[programIndex]->isRunning()) {
 					video_thread[programIndex]->packetQueue()->clear();
                     continue;
                 }
 				video_thread[programIndex]->packetQueue()->blockFull(!audio_thread[programIndex]
-					|| !audio_thread[programIndex]->isRunning() 
+					|| !audio_thread[programIndex]-isRunning() 
 					|| !audio_thread[programIndex]->packetQueue()
 					|| audio_thread[programIndex]->packetQueue()->isEnough());
 				video_thread[programIndex]->packetQueue()->put(pkt); //affect audio_thread

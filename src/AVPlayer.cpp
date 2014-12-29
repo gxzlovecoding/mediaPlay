@@ -168,6 +168,17 @@ VideoRenderer *AVPlayer::renderer(int index)
     return static_cast<VideoRenderer*>(d->vos[index]->outputs().last());
 }
 
+void AVPlayer::enableProgram(int index)
+{
+	d->read_thread->programEnable[index] = true;
+}
+
+void AVPlayer::disableAllProgram()
+{
+	for (int i = 0; i < MAX_PROGRAM; i++)
+		d->read_thread->programEnable[i] = false;
+}
+
 QList<VideoRenderer*> AVPlayer::videoOutputs(int index)
 {
     if (!d->vos)

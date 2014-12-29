@@ -87,10 +87,13 @@ void VideoGroup::preload(const QString& file)
 
 void VideoGroup::preloadSuccess()
 {
+	mpPlayer->disableAllProgram();
+
 	for (int i = 0; i < m_supportScreen[m_currentScreenIndex] && i < mpPlayer->videoStreamCount(); i++)
 	{
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
 		mpPlayer->setRenderer(mRenderers[i], i);
+		mpPlayer->enableProgram(i);
 	}
 }
 
@@ -171,4 +174,6 @@ void VideoGroup::updateScreen(int num)
 				i / (int)sqrt((double)mRenderers.size()), i % (int)(sqrt((double)mRenderers.size())));
 		}
 	}
+
+	preloadSuccess();
 }

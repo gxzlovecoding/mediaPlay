@@ -177,6 +177,10 @@ public:
     bool play(const QString& path);
     bool isPlaying() const;
     bool isPaused() const;
+
+	void enableProgram(int index = 0);
+	void disableAllProgram();
+
     // TODO: use id as parameter and return ptr?
 	void addVideoRenderer(VideoRenderer *renderer, int index = 0);
 	void removeVideoRenderer(VideoRenderer *renderer, int index = 0);
