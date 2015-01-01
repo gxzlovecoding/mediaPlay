@@ -10,16 +10,29 @@
 
 using namespace QtAV;
 
-VideoGroup::VideoGroup(QObject *parent) :
-QObject(parent)
+VideoGroup::VideoGroup(QWidget *parent) :
+QWidget(parent)
 , view(0)
 {
+	QVBoxLayout *mainLayout = new QVBoxLayout();
+	mainLayout->setSpacing(0);
+	mainLayout->setMargin(0);
+	setLayout(mainLayout);
+
 	mpPlayer = new AVPlayer(this);
 
 	mpBar = new QWidget(0, Qt::WindowStaysOnTopHint);
-	mpBar->setMaximumSize(400, 60);
-	mpBar->show();
+	mpBar->setMaximumSize(400, 40);
 	mpBar->setLayout(new QHBoxLayout);
+
+	mpTimeSlider = new Slider();
+	mpTimeSlider->setDisabled(true);
+	//mpTimeSlider->setFixedHeight(8);
+	mpTimeSlider->setMaximumHeight(8);
+	mpTimeSlider->setTracking(true);
+	mpTimeSlider->setOrientation(Qt::Horizontal);
+	mpTimeSlider->setMinimum(0);
+
 	mpOpen = new QPushButton("Open");
 	mpPlay = new QPushButton("Play");
 	mpStop = new QPushButton("Stop");
@@ -43,7 +56,7 @@ QObject(parent)
 	mpBar->layout()->addWidget(mpAdd);
 	mpBar->layout()->addWidget(mpRemove);
 	
-	mpBar->resize(200, 25);
+	//mpBar->setMaximumHeight(25);
 
 	view = new QWidget;
 	view->resize(qApp->desktop()->size());
@@ -59,9 +72,10 @@ QObject(parent)
 	memcpy(m_supportScreen, tempSupportScreen, sizeof(tempSupportScreen));
 	updateScreen(m_supportScreen[m_currentScreenIndex]);
 
-	view->setMaximumSize(800, 200);
-	view->show();
-
+	//mainLayout->addLayout(layout);
+	mainLayout->addWidget(view);
+	mainLayout->addWidget(mpTimeSlider);
+	mainLayout->addWidget(mpBar);
 }
 
 VideoGroup::~VideoGroup()
@@ -87,6 +101,9 @@ void VideoGroup::preload(const QString& file)
 
 void VideoGroup::preloadSuccess()
 {
+	if (! mpPlayer->isLoaded())
+		return;
+
 	mpPlayer->disableAllProgram();
 
 	for (int i = 0; i < m_supportScreen[m_currentScreenIndex] && i < mpPlayer->videoStreamCount(); i++)

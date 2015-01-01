@@ -480,14 +480,16 @@ void AVPlayer::togglePause()
 
 void AVPlayer::pause(bool p)
 {
-	int index = 0;
-
     //pause thread. check pause state?
     d->read_thread->pause(p);
-	if (d->athread[index])
-		d->athread[index]->pause(p);
-    if (d->vthread)
-		d->vthread[index]->pause(p);
+
+	for (int i = 0; i < MAX_PROGRAM; i++)
+	{
+		if (d->athread[i])
+			d->athread[i]->pause(p);
+		if (d->vthread[i])
+			d->vthread[i]->pause(p);
+	}
     d->clock->pause(p);
     emit paused(p);
 }
