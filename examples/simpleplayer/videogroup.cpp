@@ -48,6 +48,9 @@ QWidget(parent)
 	connect(mpAdd, SIGNAL(clicked()), SLOT(addRenderer()));
 	connect(mpRemove, SIGNAL(clicked()), SLOT(removeRenderer()));
 	connect(mpPlayer, SIGNAL(preloadSuccess()), this, SLOT(preloadSuccess()));
+	connect(mpPlayer, SIGNAL(started()), this, SLOT(onStartPlay()));
+	connect(mpPlayer, SIGNAL(stopped()), this, SLOT(onStopPlay()));
+	connect(mpPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(onPositionChange(qint64)));
 
 	mpBar->layout()->addWidget(mpOpen);
 	mpBar->layout()->addWidget(mpPlay);
@@ -112,6 +115,26 @@ void VideoGroup::preloadSuccess()
 		mpPlayer->setRenderer(mRenderers[i], i);
 		mpPlayer->enableProgram(i);
 	}
+}
+
+void VideoGroup::onStartPlay()
+{
+	mpTimeSlider->setMinimum(mpPlayer->mediaStartPosition());
+	mpTimeSlider->setMaximum(mpPlayer->mediaStopPosition());
+	mpTimeSlider->setValue(0);
+	mpTimeSlider->setEnabled(true);
+}
+
+void VideoGroup::onStopPlay()
+{
+	mpTimeSlider->setValue(0);
+	qDebug(">>>>>>>>>>>>>>disable slider");
+	mpTimeSlider->setDisabled(true);
+}
+
+void VideoGroup::onPositionChange(qint64 pos)
+{
+	mpTimeSlider->setValue(pos);
 }
 
 void VideoGroup::openLocalFile()

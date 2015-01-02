@@ -24,6 +24,9 @@ public slots:
 	void addRenderer();
 	void removeRenderer();
 	void preloadSuccess();
+	void onStartPlay();
+	void onStopPlay();
+	void onPositionChange(qint64 pos);
 
 private:
 	void updateScreen(int num);
