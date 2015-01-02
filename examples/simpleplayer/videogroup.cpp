@@ -51,6 +51,8 @@ QWidget(parent)
 	connect(mpPlayer, SIGNAL(started()), this, SLOT(onStartPlay()));
 	connect(mpPlayer, SIGNAL(stopped()), this, SLOT(onStopPlay()));
 	connect(mpPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(onPositionChange(qint64)));
+	connect(mpTimeSlider, SIGNAL(sliderPressed()), SLOT(seek()));
+	connect(mpTimeSlider, SIGNAL(sliderReleased()), SLOT(seek()));
 
 	mpBar->layout()->addWidget(mpOpen);
 	mpBar->layout()->addWidget(mpPlay);
@@ -135,6 +137,11 @@ void VideoGroup::onStopPlay()
 void VideoGroup::onPositionChange(qint64 pos)
 {
 	mpTimeSlider->setValue(pos);
+}
+
+void VideoGroup::seek()
+{
+	mpPlayer->seek((qint64)mpTimeSlider->value());
 }
 
 void VideoGroup::openLocalFile()

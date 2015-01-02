@@ -27,6 +27,7 @@ public slots:
 	void onStartPlay();
 	void onStopPlay();
 	void onPositionChange(qint64 pos);
+	void seek();
 
 private:
 	void updateScreen(int num);
