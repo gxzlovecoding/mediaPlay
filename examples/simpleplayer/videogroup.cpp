@@ -40,6 +40,8 @@ QWidget(parent)
 	mpPause->setCheckable(true);
 	mpAdd = new QPushButton("+");
 	mpRemove = new QPushButton("-");
+	mpForwardBtn = new QPushButton("FW");
+	mpBackwardBtn = new QPushButton("BW");
 
 	connect(mpOpen, SIGNAL(clicked()), SLOT(openLocalFile()));
 	connect(mpPlay, SIGNAL(clicked()), mpPlayer, SLOT(play()));
@@ -53,11 +55,15 @@ QWidget(parent)
 	connect(mpPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(onPositionChange(qint64)));
 	connect(mpTimeSlider, SIGNAL(sliderPressed()), SLOT(seek()));
 	connect(mpTimeSlider, SIGNAL(sliderReleased()), SLOT(seek()));
+	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
+	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
 
 	mpBar->layout()->addWidget(mpOpen);
 	mpBar->layout()->addWidget(mpPlay);
 	mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpPause);
+	mpBar->layout()->addWidget(mpBackwardBtn);
+	mpBar->layout()->addWidget(mpForwardBtn);
 	mpBar->layout()->addWidget(mpAdd);
 	mpBar->layout()->addWidget(mpRemove);
 	

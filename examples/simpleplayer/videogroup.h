@@ -36,7 +36,7 @@ private:
 	QWidget *view;
 	QWidget *mpBar;
 	Slider *mpTimeSlider;
-	QPushButton *mpAdd, *mpRemove, *mpOpen, *mpPlay, *mpStop, *mpPause;
+	QPushButton *mpAdd, *mpRemove, *mpOpen, *mpPlay, *mpStop, *mpPause, *mpForwardBtn, *mpBackwardBtn;
 
 	QList<QtAV::VideoRenderer*> mRenderers;
 	int		m_supportScreen[6];
