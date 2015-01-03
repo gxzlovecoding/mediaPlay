@@ -9,6 +9,7 @@ TestResults
 *.pbxuser
 *.perspectivev3
 .DS_Store
+*.txt
 
 *.old
 *.log
