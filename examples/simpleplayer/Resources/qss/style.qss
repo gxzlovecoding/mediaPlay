@@ -1,0 +1,82 @@
+ QTreeView {
+     show-decoration-selected: 1;
+ }
+
+ QTreeView::item {
+      border: 1px solid #d9d9d9;
+     border-top-color: transparent;
+     border-bottom-color: transparent;
+ }
+
+ QTreeView::item:hover {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
+     border: 1px solid #bfcde4;
+ }
+
+ QTreeView::item:selected {
+     border: 1px solid #567dbc;
+ }
+
+ QTreeView::item:selected:active{
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);
+ }
+
+ QTreeView::item:selected:!active {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
+ }
+ 
+ 
+  QTreeView::branch:has-siblings:!adjoins-item {
+     border-image: url(:/APlayer/Resources/vline.png) 0;
+ }
+
+ QTreeView::branch:has-siblings:adjoins-item {
+     border-image: url(:/APlayer/Resources/branch-more.png) 0;
+ }
+
+ QTreeView::branch:!has-children:!has-siblings:adjoins-item {
+     border-image: url(:/APlayer/Resources/branch-end.png) 0;
+ }
+
+ QTreeView::branch:has-children:!has-siblings:closed,
+ QTreeView::branch:closed:has-children:has-siblings {
+         border-image: none;
+         image: url(:/APlayer/Resources/branch-closed.png);
+ }
+
+ QTreeView::branch:open:has-children:!has-siblings,
+ QTreeView::branch:open:has-children:has-siblings  {
+         border-image: none;
+         image: url(:/APlayer/Resources/branch-open.png);
+ }
+ 
+QTreeView {color: white; background-color: gray;}
+
+ QHeaderView::section {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                       stop:0 #616161, stop: 0.5 #505050,
+                                       stop: 0.6 #434343, stop:1 #656565);
+     color: white;
+     padding-left: 4px;
+     border: 1px solid #6c6c6c;
+ }
+
+ QHeaderView::section:checked
+ {
+     background-color: red;
+ }
+
+ /* style the sort indicator */
+ QHeaderView::down-arrow {
+     image: url(:/APlayer/Resources/down_arrow.png);
+ }
+
+ QHeaderView::up-arrow {
+     image: url(:/APlayer/Resources/up_arrow.png);
+ }
+ 
+QWidget#backgroundWidget{
+	border-image: url(:/APlayer/Resources/background-picture.png);
+}
+
+ 

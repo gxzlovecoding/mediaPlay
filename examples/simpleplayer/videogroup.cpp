@@ -17,7 +17,9 @@ QWidget(parent)
 	QVBoxLayout *mainLayout = new QVBoxLayout();
 	mainLayout->setSpacing(0);
 	mainLayout->setMargin(0);
-	setLayout(mainLayout);
+	//setLayout(mainLayout);
+	mainWidget = new QWidget();
+	mainWidget->setLayout(mainLayout);
 
 	mpPlayer = new AVPlayer(this);
 
@@ -87,12 +89,33 @@ QWidget(parent)
 	mainLayout->addWidget(view);
 	mainLayout->addWidget(mpTimeSlider);
 	mainLayout->addWidget(mpBar);
+
+	m_pSplitter = new QSplitter(Qt::Horizontal, this);
+	m_pSplitter->resize(this->size());
+
+	m_playList = new PlaylistTreeView();
+
+	m_pSplitter->addWidget(m_playList);
+	m_pSplitter->addWidget(mainWidget);
+	m_pSplitter->handle(0)->installEventFilter(this);
+	m_pSplitter->setHandleWidth(1);
+
+	// 设置列表和主窗口左右比例
+	QList<int> size;
+	size.append(this->width() * 0.2);
+	size.append(this->width() * 0.8);
+	m_pSplitter->setSizes(size);
 }
 
 VideoGroup::~VideoGroup()
 {
 	delete view;
 	delete mpBar;
+}
+
+void VideoGroup::resizeEvent(QResizeEvent *event)
+{
+	m_pSplitter->setFixedSize(this->size());
 }
 
 void VideoGroup::play(const QString &file)
@@ -114,6 +137,9 @@ void VideoGroup::preloadSuccess()
 {
 	if (! mpPlayer->isLoaded())
 		return;
+
+	m_playList->addItem("aa", "11");
+	m_playList->addItem("bb", "22");
 
 	mpPlayer->disableAllProgram();
 

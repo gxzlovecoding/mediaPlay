@@ -2,10 +2,12 @@
 #define QTAV_VIDEOWALL_H
 
 #include <QtCore/QList>
+#include <QSplitter>
 #include <QtAV/AVPlayer.h>
 #include <QtAV/WidgetRenderer.h>
 #include <QtWidgets/QPushButton>
 #include "Slider.h"
+#include "PlaylistTreeView.h"
 
 #define MAX_SCREEN 16
 
@@ -30,13 +32,18 @@ public slots:
 	void seek();
 
 private:
+	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
 	int timer_id;
 	QtAV::AVPlayer *mpPlayer;
 	QWidget *view;
 	QWidget *mpBar;
+	QWidget *mainWidget;
+	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider;
 	QPushButton *mpAdd, *mpRemove, *mpOpen, *mpPlay, *mpStop, *mpPause, *mpForwardBtn, *mpBackwardBtn;
+
+	QSplitter*   m_pSplitter;
 
 	QList<QtAV::VideoRenderer*> mRenderers;
 	int		m_supportScreen[6];

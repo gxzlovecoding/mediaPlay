@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/APlayer">
+        <file>Resources/qss/style.qss</file>
+    </qresource>
+</RCC>
