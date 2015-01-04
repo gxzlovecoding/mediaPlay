@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QEvent>
+#include <QInputDialog>
 #include <QFileDialog>
 #include <QGridLayout>
 #include <QtCore/QUrl>
@@ -35,7 +36,8 @@ QWidget(parent)
 	mpTimeSlider->setOrientation(Qt::Horizontal);
 	mpTimeSlider->setMinimum(0);
 
-	mpOpen = new QPushButton("Open");
+	mpOpenUrl = new QPushButton("O_URL");
+	mpOpen = new QPushButton("O_File");
 	mpPlay = new QPushButton("Play");
 	mpStop = new QPushButton("Stop");
 	mpPause = new QPushButton("Pause");
@@ -45,6 +47,7 @@ QWidget(parent)
 	mpForwardBtn = new QPushButton("FW");
 	mpBackwardBtn = new QPushButton("BW");
 
+	connect(mpOpenUrl, SIGNAL(clicked()), SLOT(openUrl()));
 	connect(mpOpen, SIGNAL(clicked()), SLOT(openLocalFile()));
 	connect(mpPlay, SIGNAL(clicked()), mpPlayer, SLOT(play()));
 	connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
@@ -60,6 +63,7 @@ QWidget(parent)
 	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
 	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
 
+	mpBar->layout()->addWidget(mpOpenUrl);
 	mpBar->layout()->addWidget(mpOpen);
 	mpBar->layout()->addWidget(mpPlay);
 	mpBar->layout()->addWidget(mpStop);
@@ -141,6 +145,7 @@ void VideoGroup::preloadSuccess()
 	mpPlayer->disableAllProgram();
 
 	// 取出视频自带的私有流名字数据
+	m_playList->clear();
 	for (int i = 0; i < mpPlayer->videoStreamCount(); i++)
 	{
 		std::string streamName = mpPlayer->getVideoStreamName(i);
@@ -180,8 +185,19 @@ void VideoGroup::seek()
 	mpPlayer->seek((qint64)mpTimeSlider->value());
 }
 
+void VideoGroup::openUrl()
+{
+	QString url = QInputDialog::getText(0, tr("Open an url"), tr("Url"));
+	if (url.isEmpty())
+		return;
+	preload(url);
+}
 void VideoGroup::openLocalFile()
 {
+	QString file = QFileDialog::getOpenFileName(0, tr("Open a media file"));
+	if (file.isEmpty())
+		return;
+	preload(file);
 }
 
 void VideoGroup::addRenderer()

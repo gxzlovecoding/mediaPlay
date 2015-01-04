@@ -20,6 +20,13 @@ void PlaylistTreeView::addItem(QString itemName, QString value)
 	m_model->appendRow(item);
 }
 
+void PlaylistTreeView::clear(void)
+{
+	m_model->clear();
+	QStandardItem *item = new QStandardItem("player");
+	m_model->setHorizontalHeaderItem(0, item);
+}
+
 PlaylistTreeView::~PlaylistTreeView()
 {
 	delete m_model;

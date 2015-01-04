@@ -22,6 +22,7 @@ public:
 	void preload(const QString& file);
 
 public slots:
+    void openUrl();
 	void openLocalFile();
 	void addRenderer();
 	void removeRenderer();
@@ -41,7 +42,7 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider;
-	QPushButton *mpAdd, *mpRemove, *mpOpen, *mpPlay, *mpStop, *mpPause, *mpForwardBtn, *mpBackwardBtn;
+	QPushButton *mpAdd, *mpRemove, *mpOpenUrl, *mpOpen, *mpPlay, *mpStop, *mpPause, *mpForwardBtn, *mpBackwardBtn;
 
 	QSplitter*   m_pSplitter;
 
