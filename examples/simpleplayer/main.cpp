@@ -52,10 +52,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-	// 设置编码
-	QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
-
 	// 设置log日志
+	/*
 	sLogfile = fopen(QString("log.txt").toUtf8().constData(), "w+");
 	if (!sLogfile) 
 	{
@@ -63,6 +61,10 @@ int main(int argc, char *argv[])
 		sLogfile = stdout;
 	}
 	qInstallMessageHandler(Logger);
+	*/
+
+	// 设置编码
+	QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
 
 	// 设置风格
 	qDebug("set nomal style.");
