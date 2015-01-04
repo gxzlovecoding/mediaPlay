@@ -138,10 +138,14 @@ void VideoGroup::preloadSuccess()
 	if (! mpPlayer->isLoaded())
 		return;
 
-	m_playList->addItem("aa", "11");
-	m_playList->addItem("bb", "22");
-
 	mpPlayer->disableAllProgram();
+
+	// 取出视频自带的私有流名字数据
+	for (int i = 0; i < mpPlayer->videoStreamCount(); i++)
+	{
+		std::string streamName = mpPlayer->getVideoStreamName(i);
+		m_playList->addItem(QString::fromLocal8Bit(streamName.c_str()), "11");
+	}
 
 	for (int i = 0; i < m_supportScreen[m_currentScreenIndex] && i < mpPlayer->videoStreamCount(); i++)
 	{

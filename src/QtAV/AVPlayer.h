@@ -182,6 +182,7 @@ public:
 	void disableAllProgram();
 
     // TODO: use id as parameter and return ptr?
+	std::string getVideoStreamName(int index = 0);
 	void addVideoRenderer(VideoRenderer *renderer, int index = 0);
 	void removeVideoRenderer(VideoRenderer *renderer, int index = 0);
     void clearVideoRenderers(int index = 0);

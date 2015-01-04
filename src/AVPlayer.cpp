@@ -104,6 +104,10 @@ VideoFrame AVPlayer::getFirstFrame(int index)
 	// TODO else»áå´»ú
 }
 
+std::string AVPlayer::getVideoStreamName(int index)
+{
+	return d->demuxer.videoStreamName(index);
+}
 
 
 AVClock* AVPlayer::masterClock()

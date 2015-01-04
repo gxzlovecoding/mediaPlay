@@ -140,6 +140,7 @@ public:
     // current open stream
     int subtitleStream() const;
     QList<int> subtitleStreams() const;
+	std::string videoStreamName(int index) const;
 
     int width() const; //AVCodecContext::width;
     int height() const; //AVCodecContext::height

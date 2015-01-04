@@ -990,6 +990,11 @@ AVCodecContext* AVDemuxer::videoCodecContext(int stream) const
     return format_context->streams[stream]->codec;
 }
 
+std::string AVDemuxer::videoStreamName(int index) const
+{
+	return std::string(format_context->streams[video_streams[index]]->stream_name);
+}
+
 AVCodecContext* AVDemuxer::subtitleCodecContext(int stream) const
 {
     if (stream < 0)
