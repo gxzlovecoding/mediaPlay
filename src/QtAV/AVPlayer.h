@@ -60,6 +60,7 @@ public:
     ~AVPlayer();
 
 	VideoFrame getFirstFrame(int index = 0);
+	QImage* getFirstImage(int index = 0);
 
 	bool preLoad(const QString& path);
 

@@ -157,6 +157,13 @@ void VideoGroup::preloadSuccess()
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
 		mpPlayer->setRenderer(mRenderers[i], i);
 		mpPlayer->enableProgram(i);
+
+		QImage *temp = mpPlayer->getFirstImage();
+		if (temp != NULL)
+		{
+			QString format = "png";
+			temp->save(QString("C://wwwroot//%1.png").arg(i), format.toLatin1().constData(), 0x64);
+		}
 	}
 }
 

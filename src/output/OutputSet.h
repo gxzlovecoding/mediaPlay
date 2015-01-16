@@ -22,6 +22,7 @@
 #ifndef QTAV_OUTPUTSET_H
 #define QTAV_OUTPUTSET_H
 
+#include <QImage>
 #include <QtCore/QObject>
 #include <QtCore/QMutex>
 #include <QtCore/QWaitCondition>
@@ -67,6 +68,7 @@ public:
      */
     void resumeThread();
 	VideoFrame m_firstFrame;
+	QImage *m_firstImage;
 
 public slots:
     //connect to renderer->aboutToClose(). test whether delete on close

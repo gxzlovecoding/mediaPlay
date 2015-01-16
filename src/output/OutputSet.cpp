@@ -19,6 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 ******************************************************************************/
 
+#include <QtAV/ImageConverterTypes.h>
 #include "output/OutputSet.h"
 #include "QtAV/AVPlayer.h"
 #include "QtAV/VideoRenderer.h"
@@ -61,6 +62,24 @@ void OutputSet::sendVideoFrame(const VideoFrame &frame)
 	if (!m_preloadSuccess)
 	{
 		m_firstFrame = frame.clone();
+
+		ImageConverter *conv = ImageConverterFactory::create(ImageConverterId_FF);
+		m_firstFrame.setImageConverter(conv);
+		if (!m_firstFrame.convertTo(QImage::Format_ARGB32)) {
+			qWarning("Failed to convert captured frame");
+			return;
+		}
+
+		QString format = "png";
+		m_firstImage = new QImage((const uchar*)m_firstFrame.frameData().constData(), m_firstFrame.width(), m_firstFrame.height(), m_firstFrame.bytesPerLine(), QImage::Format_ARGB32);
+		/*
+		//≤‚ ‘imageø…”√
+		bool ok = image.save("C://wwwroot//6.png", format.toLatin1().constData(), 0x64);
+		if (!ok) {
+			qWarning("Failed to save capture");
+		}
+		*/
+
 		m_preloadSuccess = true;
 	}
 

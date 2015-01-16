@@ -104,6 +104,14 @@ VideoFrame AVPlayer::getFirstFrame(int index)
 	// TODO else»áå´»ú
 }
 
+QImage* AVPlayer::getFirstImage(int index)
+{
+	if ((d->vos[index]))
+		return d->vos[index]->m_firstImage;
+	return NULL;
+}
+
+
 std::string AVPlayer::getVideoStreamName(int index)
 {
 	return d->demuxer.videoStreamName(index);
