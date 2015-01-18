@@ -63,7 +63,8 @@
       <ModuleDefinitionFile>testax.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>$(QTDIR)\bin\idc.exe "$(TargetPath)" /idl "$(IntDir)/testax.idl" -version 1.0.0
+      <Command>cd ..\..\lib_win_
+$(QTDIR)\bin\idc.exe "$(TargetPath)" /idl "$(IntDir)/testax.idl" -version 1.0.0
 midl "$(IntDir)/testax.idl" /tlb "$(IntDir)/testax.tlb"
 $(QTDIR)\bin\idc.exe "$(TargetPath)" /tlb "$(IntDir)/testax.tlb"
 $(QTDIR)\bin\idc.exe "$(TargetPath)" /regserver</Command>
