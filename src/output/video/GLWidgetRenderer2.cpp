@@ -22,6 +22,8 @@
 #include "QtAV/GLWidgetRenderer2.h"
 #include "QtAV/private/OpenGLRendererBase_p.h"
 #include <QResizeEvent>
+#include <QDragEnterEvent>
+#include <QMimeData>
 
 namespace QtAV {
 
@@ -94,6 +96,21 @@ void GLWidgetRenderer2::resizeEvent(QResizeEvent *e)
 void GLWidgetRenderer2::showEvent(QShowEvent *)
 {
     onShowEvent();
+}
+
+void GLWidgetRenderer2::dragEnterEvent(QDragEnterEvent *e)
+{
+	e->acceptProposedAction();
+}
+
+void GLWidgetRenderer2::dragMoveEvent(QDragMoveEvent *e)
+{
+	e->acceptProposedAction();
+}
+
+void GLWidgetRenderer2::dropEvent(QDropEvent *)
+{
+	emit setRenderByDrag(this);
 }
 
 } //namespace QtAV

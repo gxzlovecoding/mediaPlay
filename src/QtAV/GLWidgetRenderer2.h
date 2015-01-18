@@ -43,6 +43,12 @@ public:
 
     virtual VideoRendererId id() const;
     virtual QWidget* widget() { return this; }
+
+	void dragEnterEvent(QDragEnterEvent *);
+	void dragMoveEvent(QDragMoveEvent *);
+	void dropEvent(QDropEvent *);
+signals:
+	void setRenderByDrag(QtAV::VideoRenderer* render);
 protected:
     virtual void initializeGL();
     virtual void paintGL();

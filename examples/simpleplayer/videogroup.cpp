@@ -8,6 +8,7 @@
 #include <QtCore/QUrl>
 #include <QtAV/AudioOutput.h>
 #include <QtAV/VideoRendererTypes.h>
+#include <QtAV/GLWidgetRenderer2.h>
 
 using namespace QtAV;
 
@@ -152,12 +153,14 @@ void VideoGroup::preloadSuccess()
 		m_playList->addItem(QString::fromLocal8Bit(streamName.c_str()), mpPlayer->getFirstImage());
 	}
 
+	/*
 	for (int i = 0; i < m_supportScreen[m_currentScreenIndex] && i < mpPlayer->videoStreamCount(); i++)
 	{
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
 		mpPlayer->setRenderer(mRenderers[i], i);
 		mpPlayer->enableProgram(i);
 	}
+	*/
 }
 
 void VideoGroup::onStartPlay()
@@ -214,6 +217,16 @@ void VideoGroup::removeRenderer()
 	updateScreen(currentScreen);
 }
 
+void VideoGroup::setRenderByDrag(QtAV::VideoRenderer* render)
+{
+	int renderIndex = mRenderers.indexOf(render);
+	int programIndex = m_playList->currentRow();
+
+	mRenderers[renderIndex]->receive(mpPlayer->getFirstFrame(programIndex));
+	mpPlayer->setRenderer(mRenderers[renderIndex], programIndex);
+	mpPlayer->enableProgram(programIndex);
+}
+
 void VideoGroup::updateScreen(int num)
 {
 	if (mRenderers.size() == num)
@@ -229,7 +242,9 @@ void VideoGroup::updateScreen(int num)
 			VideoRendererId v = VideoRendererId_GLWidget2;// 这个不会删除后显示不了 VideoRendererId_Widget;
 			//VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
 
-			VideoRenderer* renderer = VideoRendererFactory::create(v);
+			//VideoRenderer* renderer = new GLWidgetRenderer2();//VideoRendererFactory::create(v);
+			GLWidgetRenderer2 *renderer = new GLWidgetRenderer2();
+			connect(renderer, SIGNAL(setRenderByDrag(QtAV::VideoRenderer*)), this, SLOT(setRenderByDrag(QtAV::VideoRenderer*)));
 			mRenderers.append(renderer);
 			renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);
 			renderer->widget()->setWindowFlags(renderer->widget()->windowFlags() | Qt::FramelessWindowHint);

@@ -31,7 +31,7 @@ public slots:
 	void onStopPlay();
 	void onPositionChange(qint64 pos);
 	void seek();
-
+	void setRenderByDrag(QtAV::VideoRenderer* render);
 private:
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
