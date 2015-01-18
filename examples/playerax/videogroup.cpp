@@ -19,8 +19,8 @@ VideoGroup::VideoGroup(QWidget *parent)
 	, m_isFullscreen(false)
 	, m_currentScreens(1)
 {
-	this->setFixedSize(1000, 600);
-	this->setLayout(new QVBoxLayout);
+	this->resize(1000, 600);
+	//this->setLayout(new QVBoxLayout);
 
 	// 主视频窗口初始化 --------->
 	view = new QWidget;
