@@ -82,6 +82,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "playerthread", "tests\playe
 		{F33A4207-A525-3202-B264-979D175C2B09} = {F33A4207-A525-3202-B264-979D175C2B09}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "playerax", "examples\playerax\testax.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -156,6 +158,10 @@ Global
 		{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}.Debug|Win32.Build.0 = Debug|Win32
 		{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}.Release|Win32.ActiveCfg = Release|Win32
 		{8A4EB622-27C8-3C7E-B9D6-D6E772A3C0C4}.Release|Win32.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
