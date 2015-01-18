@@ -1,4 +1,4 @@
-#include "testax.h"
+#include "videogroup.h"
 
 #include <QLabel>
 #include <QSlider>
@@ -14,7 +14,7 @@
 
 using namespace QtAV;
 
-testax::testax(QWidget *parent)
+VideoGroup::VideoGroup(QWidget *parent)
 	: QWidget(parent)
 	, m_isFullscreen(false)
 	, m_currentScreens(1)
@@ -132,16 +132,16 @@ testax::testax(QWidget *parent)
 }
 
 
-testax::~testax()
+VideoGroup::~VideoGroup()
 {
 }
 
-void testax::resizeEvent(QResizeEvent *event)
+void VideoGroup::resizeEvent(QResizeEvent *event)
 {
 	m_pSplitter->setFixedSize(this->size());
 }
 
-void testax::play(const QString &file)
+void VideoGroup::play(const QString &file)
 {
 	qint64 pos = 0;
 	mpPlayer->seek(pos);
@@ -151,12 +151,12 @@ void testax::play(const QString &file)
 	//TODO 真正设置好每个画面对应某个节目后才开始播放。
 }
 
-void testax::preload(const QString& file)
+void VideoGroup::preload(const QString& file)
 {
 	mpPlayer->preLoad(file);
 }
 
-void testax::preloadSuccess()
+void VideoGroup::preloadSuccess()
 {
 	if (!mpPlayer->isLoaded())
 		return;
@@ -179,7 +179,7 @@ void testax::preloadSuccess()
 	}
 }
 
-void testax::onStartPlay()
+void VideoGroup::onStartPlay()
 {
 	mpTimeSlider->setMinimum(mpPlayer->mediaStartPosition());
 	mpTimeSlider->setMaximum(mpPlayer->mediaStopPosition());
@@ -187,31 +187,31 @@ void testax::onStartPlay()
 	mpTimeSlider->setEnabled(true);
 }
 
-void testax::onStopPlay()
+void VideoGroup::onStopPlay()
 {
 	mpTimeSlider->setValue(0);
 	qDebug(">>>>>>>>>>>>>>disable slider");
 	mpTimeSlider->setDisabled(true);
 }
 
-void testax::onPositionChange(qint64 pos)
+void VideoGroup::onPositionChange(qint64 pos)
 {
 	mpTimeSlider->setValue(pos);
 }
 
-void testax::seek()
+void VideoGroup::seek()
 {
 	mpPlayer->seek((qint64)mpTimeSlider->value());
 }
 
-void testax::openUrl()
+void VideoGroup::openUrl()
 {
 	QString url = QInputDialog::getText(0, tr("Open an url"), tr("Url"));
 	if (url.isEmpty())
 		return;
 	preload(url);
 }
-void testax::openLocalFile()
+void VideoGroup::openLocalFile()
 {
 	QString file = QFileDialog::getOpenFileName(0, tr("Open a media file"));
 	if (file.isEmpty())
@@ -219,28 +219,28 @@ void testax::openLocalFile()
 	preload(file);
 }
 
-void testax::set1Renderer()
+void VideoGroup::set1Renderer()
 {
 	updateScreen(1);
 }
-void testax::set2Renderer()
+void VideoGroup::set2Renderer()
 {
 	updateScreen(2);
 }
-void testax::set3Renderer()
+void VideoGroup::set3Renderer()
 {
 	updateScreen(3);
 }
-void testax::set4Renderer()
+void VideoGroup::set4Renderer()
 {
 	updateScreen(4);
 }
-void testax::set9Renderer()
+void VideoGroup::set9Renderer()
 {
 	updateScreen(9);
 }
 
-void testax::updateScreen(int num)
+void VideoGroup::updateScreen(int num)
 {
 	m_currentScreens = num;
 
@@ -305,7 +305,7 @@ void testax::updateScreen(int num)
 	preloadSuccess();
 }
 
-void testax::setFullscreen()
+void VideoGroup::setFullscreen()
 {
 	static QWidget* temp = new QWidget();
 	if (!m_isFullscreen)
@@ -331,7 +331,7 @@ void testax::setFullscreen()
 	m_isFullscreen = !m_isFullscreen;
 }
 
-QAXFACTORY_DEFAULT(testax,
+QAXFACTORY_DEFAULT(VideoGroup,
 	   "{42E32F5E-1B92-4368-8D96-022647B1BCFB}",
 	   "{C5982A06-A7F7-4783-B535-8348FA949E74}",
 	   "{C791939A-8F7B-47AE-9B03-A1DEF0A70002}",

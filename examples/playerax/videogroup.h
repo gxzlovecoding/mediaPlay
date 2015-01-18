@@ -14,13 +14,13 @@
 
 #include "ui_testax.h"
 
-class testax : public QWidget, public QAxBindable
+class VideoGroup : public QWidget, public QAxBindable
 {
 	Q_OBJECT
 
 public:
-	testax(QWidget *parent = 0);
-	~testax();
+	VideoGroup(QWidget *parent = 0);
+	~VideoGroup();
 	void play(const QString& file);
 	void preload(const QString& file);
 

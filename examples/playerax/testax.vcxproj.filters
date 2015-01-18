@@ -35,15 +35,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="testax.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_testax.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_testax.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="PlaylistTreeView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,11 +53,17 @@
     <ClCompile Include="GeneratedFiles\Release\moc_Slider.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_videogroup.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_videogroup.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="videogroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="testax.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="testax.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -74,6 +71,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="Slider.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="videogroup.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
