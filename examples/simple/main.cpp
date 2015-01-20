@@ -50,6 +50,7 @@ public:
 public slots:
 	void preload(const QString& file);
 	void onPauseResumeClick();
+	void setFullscreen();
 private:
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -60,19 +61,21 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider;
-	QPushButton *mpAdd, *mpRemove, *mpPlayPause, *mpStop, *mpForwardBtn, *mpBackwardBtn;
+	QPushButton *mpAdd, *mpRemove, *mpPlayPause, *mpStop, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn;
 
 	QSplitter*   m_pSplitter;
 
 	QList<QtAV::VideoRenderer*> mRenderers;
 	int		m_supportScreen[6];
 	int		m_currentScreenIndex;
+	bool m_isFullscreen;
 };
 
 
 VideoGroup::VideoGroup(QWidget *parent) :
 QWidget(parent)
 , view(0)
+, m_isFullscreen(false)
 {
 	QVBoxLayout *mainLayout = new QVBoxLayout();
 	mainLayout->setSpacing(0);
@@ -98,14 +101,17 @@ QWidget(parent)
 	mpPlayPause = new QPushButton();
 	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 20px;    max-width: 20px;  }"));
 	mpStop = new QPushButton();
-	mpStop->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/stop.png); maz-height: 20px;    max-width: 15px;  }"));
+	mpStop->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/stop.png); maz-height: 20px;    max-width: 20px;  }"));
 	mpAdd = new QPushButton("+");
 	mpRemove = new QPushButton("-");
 	mpForwardBtn = new QPushButton();
 	mpForwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/next.png); maz-height: 20px;    max-width: 20px;  }"));
 	mpBackwardBtn = new QPushButton();
 	mpBackwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pre.png); maz-height: 20px;    max-width: 20px;  }"));
+	mpFullscreenBtn = new QPushButton();
+	mpFullscreenBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/full.png); maz-height: 20px;    max-width: 20px;  }"));
 
+	connect(mpFullscreenBtn, SIGNAL(clicked()), SLOT(setFullscreen()));
 	connect(mpPlayPause, SIGNAL(clicked()), this, SLOT(onPauseResumeClick()));
 	connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
 	connect(mpAdd, SIGNAL(clicked()), SLOT(addRenderer()));
@@ -123,6 +129,7 @@ QWidget(parent)
 	mpBar->layout()->addWidget(mpBackwardBtn);
 	mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpForwardBtn);
+	mpBar->layout()->addWidget(mpFullscreenBtn);
 	mpBar->layout()->addWidget(mpAdd);
 	mpBar->layout()->addWidget(mpRemove);
 
@@ -171,6 +178,32 @@ VideoGroup::~VideoGroup()
 {
 	delete view;
 	delete mpBar;
+}
+
+void VideoGroup::setFullscreen()
+{
+	static QWidget* temp = new QWidget();
+	if (!m_isFullscreen)
+	{
+		// TODO 把全屏放到一个widket做全屏，因为单独全屏有问题。
+		temp->setWindowFlags(Qt::Window);
+		temp->setLayout(new QVBoxLayout());
+
+		temp->layout()->addWidget(mainWidget);
+		temp->showFullScreen();
+		mainWidget->move(0, 0);
+		mainWidget->resize(temp->size());
+	}
+	else
+	{
+		temp->layout()->removeWidget(mainWidget);
+		temp->setWindowFlags(Qt::Widget);
+		temp->hide();
+
+		// 把窗口重新放回splitter
+		m_pSplitter->addWidget(mainWidget);
+	}
+	m_isFullscreen = !m_isFullscreen;
 }
 
 void VideoGroup::onPauseResumeClick()
