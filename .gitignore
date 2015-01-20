@@ -10,6 +10,8 @@ TestResults
 *.perspectivev3
 .DS_Store
 *.txt
+*.dat
+*.aps
 
 *.old
 *.log
