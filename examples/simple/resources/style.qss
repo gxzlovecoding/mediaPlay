@@ -1,0 +1,32 @@
+QPushButton#mpOne{
+	border-image: url(:/simple/resources/1.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+QPushButton#mpTwo{
+	border-image: url(:/simple/resources/2.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+QPushButton#mpThree{
+	border-image: url(:/simple/resources/3.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+QPushButton#mpFour{
+	border-image: url(:/simple/resources/4.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+QPushButton#mpNine{
+	border-image: url(:/simple/resources/9.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+
+ 

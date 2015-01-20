@@ -105,35 +105,35 @@ QWidget(parent)
 
 	mpOne = new QPushButton();
 	mpOne->setMaximumSize(40, 40);
-	mpOne->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/1.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpOne->setObjectName("mpOne");
 	mpTwo = new QPushButton();
 	mpTwo->setMaximumSize(40, 40);
-	mpTwo->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/2.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpTwo->setObjectName("mpTwo");
 	mpThree = new QPushButton();
 	mpThree->setMaximumSize(40, 40);
-	mpThree->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/3.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpThree->setObjectName("mpThree");
 	mpFour = new QPushButton();
 	mpFour->setMaximumSize(40, 40);
-	mpFour->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/4.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpFour->setObjectName("mpFour");
 	mpNine = new QPushButton();
 	mpNine->setMaximumSize(40, 40);
-	mpNine->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/9.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpNine->setObjectName("mpNine");
 
 	mpPlayPause = new QPushButton();
 	mpPlayPause->setMaximumSize(40, 40);
-	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
 	mpStop = new QPushButton();
 	mpStop->setMaximumSize(40, 40);
-	mpStop->setStyleSheet(QString("QPushButton { color: red;  border-image: url(:/simple/resources/stop.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpStop->setStyleSheet(QString("QPushButton { color: red;  border-image: url(:/simple/resources/stop.png); max-height: 30px;    max-width: 30px;  }"));
 	
 	mpForwardBtn = new QPushButton();
-	mpForwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/next.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpForwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/next.png); max-height: 30px;    max-width: 30px;  }"));
 	mpForwardBtn->setMaximumSize(40, 40);
 	mpBackwardBtn = new QPushButton();
-	mpBackwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pre.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpBackwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pre.png); max-height: 30px;    max-width: 30px;  }"));
 	mpBackwardBtn->setMaximumSize(40, 40);
 	mpFullscreenBtn = new QPushButton();
-	mpFullscreenBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/full.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpFullscreenBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/full.png); max-height: 30px;    max-width: 30px;  }"));
 	mpFullscreenBtn->setMaximumSize(40, 40);
 
 	connect(mpOne, SIGNAL(clicked()), SLOT(set1Renderer()));
@@ -200,6 +200,14 @@ QWidget(parent)
 	size.append(this->width() * 0.2);
 	size.append(this->width() * 0.8);
 	m_pSplitter->setSizes(size);
+
+	// 设置样式
+	QFile styleSheet(":/simple/resources/style.qss");
+	if (!styleSheet.open(QIODevice::ReadOnly))
+	{
+		qWarning("Can't open the style sheet file.");
+	}
+	qApp->setStyleSheet(styleSheet.readAll());
 }
 
 VideoGroup::~VideoGroup()
@@ -238,19 +246,19 @@ void VideoGroup::onPauseResumeClick()
 {
 	if (!mpPlayer->isLoaded())
 	{
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 30px;    max-width: 30px;  }"));
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
 		return;
 	}
 
 	if (mpPlayer->isPaused())
 	{
 		mpPlayer->play();
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 30px;    max-width: 30px;  }"));
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
 	}
 	else
 	{
 		mpPlayer->pause(true);
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 30px;    max-width: 30px;  }"));
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); max-height: 30px;    max-width: 30px;  }"));
 	}
 }
 
@@ -280,7 +288,7 @@ void VideoGroup::preloadSuccess()
 		return;
 
 	// 设置播放按钮
-	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); max-height: 30px;    max-width: 30px;  }"));
 
 	mpPlayer->disableAllProgram();
 

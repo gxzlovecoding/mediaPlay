@@ -12,5 +12,6 @@
         <file>resources/2.png</file>
         <file>resources/3.png</file>
         <file>resources/4.png</file>
+        <file>resources/style.qss</file>
     </qresource>
 </RCC>
