@@ -36,11 +36,16 @@ public:
 
 	void play(const QString& file);
 
-	public slots:
+public slots:
+	// TODO下面这5个函数很龊，要优化一下
+	void set1Renderer();
+	void set2Renderer();
+	void set3Renderer();
+	void set4Renderer();
+	void set9Renderer();
+
 	void openUrl();
 	void openLocalFile();
-	void addRenderer();
-	void removeRenderer();
 	void preloadSuccess();
 	void onStartPlay();
 	void onStopPlay();
@@ -61,14 +66,14 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider;
-	QPushButton *mpAdd, *mpRemove, *mpPlayPause, *mpStop, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn;
+	QPushButton *mpOne, *mpTwo, *mpThree, *mpFour, *mpNine;
+	QPushButton *mpPlayPause, *mpStop, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn;
 
 	QSplitter*   m_pSplitter;
 
 	QList<QtAV::VideoRenderer*> mRenderers;
-	int		m_supportScreen[6];
-	int		m_currentScreenIndex;
 	bool m_isFullscreen;
+	int m_currentScreens;
 };
 
 
@@ -76,6 +81,7 @@ VideoGroup::VideoGroup(QWidget *parent) :
 QWidget(parent)
 , view(0)
 , m_isFullscreen(false)
+, m_currentScreens(1)
 {
 	QVBoxLayout *mainLayout = new QVBoxLayout();
 	mainLayout->setSpacing(0);
@@ -92,30 +98,52 @@ QWidget(parent)
 
 	mpTimeSlider = new Slider();
 	mpTimeSlider->setDisabled(true);
-	//mpTimeSlider->setFixedHeight(8);
 	mpTimeSlider->setMaximumHeight(8);
 	mpTimeSlider->setTracking(true);
 	mpTimeSlider->setOrientation(Qt::Horizontal);
 	mpTimeSlider->setMinimum(0);
 
-	mpPlayPause = new QPushButton();
-	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 20px;    max-width: 20px;  }"));
-	mpStop = new QPushButton();
-	mpStop->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/stop.png); maz-height: 20px;    max-width: 20px;  }"));
-	mpAdd = new QPushButton("+");
-	mpRemove = new QPushButton("-");
-	mpForwardBtn = new QPushButton();
-	mpForwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/next.png); maz-height: 20px;    max-width: 20px;  }"));
-	mpBackwardBtn = new QPushButton();
-	mpBackwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pre.png); maz-height: 20px;    max-width: 20px;  }"));
-	mpFullscreenBtn = new QPushButton();
-	mpFullscreenBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/full.png); maz-height: 20px;    max-width: 20px;  }"));
+	mpOne = new QPushButton();
+	mpOne->setMaximumSize(40, 40);
+	mpOne->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/1.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpTwo = new QPushButton();
+	mpTwo->setMaximumSize(40, 40);
+	mpTwo->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/2.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpThree = new QPushButton();
+	mpThree->setMaximumSize(40, 40);
+	mpThree->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/3.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpFour = new QPushButton();
+	mpFour->setMaximumSize(40, 40);
+	mpFour->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/4.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpNine = new QPushButton();
+	mpNine->setMaximumSize(40, 40);
+	mpNine->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/9.png); maz-height: 30px;    max-width: 30px;  }"));
 
+	mpPlayPause = new QPushButton();
+	mpPlayPause->setMaximumSize(40, 40);
+	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpStop = new QPushButton();
+	mpStop->setMaximumSize(40, 40);
+	mpStop->setStyleSheet(QString("QPushButton { color: red;  border-image: url(:/simple/resources/stop.png); maz-height: 30px;    max-width: 30px;  }"));
+	
+	mpForwardBtn = new QPushButton();
+	mpForwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/next.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpForwardBtn->setMaximumSize(40, 40);
+	mpBackwardBtn = new QPushButton();
+	mpBackwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pre.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpBackwardBtn->setMaximumSize(40, 40);
+	mpFullscreenBtn = new QPushButton();
+	mpFullscreenBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/full.png); maz-height: 30px;    max-width: 30px;  }"));
+	mpFullscreenBtn->setMaximumSize(40, 40);
+
+	connect(mpOne, SIGNAL(clicked()), SLOT(set1Renderer()));
+	connect(mpTwo, SIGNAL(clicked()), SLOT(set2Renderer()));
+	connect(mpThree, SIGNAL(clicked()), SLOT(set3Renderer()));
+	connect(mpFour, SIGNAL(clicked()), SLOT(set4Renderer()));
+	connect(mpNine, SIGNAL(clicked()), SLOT(set9Renderer()));
 	connect(mpFullscreenBtn, SIGNAL(clicked()), SLOT(setFullscreen()));
 	connect(mpPlayPause, SIGNAL(clicked()), this, SLOT(onPauseResumeClick()));
 	connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
-	connect(mpAdd, SIGNAL(clicked()), SLOT(addRenderer()));
-	connect(mpRemove, SIGNAL(clicked()), SLOT(removeRenderer()));
 	connect(mpPlayer, SIGNAL(preloadSuccess()), this, SLOT(preloadSuccess()));
 	connect(mpPlayer, SIGNAL(started()), this, SLOT(onStartPlay()));
 	connect(mpPlayer, SIGNAL(stopped()), this, SLOT(onStopPlay()));
@@ -125,13 +153,16 @@ QWidget(parent)
 	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
 	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
 
+	mpBar->layout()->addWidget(mpOne);
+	mpBar->layout()->addWidget(mpTwo);
+	mpBar->layout()->addWidget(mpThree);
+	mpBar->layout()->addWidget(mpFour);
+	mpBar->layout()->addWidget(mpNine);
 	mpBar->layout()->addWidget(mpPlayPause);
 	mpBar->layout()->addWidget(mpBackwardBtn);
 	mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpForwardBtn);
 	mpBar->layout()->addWidget(mpFullscreenBtn);
-	mpBar->layout()->addWidget(mpAdd);
-	mpBar->layout()->addWidget(mpRemove);
 
 	QPalette palette;
 	mpBar->setAutoFillBackground(true);
@@ -147,10 +178,7 @@ QWidget(parent)
 	layout->setContentsMargins(0, 0, 0, 0);
 	view->setLayout(layout);
 
-	m_currentScreenIndex = 4;
-	int tempSupportScreen[6] = { 1, 2, 3, 4, 9, 16 };
-	memcpy(m_supportScreen, tempSupportScreen, sizeof(tempSupportScreen));
-	updateScreen(m_supportScreen[m_currentScreenIndex]);
+	updateScreen(m_currentScreens);
 
 	//mainLayout->addLayout(layout);
 	mainLayout->addWidget(view);
@@ -210,19 +238,19 @@ void VideoGroup::onPauseResumeClick()
 {
 	if (!mpPlayer->isLoaded())
 	{
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 20px;    max-width: 20px;  }"));
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 30px;    max-width: 30px;  }"));
 		return;
 	}
 
 	if (mpPlayer->isPaused())
 	{
 		mpPlayer->play();
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 20px;    max-width: 20px;  }"));
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 30px;    max-width: 30px;  }"));
 	}
 	else
 	{
 		mpPlayer->pause(true);
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 20px;    max-width: 20px;  }"));
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 30px;    max-width: 30px;  }"));
 	}
 }
 
@@ -252,7 +280,7 @@ void VideoGroup::preloadSuccess()
 		return;
 
 	// 设置播放按钮
-	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 20px;    max-width: 20px;  }"));
+	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 30px;    max-width: 30px;  }"));
 
 	mpPlayer->disableAllProgram();
 
@@ -314,18 +342,25 @@ void VideoGroup::openLocalFile()
 	preload(file);
 }
 
-void VideoGroup::addRenderer()
+void VideoGroup::set1Renderer()
 {
-	m_currentScreenIndex = m_currentScreenIndex < 4 ? m_currentScreenIndex + 1 : m_currentScreenIndex;
-	int currentScreen = m_supportScreen[m_currentScreenIndex];
-	updateScreen(currentScreen);
+	updateScreen(1);
 }
-
-void VideoGroup::removeRenderer()
+void VideoGroup::set2Renderer()
 {
-	m_currentScreenIndex = m_currentScreenIndex > 0 ? m_currentScreenIndex - 1 : m_currentScreenIndex;
-	int currentScreen = m_supportScreen[m_currentScreenIndex];
-	updateScreen(currentScreen);
+	updateScreen(2);
+}
+void VideoGroup::set3Renderer()
+{
+	updateScreen(3);
+}
+void VideoGroup::set4Renderer()
+{
+	updateScreen(4);
+}
+void VideoGroup::set9Renderer()
+{
+	updateScreen(9);
 }
 
 void VideoGroup::setRenderByDrag(QtAV::VideoRenderer* render)
@@ -340,6 +375,8 @@ void VideoGroup::setRenderByDrag(QtAV::VideoRenderer* render)
 
 void VideoGroup::updateScreen(int num)
 {
+	m_currentScreens = num;
+
 	if (mRenderers.size() == num)
 	{
 		// 窗口不变

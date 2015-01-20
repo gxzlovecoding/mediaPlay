@@ -7,5 +7,10 @@
         <file>resources/stop.png</file>
         <file>resources/pause.png</file>
         <file>resources/full.png</file>
+        <file>resources/9.png</file>
+        <file>resources/1.png</file>
+        <file>resources/2.png</file>
+        <file>resources/3.png</file>
+        <file>resources/4.png</file>
     </qresource>
 </RCC>
