@@ -42,6 +42,30 @@ Slider::Slider(QWidget *parent):
 {
     setOrientation(Qt::Horizontal);
     setMouseTracking(true); //mouseMoveEvent without press.
+
+	this->setStyleSheet(QString(
+		"QSlider::groove:horizontal {                                "
+		"     border: 1px solid #999999;                             "
+		"     height: 2px;                                           "
+		"     margin: 0px 0;                                         "
+		"     left: 0px; right: 0px;                               "
+		" }                                                          "
+		"QSlider::handle:horizontal {                                "
+		"     border: 1px solid #5c5c5c;                             "
+		" border-image:url(:/simple/resources/slider_button.png);"
+		"     width: 7px;                                           "
+		"     height: 5px;                                           "
+		"     margin: -5px -5px -5px -5px;                           "
+		" }                                                          "
+		"                                                            "
+		"QSlider::sub-page:horizontal{                               "
+		" background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(27, 5, 27, 255), stop:0.25 rgba(99, 20, 102, 255), stop:0.5 rgba(154, 30, 158, 255), stop:1 rgba(173, 57, 176, 255));                      "
+		"}                                                           "
+		"QSlider::add-page:horizontal{                               "
+		//" background-image:url(pics/button.png)   "
+		//" background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(27, 5, 27, 255), stop:0.25 rgba(99, 20, 102, 255), stop:0.5 rgba(154, 30, 158, 255), stop:1 rgba(173, 57, 176, 255));                      "
+		"}"
+		));
 }
 
 Slider::~Slider()
