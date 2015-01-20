@@ -49,6 +49,7 @@ public:
 	void setRenderByDrag(QtAV::VideoRenderer* render);
 public slots:
 	void preload(const QString& file);
+	void onPauseResumeClick();
 private:
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -59,7 +60,7 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider;
-	QPushButton *mpAdd, *mpRemove, *mpPlay, *mpStop, *mpPause, *mpForwardBtn, *mpBackwardBtn;
+	QPushButton *mpAdd, *mpRemove, *mpPlayPause, *mpStop, *mpForwardBtn, *mpBackwardBtn;
 
 	QSplitter*   m_pSplitter;
 
@@ -94,18 +95,19 @@ QWidget(parent)
 	mpTimeSlider->setOrientation(Qt::Horizontal);
 	mpTimeSlider->setMinimum(0);
 
-	mpPlay = new QPushButton("Play");
-	mpStop = new QPushButton("Stop");
-	mpPause = new QPushButton("Pause");
-	mpPause->setCheckable(true);
+	mpPlayPause = new QPushButton();
+	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 20px;    max-width: 20px;  }"));
+	mpStop = new QPushButton();
+	mpStop->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/stop.png); maz-height: 20px;    max-width: 15px;  }"));
 	mpAdd = new QPushButton("+");
 	mpRemove = new QPushButton("-");
-	mpForwardBtn = new QPushButton("FW");
-	mpBackwardBtn = new QPushButton("BW");
+	mpForwardBtn = new QPushButton();
+	mpForwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/next.png); maz-height: 20px;    max-width: 20px;  }"));
+	mpBackwardBtn = new QPushButton();
+	mpBackwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pre.png); maz-height: 20px;    max-width: 20px;  }"));
 
-	connect(mpPlay, SIGNAL(clicked()), mpPlayer, SLOT(play()));
+	connect(mpPlayPause, SIGNAL(clicked()), this, SLOT(onPauseResumeClick()));
 	connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
-	connect(mpPause, SIGNAL(toggled(bool)), mpPlayer, SLOT(pause(bool)));
 	connect(mpAdd, SIGNAL(clicked()), SLOT(addRenderer()));
 	connect(mpRemove, SIGNAL(clicked()), SLOT(removeRenderer()));
 	connect(mpPlayer, SIGNAL(preloadSuccess()), this, SLOT(preloadSuccess()));
@@ -117,10 +119,9 @@ QWidget(parent)
 	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
 	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
 
-	mpBar->layout()->addWidget(mpPlay);
-	mpBar->layout()->addWidget(mpStop);
-	mpBar->layout()->addWidget(mpPause);
+	mpBar->layout()->addWidget(mpPlayPause);
 	mpBar->layout()->addWidget(mpBackwardBtn);
+	mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpForwardBtn);
 	mpBar->layout()->addWidget(mpAdd);
 	mpBar->layout()->addWidget(mpRemove);
@@ -132,7 +133,6 @@ QWidget(parent)
 	mpBar->setPalette(palette);
 
 	view = new QWidget;
-	//view->resize(qApp->desktop()->size());
 	QGridLayout *layout = new QGridLayout;
 	layout->setSizeConstraint(QLayout::SetMaximumSize);
 	layout->setSpacing(1);
@@ -173,6 +173,26 @@ VideoGroup::~VideoGroup()
 	delete mpBar;
 }
 
+void VideoGroup::onPauseResumeClick()
+{
+	if (!mpPlayer->isLoaded())
+	{
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 20px;    max-width: 20px;  }"));
+		return;
+	}
+
+	if (mpPlayer->isPaused())
+	{
+		mpPlayer->play();
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); maz-height: 20px;    max-width: 20px;  }"));
+	}
+	else
+	{
+		mpPlayer->pause(true);
+		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 20px;    max-width: 20px;  }"));
+	}
+}
+
 void VideoGroup::resizeEvent(QResizeEvent *event)
 {
 	m_pSplitter->setFixedSize(this->size());
@@ -197,6 +217,9 @@ void VideoGroup::preloadSuccess()
 {
 	if (!mpPlayer->isLoaded())
 		return;
+
+	// ÉèÖÃ²¥·Å°´Å¥
+	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); maz-height: 20px;    max-width: 20px;  }"));
 
 	mpPlayer->disableAllProgram();
 

@@ -232,12 +232,6 @@ if errorlevel 1 goto VCEnd
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\background.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <CustomBuild Include="simple.qrc">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);.\Resources\left.bmp;.\Resources\right.bmp;.\Resources\background.png;.\Resources\background-picture.PNG;.\Resources\button.png;.\Resources\button-pressed.png;.\Resources\hint.png;.\Resources\mute.png;.\Resources\next.png;.\Resources\nextLabel.png;.\Resources\pause.png;.\Resources\play.png;.\Resources\pre.png;.\Resources\preLabel.png;.\Resources\stop.png;.\Resources\unMute.png;.\Resources\branch-closed.png;.\Resources\branch-end.png;.\Resources\branch-more.png;.\Resources\branch-open.png;.\Resources\vline.png;.\Resources\qss\style.qss;.\Resources\down_arrow.png;.\Resources\up_arrow.png;.\Resources\background-picture.png;.\Resources\full.png;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rcc%27ing %(Identity)...</Message>
