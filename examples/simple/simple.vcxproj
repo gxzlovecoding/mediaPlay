@@ -113,7 +113,7 @@ if errorlevel 1 goto VCEnd
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\qt\qt5.3.1\5.3\msvc2013_opengl\include;C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\ActiveQt;C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtWidgets;C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui;C:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore;debug;C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;..\..\src;..\..\src\QtAV;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include\;$(QTDIR)\include\ActiveQt;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;debug;C:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013;..\..\src;..\..\src\QtAV;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -131,8 +131,8 @@ if errorlevel 1 goto VCEnd
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\Qt5AxServerd.lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib\Qt5AxBased.lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5AxBased.lib;glu32.lib;opengl32.lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Guid.lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib\Qt5Cored.lib;ole32.lib;oleaut32.lib;user32.lib;gdi32.lib;advapi32.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;QtAVd1.lib;$(QTDIR)\lib\Qt5OpenGLd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\qt\qt5.3.1\5.3\msvc2013_opengl\lib;C:\Qt\Qt5.3.1\5.3\msvc2013_opengl\lib;..\..\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(QTDIR)\lib\Qt5AxServerd.lib;Qt5AxBased.lib;Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5AxBased.lib;glu32.lib;opengl32.lib;Qt5Guid.lib;Qt5Cored.lib;ole32.lib;oleaut32.lib;user32.lib;gdi32.lib;advapi32.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;QtAVd1.lib;$(QTDIR)\lib\Qt5OpenGLd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;..\..\lib_win_;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -151,14 +151,14 @@ if errorlevel 1 goto VCEnd
       <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_AXSERVER_LIB;QAXSERVER;QT_AXBASE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /idl $(IntDir)simpleax.idl -version 1.0
+      <Command>$(QTDIR)\bin\idc.exe $(TargetPath) /idl $(IntDir)simpleax.idl -version 1.0
 if errorlevel 1 goto VCEnd
  midl $(IntDir)simpleax.idl /nologo /tlb $(IntDir)simpleax.tlb
 if errorlevel 1 goto VCEnd
- C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /tlb $(IntDir)simpleax.tlb
+ $(QTDIR)\bin\idc.exe $(TargetPath) /tlb $(IntDir)simpleax.tlb
 if errorlevel 1 goto VCEnd
- C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /regserver</Command>
-      <Message>C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /idl $(IntDir)simpleax.idl -version 1.0
+ $(QTDIR)\bin\idc.exe $(TargetPath) /regserver</Command>
+      <Message>$(QTDIR)\bin\idc.exe $(TargetPath) /idl $(IntDir)simpleax.idl -version 1.0
  midl $(IntDir)simpleax.idl /nologo /tlb $(IntDir)simpleax.tlb
  C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /tlb $(IntDir)simpleax.tlb
  C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /regserver</Message>
