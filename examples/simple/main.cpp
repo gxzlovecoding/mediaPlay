@@ -59,7 +59,7 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider;
-	QPushButton *mpAdd, *mpRemove, *mpOpenUrl, *mpOpen, *mpPlay, *mpStop, *mpPause, *mpForwardBtn, *mpBackwardBtn;
+	QPushButton *mpAdd, *mpRemove, *mpPlay, *mpStop, *mpPause, *mpForwardBtn, *mpBackwardBtn;
 
 	QSplitter*   m_pSplitter;
 
@@ -94,8 +94,6 @@ QWidget(parent)
 	mpTimeSlider->setOrientation(Qt::Horizontal);
 	mpTimeSlider->setMinimum(0);
 
-	mpOpenUrl = new QPushButton("O_URL");
-	mpOpen = new QPushButton("O_File");
 	mpPlay = new QPushButton("Play");
 	mpStop = new QPushButton("Stop");
 	mpPause = new QPushButton("Pause");
@@ -105,8 +103,6 @@ QWidget(parent)
 	mpForwardBtn = new QPushButton("FW");
 	mpBackwardBtn = new QPushButton("BW");
 
-	connect(mpOpenUrl, SIGNAL(clicked()), SLOT(openUrl()));
-	connect(mpOpen, SIGNAL(clicked()), SLOT(openLocalFile()));
 	connect(mpPlay, SIGNAL(clicked()), mpPlayer, SLOT(play()));
 	connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
 	connect(mpPause, SIGNAL(toggled(bool)), mpPlayer, SLOT(pause(bool)));
@@ -121,8 +117,6 @@ QWidget(parent)
 	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
 	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
 
-	mpBar->layout()->addWidget(mpOpenUrl);
-	mpBar->layout()->addWidget(mpOpen);
 	mpBar->layout()->addWidget(mpPlay);
 	mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpPause);
