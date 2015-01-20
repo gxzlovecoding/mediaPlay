@@ -35,7 +35,6 @@ public:
 	~VideoGroup();
 
 	void play(const QString& file);
-	void preload(const QString& file);
 
 	public slots:
 	void openUrl();
@@ -48,6 +47,8 @@ public:
 	void onPositionChange(qint64 pos);
 	void seek();
 	void setRenderByDrag(QtAV::VideoRenderer* render);
+public slots:
+	void preload(const QString& file);
 private:
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -82,7 +83,7 @@ QWidget(parent)
 	mpPlayer = new AVPlayer(this);
 
 	mpBar = new QWidget(0, Qt::WindowStaysOnTopHint);
-	mpBar->setMaximumSize(400, 40);
+	mpBar->setMaximumHeight(40);
 	mpBar->setLayout(new QHBoxLayout);
 
 	mpTimeSlider = new Slider();
@@ -130,7 +131,11 @@ QWidget(parent)
 	mpBar->layout()->addWidget(mpAdd);
 	mpBar->layout()->addWidget(mpRemove);
 
-	//mpBar->setMaximumHeight(25);
+	QPalette palette;
+	mpBar->setAutoFillBackground(true);
+	//palette.setColor(QPalette::Background, QColor(192, 253, 123));
+	palette.setBrush(QPalette::Background, QBrush(QPixmap(":/simple/resources/background.png")));
+	mpBar->setPalette(palette);
 
 	view = new QWidget;
 	//view->resize(qApp->desktop()->size());

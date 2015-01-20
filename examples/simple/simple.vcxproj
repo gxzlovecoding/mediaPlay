@@ -171,6 +171,12 @@ if errorlevel 1 goto VCEnd
     <ClCompile Include="Debug\moc_Slider.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_simple.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaylistTreeView.cpp" />
     <ClCompile Include="Release\moc_PlaylistTreeView.cpp">
@@ -223,6 +229,24 @@ if errorlevel 1 goto VCEnd
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing Slider.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_AXSERVER_LIB -DQAXSERVER -DQT_AXBASE_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\ActiveQt" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtWidgets" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtGui" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\include\QtCore" "-I.\release" "-IC:\qt\qt5.3.1\5.3\msvc2013_opengl\mkspecs\win32-msvc2013"</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\background.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="simple.qrc">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);.\Resources\left.bmp;.\Resources\right.bmp;.\Resources\background.png;.\Resources\background-picture.PNG;.\Resources\button.png;.\Resources\button-pressed.png;.\Resources\hint.png;.\Resources\mute.png;.\Resources\next.png;.\Resources\nextLabel.png;.\Resources\pause.png;.\Resources\play.png;.\Resources\pre.png;.\Resources\preLabel.png;.\Resources\stop.png;.\Resources\unMute.png;.\Resources\branch-closed.png;.\Resources\branch-end.png;.\Resources\branch-more.png;.\Resources\branch-open.png;.\Resources\vline.png;.\Resources\qss\style.qss;.\Resources\down_arrow.png;.\Resources\up_arrow.png;.\Resources\background-picture.png;.\Resources\full.png;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(FullPath);.\Resources\left.bmp;.\Resources\right.bmp;.\Resources\background.png;.\Resources\background-picture.PNG;.\Resources\button.png;.\Resources\button-pressed.png;.\Resources\hint.png;.\Resources\mute.png;.\Resources\next.png;.\Resources\nextLabel.png;.\Resources\pause.png;.\Resources\play.png;.\Resources\pre.png;.\Resources\preLabel.png;.\Resources\stop.png;.\Resources\unMute.png;.\Resources\branch-closed.png;.\Resources\branch-end.png;.\Resources\branch-more.png;.\Resources\branch-open.png;.\Resources\vline.png;.\Resources\qss\style.qss;.\Resources\down_arrow.png;.\Resources\up_arrow.png;.\Resources\background-picture.png;.\Resources\full.png;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
