@@ -28,5 +28,31 @@ QPushButton#mpNine{
 	max-width: 30px;
 }
 
+QPushButton#mpStop{
+	border-image: url(:/simple/resources/stop.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+QPushButton#mpForwardBtn{
+	border-image: url(:/simple/resources/next.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+QPushButton#mpBackwardBtn{
+	border-image: url(:/simple/resources/pre.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+QPushButton#mpFullscreenBtn{
+	border-image: url(:/simple/resources/full.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
+
+
+
 
  

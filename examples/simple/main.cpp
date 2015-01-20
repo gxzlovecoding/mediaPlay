@@ -124,17 +124,16 @@ QWidget(parent)
 	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
 	mpStop = new QPushButton();
 	mpStop->setMaximumSize(40, 40);
-	mpStop->setStyleSheet(QString("QPushButton { color: red;  border-image: url(:/simple/resources/stop.png); max-height: 30px;    max-width: 30px;  }"));
-	
+	mpStop->setObjectName("mpStop");
 	mpForwardBtn = new QPushButton();
-	mpForwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/next.png); max-height: 30px;    max-width: 30px;  }"));
 	mpForwardBtn->setMaximumSize(40, 40);
+	mpForwardBtn->setObjectName("mpForwardBtn");
 	mpBackwardBtn = new QPushButton();
-	mpBackwardBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pre.png); max-height: 30px;    max-width: 30px;  }"));
 	mpBackwardBtn->setMaximumSize(40, 40);
+	mpBackwardBtn->setObjectName("mpBackwardBtn");
 	mpFullscreenBtn = new QPushButton();
-	mpFullscreenBtn->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/full.png); max-height: 30px;    max-width: 30px;  }"));
 	mpFullscreenBtn->setMaximumSize(40, 40);
+	mpFullscreenBtn->setObjectName("mpFullscreenBtn");
 
 	connect(mpOne, SIGNAL(clicked()), SLOT(set1Renderer()));
 	connect(mpTwo, SIGNAL(clicked()), SLOT(set2Renderer()));
