@@ -61,14 +61,17 @@
     <ClCompile Include="GeneratedFiles\qrc_simple.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_videogroup.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_videogroup.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="videogroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="debug\main.moc">
-      <Filter>Generated Files\Debug</Filter>
-    </CustomBuild>
-    <CustomBuild Include="release\main.moc">
-      <Filter>Generated Files\Release</Filter>
-    </CustomBuild>
     <CustomBuild Include="PlaylistTreeView.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -77,6 +80,9 @@
     </CustomBuild>
     <CustomBuild Include="simple.qrc">
       <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="videogroup.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
