@@ -5,31 +5,74 @@
 #define H_ICONSIZE 100
 
 PlaylistTreeView::PlaylistTreeView(QWidget *parent)
-: QListWidget(parent)
+: QWidget(parent)
 {
-	this->adjustSize();
+	m_mainLayout = new QHBoxLayout();
+	m_mainLayout->setSpacing(0);
+	m_mainLayout->setMargin(0);
+	this->setLayout(m_mainLayout);
 
-	//设置QListWidget中的单元项的图片大小
-	this->setIconSize(QSize(W_ICONSIZE, H_ICONSIZE));
-	this->setResizeMode(QListView::Adjust);
-	//设置QListWidget的显示模式
-	this->setViewMode(QListView::IconMode);
-	//设置QListWidget中的单元项不可被拖动
-	this->setMovement(QListView::Snap);
-	//设置QListWidget中的单元项的间距
-	this->setSpacing(2);
+	m_leftLayout = new QVBoxLayout();
+	m_leftLayout->setSpacing(0);
+	m_leftLayout->setMargin(0);
 
-	// 用来设置鼠标图标
-	// this->setCursor(Qt::CrossCursor);
+	m_mainLayout->addLayout(m_leftLayout);
 }
 
 void PlaylistTreeView::addItem(QString itemName, QImage *image)
 {
-	//生成QListWidgetItem对象(注意：其Icon图像进行了伸缩[96*96])---scaled函数
-	QListWidgetItem *pItem = new QListWidgetItem(QIcon(QPixmap::fromImage(image->scaled(QSize(W_ICONSIZE, H_ICONSIZE)))), itemName);
-	//设置单元项的宽度和高度
-	pItem->setSizeHint(QSize(W_ICONSIZE, H_ICONSIZE + 20));
-	this->insertItem(this->count(), pItem);
+	static int remainHeight = this->size().height();
+
+	int pWidth = this->size().width() - 40;
+	int pHeight = pWidth * 0.5625;
+
+	// 如果剩下的高度不够放下一个节目，就不显示了
+	if (remainHeight < pHeight + 40)
+	{
+		// 节目列表超出了显示范围，引出滚动条
+		static bool flag = false;
+		if (!flag)
+		{
+			QScrollBar *bar = new QScrollBar();
+			bar->setPageStep(30);
+			bar->setValue(3);
+			int a = bar->value();
+			connect(bar, SIGNAL(valueChanged(int)), this, SLOT(valueChanged(int)));
+			m_mainLayout->addWidget(bar);
+			flag = true;
+
+			QSpacerItem *left = new QSpacerItem(pWidth, remainHeight, QSizePolicy::Expanding, QSizePolicy::Minimum);
+			m_leftLayout->addItem(left);
+		}
+
+		return;
+	}
+	else
+	{
+		remainHeight -= (pHeight + 40);
+	}
+
+	QWidget *itemWidget = new QWidget();
+	QGridLayout *ItemVBLayout = new QGridLayout();
+	itemWidget->setLayout(ItemVBLayout);
+
+	QLabel *programIcon = new QLabel;
+	programIcon->setPixmap(QPixmap::fromImage(*image).scaled(pWidth, pHeight));
+
+	QPushButton *voiceButton = new QPushButton();
+	voiceButton->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
+	voiceButton->setMaximumHeight(16);
+	voiceButton->setMaximumWidth(16);
+
+	QLabel *programName = new QLabel(itemName);
+	programName->setAlignment(Qt::AlignCenter);
+	programName->setMaximumHeight(16);
+
+	ItemVBLayout->addWidget(programIcon, 0, 0, 1, 2);
+	ItemVBLayout->addWidget(voiceButton, 1, 0);
+	ItemVBLayout->addWidget(programName, 1, 1);
+
+	m_leftLayout->addWidget(itemWidget);
 }
 
 void PlaylistTreeView::clear(void)

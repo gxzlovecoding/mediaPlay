@@ -3,9 +3,13 @@
 
 #include <QListWidget>
 #include <QImage>
+#include <QLabel>
 #include <QtGui>
+#include <QGridLayout>
+#include <QPushButton>
+#include <QScrollBar>
 
-class PlaylistTreeView : public QListWidget
+class PlaylistTreeView : public QWidget
 {
 	Q_OBJECT
 public:
@@ -16,6 +20,8 @@ public:
 	void clear(void);
 
 private:
+	QHBoxLayout *m_mainLayout;
+	QVBoxLayout *m_leftLayout;
 };
 
 #endif

@@ -14,5 +14,7 @@
         <file>resources/4.png</file>
         <file>resources/style.qss</file>
         <file>resources/slider_button.png</file>
+        <file>resources/mute.png</file>
+        <file>resources/unmute.png</file>
     </qresource>
 </RCC>
