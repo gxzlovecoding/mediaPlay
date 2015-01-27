@@ -1,8 +1,38 @@
 #include "PlaylistTreeView.h"
 
-// ÉèÖÃ³É16:9
-#define W_ICONSIZE 178
-#define H_ICONSIZE 100
+ProgramItem::ProgramItem(QWidget *parent)
+: QWidget(parent)
+{
+
+}
+
+void ProgramItem::init(int iconW, int iconH, QString itemName, QImage *image)
+{
+	QGridLayout *ItemVBLayout = new QGridLayout();
+	this->setLayout(ItemVBLayout);
+
+	QLabel *programIcon = new QLabel;
+	programIcon->setPixmap(QPixmap::fromImage(*image).scaled(iconW, iconH));
+
+	QPushButton *voiceButton = new QPushButton();
+	voiceButton->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
+	voiceButton->setMaximumHeight(16);
+	voiceButton->setMaximumWidth(16);
+
+	m_programName = itemName;
+	QLabel *programName = new QLabel(itemName);
+	programName->setAlignment(Qt::AlignCenter);
+	programName->setMaximumHeight(16);
+
+	ItemVBLayout->addWidget(programIcon, 0, 0, 1, 2);
+	ItemVBLayout->addWidget(voiceButton, 1, 0);
+	ItemVBLayout->addWidget(programName, 1, 1);
+}
+
+ProgramItem::~ProgramItem()
+{
+
+}
 
 PlaylistTreeView::PlaylistTreeView(QWidget *parent)
 : QWidget(parent)
@@ -34,8 +64,9 @@ void PlaylistTreeView::addItem(QString itemName, QImage *image)
 		if (!flag)
 		{
 			QScrollBar *bar = new QScrollBar();
-			bar->setPageStep(30);
-			bar->setValue(3);
+			bar->setPageStep(1);
+			bar->setMaximum(5);
+			bar->setValue(0);
 			int a = bar->value();
 			connect(bar, SIGNAL(valueChanged(int)), this, SLOT(valueChanged(int)));
 			m_mainLayout->addWidget(bar);
@@ -52,27 +83,14 @@ void PlaylistTreeView::addItem(QString itemName, QImage *image)
 		remainHeight -= (pHeight + 40);
 	}
 
-	QWidget *itemWidget = new QWidget();
-	QGridLayout *ItemVBLayout = new QGridLayout();
-	itemWidget->setLayout(ItemVBLayout);
-
-	QLabel *programIcon = new QLabel;
-	programIcon->setPixmap(QPixmap::fromImage(*image).scaled(pWidth, pHeight));
-
-	QPushButton *voiceButton = new QPushButton();
-	voiceButton->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
-	voiceButton->setMaximumHeight(16);
-	voiceButton->setMaximumWidth(16);
-
-	QLabel *programName = new QLabel(itemName);
-	programName->setAlignment(Qt::AlignCenter);
-	programName->setMaximumHeight(16);
-
-	ItemVBLayout->addWidget(programIcon, 0, 0, 1, 2);
-	ItemVBLayout->addWidget(voiceButton, 1, 0);
-	ItemVBLayout->addWidget(programName, 1, 1);
-
+	ProgramItem* itemWidget = new ProgramItem();
+	itemWidget->init(pWidth, pHeight, itemName, image);
 	m_leftLayout->addWidget(itemWidget);
+}
+
+void PlaylistTreeView::valueChanged(int value)
+{
+	int v = value;
 }
 
 void PlaylistTreeView::clear(void)
