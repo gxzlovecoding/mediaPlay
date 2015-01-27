@@ -12,6 +12,7 @@
 
 #include <QtAV/VideoRendererTypes.h>
 #include <QtAV/GLWidgetRenderer2.h>
+#include <QtAV/WidgetRenderer.h>
 
 using namespace QtAV;
 
@@ -336,7 +337,8 @@ void VideoGroup::updateScreen(int num)
 			//VideoRendererId v = VideoRendererId_Widget;// 这个不会删除后显示不了 VideoRendererId_Widget;
 
 			//VideoRenderer* renderer = new GLWidgetRenderer2();//VideoRendererFactory::create(v);
-			GLWidgetRenderer2 *renderer = new GLWidgetRenderer2();
+			//GLWidgetRenderer2 *renderer = new GLWidgetRenderer2();
+			WidgetRenderer *renderer = new WidgetRenderer();
 			connect(renderer, SIGNAL(setRenderByDrag(QtAV::VideoRenderer*)), this, SLOT(setRenderByDrag(QtAV::VideoRenderer*)));
 			mRenderers.append(renderer);
 			renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);

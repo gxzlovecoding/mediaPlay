@@ -123,4 +123,19 @@ bool WidgetRenderer::onSetOrientation(int value)
     return true;
 }
 
+void WidgetRenderer::dragEnterEvent(QDragEnterEvent *e)
+{
+	e->acceptProposedAction();
+}
+
+void WidgetRenderer::dragMoveEvent(QDragMoveEvent *e)
+{
+	e->acceptProposedAction();
+}
+
+void WidgetRenderer::dropEvent(QDropEvent *)
+{
+	emit setRenderByDrag(this);
+}
+
 } //namespace QtAV

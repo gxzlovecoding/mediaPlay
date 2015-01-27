@@ -40,8 +40,13 @@ public:
     explicit WidgetRenderer(QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual VideoRendererId id() const;
     virtual QWidget* widget() { return this; }
+
+	void dragEnterEvent(QDragEnterEvent *);
+	void dragMoveEvent(QDragMoveEvent *);
+	void dropEvent(QDropEvent *);
 signals:
     void imageReady();
+	void setRenderByDrag(QtAV::VideoRenderer* render);
 protected:
     virtual bool receiveFrame(const VideoFrame& frame);
     virtual bool needUpdateBackground() const;
