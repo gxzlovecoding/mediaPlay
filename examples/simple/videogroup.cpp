@@ -162,11 +162,13 @@ void VideoGroup::setFullscreen()
 		// TODO 把全屏放到一个widket做全屏，因为单独全屏有问题。
 		temp->setWindowFlags(Qt::Window);
 		temp->setLayout(new QVBoxLayout());
+		temp->layout()->setSpacing(0);
+		temp->layout()->setMargin(0);
 
 		temp->layout()->addWidget(mainWidget);
 		temp->showFullScreen();
-		mainWidget->move(0, 0);
-		mainWidget->resize(temp->size());
+		//mainWidget->move(0, 0);
+		//mainWidget->resize(temp->size());
 	}
 	else
 	{
