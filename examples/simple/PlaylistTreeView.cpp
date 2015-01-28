@@ -1,42 +1,69 @@
 #include "PlaylistTreeView.h"
 
-ProgramItem::ProgramItem(QWidget *parent)
+ProgramItem::ProgramItem(int id, QWidget *parent)
 : QWidget(parent)
+, m_isMute(false)
+, m_id(id)
 {
 
 }
 
-void ProgramItem::init(int iconW, int iconH, QString itemName, QImage *image)
+ProgramItem* ProgramItem::clone()
 {
+	ProgramItem* item = new ProgramItem(m_id);
+	item->init(m_programName, m_programPixmap);
+	return item;
+}
+
+void ProgramItem::setMute(bool flag)
+{
+	m_isMute = flag;
+	if (m_isMute)
+		m_voiceButton->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
+	else
+		m_voiceButton->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/unmute.png); max-height: 30px;    max-width: 30px;  }"));
+}
+
+void ProgramItem::init(QString itemName, QPixmap *image)
+{
+	m_programName = itemName;
+	m_programPixmap = new QPixmap(*image);
+
 	QGridLayout *ItemVBLayout = new QGridLayout();
 	this->setLayout(ItemVBLayout);
+	
+	m_programIcon = new DragIcon(*m_programPixmap);
 
-	DragIcon *programIcon = new DragIcon(QPixmap::fromImage(*image).scaled(iconW, iconH));
-	//QLabel *programIcon = new QLabel;
-	//programIcon->setPixmap(QPixmap::fromImage(*image).scaled(iconW, iconH));
+	m_voiceButton = new QPushButton();
+	m_voiceButton->setMaximumHeight(16);
+	m_voiceButton->setMaximumWidth(16);
+	setMute(false);
 
-	QPushButton *voiceButton = new QPushButton();
-	voiceButton->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
-	voiceButton->setMaximumHeight(16);
-	voiceButton->setMaximumWidth(16);
+	m_programNameLabel = new QLabel(itemName);
+	m_programNameLabel->setAlignment(Qt::AlignCenter);
+	m_programNameLabel->setMaximumHeight(16);
 
-	m_programName = itemName;
-	QLabel *programName = new QLabel(itemName);
-	programName->setAlignment(Qt::AlignCenter);
-	programName->setMaximumHeight(16);
-
-	ItemVBLayout->addWidget(programIcon, 0, 0, 1, 2);
-	ItemVBLayout->addWidget(voiceButton, 1, 0);
-	ItemVBLayout->addWidget(programName, 1, 1);
+	ItemVBLayout->addWidget(m_programIcon, 0, 0, 1, 2);
+	ItemVBLayout->addWidget(m_voiceButton, 1, 0);
+	ItemVBLayout->addWidget(m_programNameLabel, 1, 1);
 }
 
 ProgramItem::~ProgramItem()
 {
-
+	if (m_programPixmap)
+		delete m_programPixmap;
+	if (m_programIcon)
+		delete m_programIcon;
+	if (m_voiceButton)
+		delete m_voiceButton;
+	if (m_programNameLabel)
+		delete m_programNameLabel;
 }
 
 PlaylistTreeView::PlaylistTreeView(QWidget *parent)
 : QWidget(parent)
+, m_displayNumber(0)
+, m_totalProbramNumber(0)
 {
 	m_mainLayout = new QHBoxLayout();
 	m_mainLayout->setSpacing(0);
@@ -47,6 +74,12 @@ PlaylistTreeView::PlaylistTreeView(QWidget *parent)
 	m_leftLayout->setSpacing(0);
 	m_leftLayout->setMargin(0);
 
+	m_scrollBar = new QScrollBar();
+	m_scrollBar->setPageStep(1);
+	m_scrollBar->setMaximum(0);
+	m_scrollBar->setValue(0);
+	connect(m_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(valueChanged(int)));
+
 	m_mainLayout->addLayout(m_leftLayout);
 }
 
@@ -56,42 +89,57 @@ void PlaylistTreeView::addItem(QString itemName, QImage *image)
 
 	int pWidth = this->size().width() - 40;
 	int pHeight = pWidth * 0.5625;
+	m_totalProbramNumber++;
 
-	// 如果剩下的高度不够放下一个节目，就不显示了
-	if (remainHeight < pHeight + 40)
-	{
-		// 节目列表超出了显示范围，引出滚动条
-		static bool flag = false;
-		if (!flag)
-		{
-			QScrollBar *bar = new QScrollBar();
-			bar->setPageStep(1);
-			bar->setMaximum(5);
-			bar->setValue(0);
-			int a = bar->value();
-			connect(bar, SIGNAL(valueChanged(int)), this, SLOT(valueChanged(int)));
-			m_mainLayout->addWidget(bar);
-			flag = true;
+	// 生成节目Item
+	ProgramItem* itemWidget = new ProgramItem(m_displayNumber);
+	itemWidget->init(itemName, &QPixmap::fromImage(*image).scaled(pWidth, pHeight));
 
-			QSpacerItem *left = new QSpacerItem(pWidth, remainHeight, QSizePolicy::Expanding, QSizePolicy::Minimum);
-			m_leftLayout->addItem(left);
-		}
+	// 放入List
+	m_programList.append(itemWidget);
 
-		return;
-	}
-	else
+	if (remainHeight > pHeight + 40)
 	{
 		remainHeight -= (pHeight + 40);
+
+		// 添加进去左边列表
+		ProgramItem *item = itemWidget->clone();
+		m_leftLayout->addWidget(item);
+		m_currentDisplayList.append(item);
+		m_displayNumber++;
+	}
+	else if (remainHeight > 0)
+	{
+		// 如果剩下的高度不够放下一个节目，就不显示了
+		// 节目列表超出了显示范围，引出滚动条
+		m_mainLayout->addWidget(m_scrollBar);
+
+		//QSpacerItem *left = new QSpacerItem(pWidth, remainHeight, QSizePolicy::Expanding, QSizePolicy::Minimum);
+		//m_leftLayout->addItem(left);
+		remainHeight = 0;
 	}
 
-	ProgramItem* itemWidget = new ProgramItem();
-	itemWidget->init(pWidth, pHeight, itemName, image);
-	m_leftLayout->addWidget(itemWidget);
+	if (m_totalProbramNumber > m_displayNumber)
+		m_scrollBar->setMaximum(m_totalProbramNumber - m_displayNumber);
 }
 
 void PlaylistTreeView::valueChanged(int value)
 {
-	int v = value;
+	//int v = value;
+	while (!m_currentDisplayList.empty())
+	{
+		ProgramItem *item = m_currentDisplayList.takeLast();
+		m_programList[item->getID()]->setMute(item->getMute());
+		m_leftLayout->removeWidget(item);
+		delete item;
+	}
+
+	for (int i = 0; i < m_displayNumber; i++)
+	{
+		ProgramItem *item = m_programList[i + value]->clone();
+		m_leftLayout->addWidget(item);
+		m_currentDisplayList.append(item);
+	}
 }
 
 void PlaylistTreeView::clear(void)

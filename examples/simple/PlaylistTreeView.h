@@ -10,17 +10,29 @@
 #include <QScrollBar>
 #include <QImage>
 #include <QString>
+#include <QList>
 #include "dragicon.h"
 
 class ProgramItem : public QWidget
 {
 	Q_OBJECT
 public:
-	ProgramItem(QWidget *parent = 0);
+	ProgramItem(int id, QWidget *parent = 0);
 	~ProgramItem();
-	void init(int iconW, int iconH, QString itemName, QImage *image);
+	ProgramItem* clone();
+	void init(QString itemName, QPixmap *image);
+	void setMute(bool flag);
+	inline bool getMute(void){ return m_isMute; }
+	inline int getID(){ return m_id; }
 private:
 	QString m_programName;
+
+	DragIcon* m_programIcon;
+	QPixmap* m_programPixmap;
+	QPushButton* m_voiceButton;
+	QLabel* m_programNameLabel;
+	bool m_isMute;
+	int m_id;
 };
 
 class PlaylistTreeView : public QWidget
@@ -38,6 +50,11 @@ public slots:
 private:
 	QHBoxLayout *m_mainLayout;
 	QVBoxLayout *m_leftLayout;
+	QScrollBar *m_scrollBar;
+	QList<ProgramItem*> m_programList;
+	QList<ProgramItem*> m_currentDisplayList;
+	int m_displayNumber;
+	int m_totalProbramNumber;
 };
 
 #endif
