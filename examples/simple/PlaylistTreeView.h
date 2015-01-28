@@ -24,6 +24,8 @@ public:
 	void setMute(bool flag);
 	inline bool getMute(void){ return m_isMute; }
 	inline int getID(){ return m_id; }
+public slots:
+	void onMuteClick();
 private:
 	QString m_programName;
 

@@ -12,6 +12,7 @@ ProgramItem* ProgramItem::clone()
 {
 	ProgramItem* item = new ProgramItem(m_id);
 	item->init(m_programName, m_programPixmap);
+	item->setMute(m_isMute);
 	return item;
 }
 
@@ -37,6 +38,7 @@ void ProgramItem::init(QString itemName, QPixmap *image)
 	m_voiceButton = new QPushButton();
 	m_voiceButton->setMaximumHeight(16);
 	m_voiceButton->setMaximumWidth(16);
+	connect(m_voiceButton, SIGNAL(clicked()), this, SLOT(onMuteClick()));
 	setMute(false);
 
 	m_programNameLabel = new QLabel(itemName);
@@ -46,6 +48,11 @@ void ProgramItem::init(QString itemName, QPixmap *image)
 	ItemVBLayout->addWidget(m_programIcon, 0, 0, 1, 2);
 	ItemVBLayout->addWidget(m_voiceButton, 1, 0);
 	ItemVBLayout->addWidget(m_programNameLabel, 1, 1);
+}
+
+void ProgramItem::onMuteClick()
+{
+	setMute(!m_isMute);
 }
 
 ProgramItem::~ProgramItem()
@@ -89,10 +96,9 @@ void PlaylistTreeView::addItem(QString itemName, QImage *image)
 
 	int pWidth = this->size().width() - 40;
 	int pHeight = pWidth * 0.5625;
-	m_totalProbramNumber++;
 
 	// 生成节目Item
-	ProgramItem* itemWidget = new ProgramItem(m_displayNumber);
+	ProgramItem* itemWidget = new ProgramItem(m_totalProbramNumber++);
 	itemWidget->init(itemName, &QPixmap::fromImage(*image).scaled(pWidth, pHeight));
 
 	// 放入List
