@@ -12,6 +12,7 @@ void DragIcon::mousePressEvent(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
         startPos = e->pos();
+	emit onClick();
 }
 
 void DragIcon::mouseMoveEvent(QMouseEvent * e)

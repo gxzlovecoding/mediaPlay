@@ -312,7 +312,7 @@ void VideoGroup::set9Renderer()
 void VideoGroup::setRenderByDrag(QtAV::VideoRenderer* render)
 {
 	int renderIndex = mRenderers.indexOf(render);
-	int programIndex = m_playList->currentRow();
+	int programIndex = m_playList->getCurrentItem();
 
 	mRenderers[renderIndex]->receive(mpPlayer->getFirstFrame(programIndex));
 	mpPlayer->setRenderer(mRenderers[renderIndex], programIndex);

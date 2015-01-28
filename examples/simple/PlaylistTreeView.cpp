@@ -34,6 +34,7 @@ void ProgramItem::init(QString itemName, QPixmap *image)
 	this->setLayout(ItemVBLayout);
 	
 	m_programIcon = new DragIcon(*m_programPixmap);
+	connect(m_programIcon, SIGNAL(onClick()), this, SLOT(onClick()));
 
 	m_voiceButton = new QPushButton();
 	m_voiceButton->setMaximumHeight(16);
@@ -53,6 +54,11 @@ void ProgramItem::init(QString itemName, QPixmap *image)
 void ProgramItem::onMuteClick()
 {
 	setMute(!m_isMute);
+}
+
+void ProgramItem::onClick()
+{
+	emit activeItem(m_id);
 }
 
 ProgramItem::~ProgramItem()
@@ -110,6 +116,7 @@ void PlaylistTreeView::addItem(QString itemName, QImage *image)
 
 		// 添加进去左边列表
 		ProgramItem *item = itemWidget->clone();
+		connect(item, SIGNAL(activeItem(int)), this, SLOT(activeItem(int)));
 		m_leftLayout->addWidget(item);
 		m_currentDisplayList.append(item);
 		m_displayNumber++;
@@ -143,9 +150,15 @@ void PlaylistTreeView::valueChanged(int value)
 	for (int i = 0; i < m_displayNumber; i++)
 	{
 		ProgramItem *item = m_programList[i + value]->clone();
+		connect(item, SIGNAL(activeItem(int)), this, SLOT(activeItem(int)));
 		m_leftLayout->addWidget(item);
 		m_currentDisplayList.append(item);
 	}
+}
+
+void PlaylistTreeView::activeItem(int id)
+{
+	m_activeItem = id;
 }
 
 void PlaylistTreeView::clear(void)

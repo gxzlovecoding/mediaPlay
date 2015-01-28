@@ -9,16 +9,13 @@ class DragIcon : public QLabel
     Q_OBJECT
 public:
     DragIcon(QPixmap pix, QWidget *parent=0);
+signals:
+	void onClick();
 protected:
     void mousePressEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *);
 private:
     QPoint startPos;
-
-signals:
-
-public slots:
-
 };
 
 #endif // DRAGICON_H

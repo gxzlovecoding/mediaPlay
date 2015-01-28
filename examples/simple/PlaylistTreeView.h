@@ -24,8 +24,11 @@ public:
 	void setMute(bool flag);
 	inline bool getMute(void){ return m_isMute; }
 	inline int getID(){ return m_id; }
+signals:
+	void activeItem(int id);
 public slots:
 	void onMuteClick();
+	void onClick();
 private:
 	QString m_programName;
 
@@ -46,9 +49,10 @@ public:
 
 	void addItem(QString itemName, QImage *image);
 	void clear(void);
-
+	inline int getCurrentItem(void){ return m_activeItem; }
 public slots:
 	void valueChanged(int value);
+	void activeItem(int id);
 private:
 	QHBoxLayout *m_mainLayout;
 	QVBoxLayout *m_leftLayout;
@@ -57,6 +61,7 @@ private:
 	QList<ProgramItem*> m_currentDisplayList;
 	int m_displayNumber;
 	int m_totalProbramNumber;
+	int m_activeItem;
 };
 
 #endif
