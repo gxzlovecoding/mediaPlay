@@ -70,6 +70,15 @@
     <ClCompile Include="videogroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_dragicon.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dragicon.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="dragicon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="PlaylistTreeView.h">
@@ -82,6 +91,9 @@
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="videogroup.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dragicon.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

@@ -10,6 +10,7 @@
 #include <QScrollBar>
 #include <QImage>
 #include <QString>
+#include "dragicon.h"
 
 class ProgramItem : public QWidget
 {

@@ -11,8 +11,9 @@ void ProgramItem::init(int iconW, int iconH, QString itemName, QImage *image)
 	QGridLayout *ItemVBLayout = new QGridLayout();
 	this->setLayout(ItemVBLayout);
 
-	QLabel *programIcon = new QLabel;
-	programIcon->setPixmap(QPixmap::fromImage(*image).scaled(iconW, iconH));
+	DragIcon *programIcon = new DragIcon(QPixmap::fromImage(*image).scaled(iconW, iconH));
+	//QLabel *programIcon = new QLabel;
+	//programIcon->setPixmap(QPixmap::fromImage(*image).scaled(iconW, iconH));
 
 	QPushButton *voiceButton = new QPushButton();
 	voiceButton->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
