@@ -178,6 +178,12 @@ void VideoGroup::setFullscreen()
 
 		// 把窗口重新放回splitter
 		m_pSplitter->addWidget(mainWidget);
+
+		// 设置列表和主窗口左右比例
+		QList<int> size;
+		size.append(this->width() * 0.2);
+		size.append(this->width() * 0.8);
+		m_pSplitter->setSizes(size);
 	}
 	m_isFullscreen = !m_isFullscreen;
 }
