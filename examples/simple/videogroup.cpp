@@ -110,10 +110,14 @@ QWidget(parent)
 	mpBar->layout()->addWidget(mpThree);
 	mpBar->layout()->addWidget(mpFour);
 	mpBar->layout()->addWidget(mpNine);
+	QSpacerItem *left = new QSpacerItem(80, 50, QSizePolicy::Expanding, QSizePolicy::Minimum);
+	mpBar->layout()->addItem(left);
 	mpBar->layout()->addWidget(mpBackwardBtn);
 	mpBar->layout()->addWidget(mpPlayPause);
 	//mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpForwardBtn);
+	QSpacerItem *right = new QSpacerItem(60, 50, QSizePolicy::Expanding, QSizePolicy::Minimum);
+	mpBar->layout()->addItem(right);
 	mpBar->layout()->addWidget(mpVolumeSlider);
 	mpBar->layout()->addWidget(mpFullscreenBtn);
 
