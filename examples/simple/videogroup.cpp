@@ -142,6 +142,7 @@ QWidget(parent)
 	m_pSplitter->resize(this->size());
 
 	m_playList = new PlaylistTreeView();
+	connect(m_playList, SIGNAL(onItemMuteClick(int, bool)), this, SLOT(onItemMuteClick(int, bool)));
 
 	m_pSplitter->addWidget(m_playList);
 	m_pSplitter->addWidget(mainWidget);
@@ -184,6 +185,15 @@ void VideoGroup::setVolume()
 			ao->setVolume(v);
 		}
 	}
+}
+
+void VideoGroup::onItemMuteClick(int id, bool flag)
+{
+	if (!mpPlayer->isLoaded())
+	{
+		return;
+	}
+	mpPlayer->setMute(flag, id);
 }
 
 void VideoGroup::setFullscreen()

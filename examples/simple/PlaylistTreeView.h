@@ -26,6 +26,7 @@ public:
 	inline int getID(){ return m_id; }
 signals:
 	void activeItem(int id);
+	void onMuteClick(int id, bool flag);
 public slots:
 	void onMuteClick();
 	void onClick();
@@ -50,9 +51,12 @@ public:
 	void addItem(QString itemName, QImage *image);
 	void clear(void);
 	inline int getCurrentItem(void){ return m_activeItem; }
+signals:
+	void onItemMuteClick(int id, bool flag);
 public slots:
 	void valueChanged(int value);
 	void activeItem(int id);
+	void onMuteClick(int id, bool flag);
 private:
 	QHBoxLayout *m_mainLayout;
 	QVBoxLayout *m_leftLayout;

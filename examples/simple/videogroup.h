@@ -45,6 +45,7 @@ public:
 
 private slots:
 	void setVolume();
+	void onItemMuteClick(int id, bool flag);
 private:
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);

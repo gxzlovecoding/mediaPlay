@@ -54,6 +54,7 @@ void ProgramItem::init(QString itemName, QPixmap *image)
 void ProgramItem::onMuteClick()
 {
 	setMute(!m_isMute);
+	emit onMuteClick(m_id, m_isMute);
 }
 
 void ProgramItem::onClick()
@@ -117,6 +118,7 @@ void PlaylistTreeView::addItem(QString itemName, QImage *image)
 		// 添加进去左边列表
 		ProgramItem *item = itemWidget->clone();
 		connect(item, SIGNAL(activeItem(int)), this, SLOT(activeItem(int)));
+		connect(item, SIGNAL(onMuteClick(int,bool)), this, SLOT(onMuteClick(int,bool)));
 		m_leftLayout->addWidget(item);
 		m_currentDisplayList.append(item);
 		m_displayNumber++;
@@ -151,6 +153,7 @@ void PlaylistTreeView::valueChanged(int value)
 	{
 		ProgramItem *item = m_programList[i + value]->clone();
 		connect(item, SIGNAL(activeItem(int)), this, SLOT(activeItem(int)));
+		connect(item, SIGNAL(onMuteClick(int,bool)), this, SLOT(onMuteClick(int,bool)));
 		m_leftLayout->addWidget(item);
 		m_currentDisplayList.append(item);
 	}
@@ -159,6 +162,11 @@ void PlaylistTreeView::valueChanged(int value)
 void PlaylistTreeView::activeItem(int id)
 {
 	m_activeItem = id;
+}
+
+void PlaylistTreeView::onMuteClick(int id, bool flag)
+{
+	emit onItemMuteClick(id,flag);
 }
 
 void PlaylistTreeView::clear(void)
