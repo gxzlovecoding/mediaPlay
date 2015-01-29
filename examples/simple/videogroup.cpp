@@ -62,9 +62,9 @@ QWidget(parent)
 	mpPlayPause = new QPushButton();
 	mpPlayPause->setMaximumSize(40, 40);
 	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
-	mpStop = new QPushButton();
-	mpStop->setMaximumSize(40, 40);
-	mpStop->setObjectName("mpStop");
+	//mpStop = new QPushButton();
+	//mpStop->setMaximumSize(40, 40);
+	//mpStop->setObjectName("mpStop");
 	mpForwardBtn = new QPushButton();
 	mpForwardBtn->setMaximumSize(40, 40);
 	mpForwardBtn->setObjectName("mpForwardBtn");
@@ -93,7 +93,7 @@ QWidget(parent)
 	connect(mpNine, SIGNAL(clicked()), SLOT(set9Renderer()));
 	connect(mpFullscreenBtn, SIGNAL(clicked()), SLOT(setFullscreen()));
 	connect(mpPlayPause, SIGNAL(clicked()), this, SLOT(onPauseResumeClick()));
-	connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
+	//connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
 	connect(mpPlayer, SIGNAL(preloadSuccess()), this, SLOT(preloadSuccess()));
 	connect(mpPlayer, SIGNAL(started()), this, SLOT(onStartPlay()));
 	connect(mpPlayer, SIGNAL(stopped()), this, SLOT(onStopPlay()));
@@ -110,9 +110,9 @@ QWidget(parent)
 	mpBar->layout()->addWidget(mpThree);
 	mpBar->layout()->addWidget(mpFour);
 	mpBar->layout()->addWidget(mpNine);
-	mpBar->layout()->addWidget(mpPlayPause);
 	mpBar->layout()->addWidget(mpBackwardBtn);
-	mpBar->layout()->addWidget(mpStop);
+	mpBar->layout()->addWidget(mpPlayPause);
+	//mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpForwardBtn);
 	mpBar->layout()->addWidget(mpVolumeSlider);
 	mpBar->layout()->addWidget(mpFullscreenBtn);

@@ -57,7 +57,7 @@ private:
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider, *mpVolumeSlider;
 	QPushButton *mpOne, *mpTwo, *mpThree, *mpFour, *mpNine;
-	QPushButton *mpPlayPause, *mpStop, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn;
+	QPushButton *mpPlayPause, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn;// *mpStop,
 
 	QSplitter*   m_pSplitter;
 
