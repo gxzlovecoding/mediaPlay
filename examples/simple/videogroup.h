@@ -42,6 +42,9 @@ public:
 	void preload(const QString& file);
 	void onPauseResumeClick();
 	void setFullscreen();
+
+private slots:
+	void setVolume();
 private:
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -51,7 +54,7 @@ private:
 	QWidget *mpBar;
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
-	Slider *mpTimeSlider;
+	Slider *mpTimeSlider, *mpVolumeSlider;
 	QPushButton *mpOne, *mpTwo, *mpThree, *mpFour, *mpNine;
 	QPushButton *mpPlayPause, *mpStop, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn;
 

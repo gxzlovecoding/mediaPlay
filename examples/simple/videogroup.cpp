@@ -15,6 +15,7 @@
 #include <QtAV/WidgetRenderer.h>
 
 using namespace QtAV;
+const qreal kVolumeInterval = 0.05;
 
 VideoGroup::VideoGroup(QWidget *parent) :
 QWidget(parent)
@@ -70,6 +71,17 @@ QWidget(parent)
 	mpBackwardBtn = new QPushButton();
 	mpBackwardBtn->setMaximumSize(40, 40);
 	mpBackwardBtn->setObjectName("mpBackwardBtn");
+
+	mpVolumeSlider = new Slider();
+	//mpVolumeSlider->hide();
+	mpVolumeSlider->setOrientation(Qt::Horizontal);
+	mpVolumeSlider->setMinimum(0);
+	const int kVolumeSliderMax = 100;
+	mpVolumeSlider->setMaximum(kVolumeSliderMax);
+	//mpVolumeSlider->setMaximumHeight(8);
+	mpVolumeSlider->setMaximumWidth(88);
+	mpVolumeSlider->setValue(int(1.0 / kVolumeInterval*qreal(kVolumeSliderMax) / 100.0));
+
 	mpFullscreenBtn = new QPushButton();
 	mpFullscreenBtn->setMaximumSize(40, 40);
 	mpFullscreenBtn->setObjectName("mpFullscreenBtn");
@@ -90,6 +102,8 @@ QWidget(parent)
 	connect(mpTimeSlider, SIGNAL(sliderReleased()), SLOT(seek()));
 	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
 	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
+	connect(mpVolumeSlider, SIGNAL(sliderPressed()), SLOT(setVolume()));
+	connect(mpVolumeSlider, SIGNAL(valueChanged(int)), SLOT(setVolume()));
 
 	mpBar->layout()->addWidget(mpOne);
 	mpBar->layout()->addWidget(mpTwo);
@@ -100,6 +114,7 @@ QWidget(parent)
 	mpBar->layout()->addWidget(mpBackwardBtn);
 	mpBar->layout()->addWidget(mpStop);
 	mpBar->layout()->addWidget(mpForwardBtn);
+	mpBar->layout()->addWidget(mpVolumeSlider);
 	mpBar->layout()->addWidget(mpFullscreenBtn);
 
 	QPalette palette;
@@ -152,6 +167,23 @@ VideoGroup::~VideoGroup()
 {
 	delete view;
 	delete mpBar;
+}
+
+void VideoGroup::setVolume()
+{
+	if (!mpPlayer->isLoaded())
+	{
+		return;
+	}
+	for (int i = 0; i < mpPlayer->videoStreamCount(); i++)
+	{
+		AudioOutput *ao = mpPlayer ? mpPlayer->audio(i) : 0;
+		qreal v = qreal(mpVolumeSlider->value())*kVolumeInterval;
+		if (ao)
+		{
+			ao->setVolume(v);
+		}
+	}
 }
 
 void VideoGroup::setFullscreen()
@@ -235,6 +267,8 @@ void VideoGroup::preloadSuccess()
 
 	// ÉèÖÃ²¥·Å°´Å¥
 	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); max-height: 30px;    max-width: 30px;  }"));
+
+	setVolume();
 
 	mpPlayer->disableAllProgram();
 
