@@ -22,6 +22,7 @@ QWidget(parent)
 , view(0)
 , m_isFullscreen(false)
 , m_currentScreens(1)
+, m_intervalTimer(new QTimer(this))
 {
 	QVBoxLayout *mainLayout = new QVBoxLayout();
 	mainLayout->setSpacing(0);
@@ -166,6 +167,9 @@ QWidget(parent)
 		qWarning("Can't open the style sheet file.");
 	}
 	qApp->setStyleSheet(styleSheet.readAll());
+
+	connect(m_intervalTimer, SIGNAL(timeout()), SLOT(intervalTimerExpired()));
+	m_intervalTimer->start(500);
 }
 
 VideoGroup::~VideoGroup()
@@ -198,6 +202,35 @@ void VideoGroup::onItemMuteClick(int id, bool flag)
 		return;
 	}
 	mpPlayer->setMute(flag, id);
+}
+
+void VideoGroup::intervalTimerExpired()
+{
+	if (m_isFullscreen)
+	{
+		static int notMoveCount = 0;
+		static QPoint currentPos(QWidget::mapFromGlobal(QCursor::pos()));
+
+		notMoveCount = (currentPos == QWidget::mapFromGlobal(QCursor::pos())) ? notMoveCount + 1 : 0;
+		currentPos = QWidget::mapFromGlobal(QCursor::pos());
+
+		if (notMoveCount > 6)
+		{
+			if (this->mpTimeSlider->isVisible())
+				this->mpTimeSlider->setVisible(false);
+			if (this->mpBar->isVisible())
+				this->mpBar->setVisible(false);
+			QApplication::setOverrideCursor(Qt::BlankCursor);
+		}
+		else
+		{
+			if (!this->mpTimeSlider->isVisible())
+				this->mpTimeSlider->setVisible(true);
+			if (!this->mpBar->isVisible())
+				this->mpBar->setVisible(true);
+			QApplication::setOverrideCursor(Qt::ArrowCursor);
+		}
+	}
 }
 
 void VideoGroup::setFullscreen()

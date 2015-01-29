@@ -5,6 +5,7 @@
 #include <QSplitter>
 #include <QSlider>
 #include <QList>
+#include <QTimer>
 #include <QtWidgets/QWidget>
 #include <ActiveQt/QAxBindable>
 #include <QtAV/AVPlayer.h>
@@ -46,6 +47,7 @@ public:
 private slots:
 	void setVolume();
 	void onItemMuteClick(int id, bool flag);
+	void intervalTimerExpired();
 private:
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -64,6 +66,7 @@ private:
 	QList<QtAV::VideoRenderer*> mRenderers;
 	bool m_isFullscreen;
 	int m_currentScreens;
+	QTimer*      m_intervalTimer;
 };
 
 #endif // TESTAX_H
