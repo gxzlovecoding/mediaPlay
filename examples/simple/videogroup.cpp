@@ -21,7 +21,7 @@ VideoGroup::VideoGroup(QWidget *parent) :
 QWidget(parent)
 , view(0)
 , m_isFullscreen(false)
-, m_currentScreens(1)
+, m_currentScreens(9)
 , m_intervalTimer(new QTimer(this))
 {
 	QVBoxLayout *mainLayout = new QVBoxLayout();
@@ -324,17 +324,15 @@ void VideoGroup::preloadSuccess()
 	for (int i = 0; i < mpPlayer->videoStreamCount(); i++)
 	{
 		std::string streamName = mpPlayer->getVideoStreamName(i);
-		m_playList->addItem(QString::fromLocal8Bit(streamName.c_str()), mpPlayer->getFirstImage());
+		m_playList->addItem(QString::fromLocal8Bit(streamName.c_str()), mpPlayer->getFirstImage(i));
 	}
 
-	/*
-	for (int i = 0; i < m_supportScreen[m_currentScreenIndex] && i < mpPlayer->videoStreamCount(); i++)
+	for (int i = 0; i < m_currentScreens && i < mpPlayer->videoStreamCount(); i++)
 	{
-	mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
-	mpPlayer->setRenderer(mRenderers[i], i);
-	mpPlayer->enableProgram(i);
+		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
+		mpPlayer->setRenderer(mRenderers[i], i);
+		mpPlayer->enableProgram(i);
 	}
-	*/
 }
 
 void VideoGroup::onStartPlay()

@@ -318,7 +318,11 @@ bool AVPlayer::Private::setupAudioThread(AVPlayer *player)
 				//could not open audio device. use extrenal clock
 				delete ao[index];
 				ao[index] = 0;
-				return false;
+				// audio can not find, ignore this audio
+				index--;
+				demuxer.removeAudioStream(*it);
+				continue;
+				//return false;
 			}
 		}
 		if (ao[index])
@@ -365,8 +369,10 @@ bool AVPlayer::Private::setupVideoThread(AVPlayer *player)
 	for (QList<int>::iterator it = videoList.begin(); it != videoList.end(); it++, index++)
 	{
 		AVCodecContext *vCodecCtx = demuxer.videoCodecContext(*it);
-		if (!vCodecCtx) {
+		if (!vCodecCtx || vCodecCtx->width <= 0 || vCodecCtx->height <= 0) {
 			//return false;
+			index--;
+			demuxer.removeVideoStream(*it);
 			continue;
 		}
 		/*

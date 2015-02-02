@@ -886,6 +886,20 @@ QList<int> AVDemuxer::audioStreams() const
     return audio_streams;
 }
 
+void AVDemuxer::removeAudioStream(int index)
+{
+	QList<int>::iterator it = audio_streams.begin();
+	while (it != audio_streams.end())
+	{
+		if (*it == index)
+		{
+			audio_streams.erase(it);
+			break;
+		}
+		it++;
+	}
+}
+
 int AVDemuxer::videoStream() const
 {
     if (video_stream != -2) //-2: not parsed, -1 not found.
@@ -917,6 +931,20 @@ QList<int> AVDemuxer::videoStreams() const
         videoStream();
     }
     return video_streams;
+}
+
+void AVDemuxer::removeVideoStream(int index)
+{
+	QList<int>::iterator it = video_streams.begin();
+	while (it != video_streams.end())
+	{
+		if (*it == index)
+		{
+			video_streams.erase(it);
+			break;
+		}
+		it++;
+	}
 }
 
 int AVDemuxer::subtitleStream() const

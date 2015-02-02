@@ -134,8 +134,10 @@ public:
     // current open stream
     int audioStream() const;
     QList<int> audioStreams() const;
+	void removeAudioStream(int index);
     // current open stream
     int videoStream() const;
+	void removeVideoStream(int index);
     QList<int> videoStreams() const;
     // current open stream
     int subtitleStream() const;
