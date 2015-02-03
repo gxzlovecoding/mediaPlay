@@ -32,10 +32,6 @@ void PlaylistTreeView::addItem(QString itemName, QImage *image)
 	this->insertItem(this->count(), pItem);
 }
 
-void PlaylistTreeView::clear(void)
-{
-}
-
 PlaylistTreeView::~PlaylistTreeView()
 {
 }

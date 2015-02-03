@@ -13,7 +13,6 @@ public:
 	~PlaylistTreeView();
 
 	void addItem(QString itemName, QImage *image);
-	void clear(void);
 
 private:
 };
