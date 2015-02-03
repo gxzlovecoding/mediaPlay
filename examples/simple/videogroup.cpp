@@ -21,7 +21,8 @@ VideoGroup::VideoGroup(QWidget *parent) :
 QWidget(parent)
 , view(0)
 , m_isFullscreen(false)
-, m_currentScreens(9)
+, m_currentScreens(4)
+, m_isMute(false)
 , m_intervalTimer(new QTimer(this))
 {
 	QVBoxLayout *mainLayout = new QVBoxLayout();
@@ -73,6 +74,10 @@ QWidget(parent)
 	mpBackwardBtn->setMaximumSize(40, 40);
 	mpBackwardBtn->setObjectName("mpBackwardBtn");
 
+	mpMute = new QPushButton();
+	mpMute->setMaximumSize(40, 40);
+	mpMute->setObjectName("mpMute");
+
 	mpVolumeSlider = new Slider();
 	//mpVolumeSlider->hide();
 	mpVolumeSlider->setOrientation(Qt::Horizontal);
@@ -103,6 +108,7 @@ QWidget(parent)
 	connect(mpTimeSlider, SIGNAL(sliderReleased()), SLOT(seek()));
 	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
 	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
+	connect(mpMute, SIGNAL(clicked()), this, SLOT(setMute()));
 	connect(mpVolumeSlider, SIGNAL(sliderPressed()), SLOT(setVolume()));
 	connect(mpVolumeSlider, SIGNAL(valueChanged(int)), SLOT(setVolume()));
 
@@ -119,6 +125,7 @@ QWidget(parent)
 	mpBar->layout()->addWidget(mpForwardBtn);
 	QSpacerItem *right = new QSpacerItem(60, 50, QSizePolicy::Expanding, QSizePolicy::Minimum);
 	mpBar->layout()->addItem(right);
+	mpBar->layout()->addWidget(mpMute);
 	mpBar->layout()->addWidget(mpVolumeSlider);
 	mpBar->layout()->addWidget(mpFullscreenBtn);
 
@@ -147,7 +154,6 @@ QWidget(parent)
 	m_pSplitter->resize(this->size());
 
 	m_playList = new PlaylistTreeView();
-	connect(m_playList, SIGNAL(onItemMuteClick(int, bool)), this, SLOT(onItemMuteClick(int, bool)));
 
 	m_pSplitter->addWidget(m_playList);
 	m_pSplitter->addWidget(mainWidget);
@@ -184,7 +190,7 @@ void VideoGroup::setVolume()
 	{
 		return;
 	}
-	for (int i = 0; i < mpPlayer->videoStreamCount(); i++)
+	for (int i = 0; i < mpPlayer->audioStreamCount(); i++)
 	{
 		AudioOutput *ao = mpPlayer ? mpPlayer->audio(i) : 0;
 		qreal v = qreal(mpVolumeSlider->value())*kVolumeInterval;
@@ -195,13 +201,27 @@ void VideoGroup::setVolume()
 	}
 }
 
-void VideoGroup::onItemMuteClick(int id, bool flag)
+void VideoGroup::setMute()
 {
+	m_isMute = !m_isMute;
+	if (m_isMute)
+	{
+		mpMute->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
+	}
+	else
+	{
+		mpMute->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/unmute.png); max-height: 30px;    max-width: 30px;  }"));
+	}
+
 	if (!mpPlayer->isLoaded())
 	{
 		return;
 	}
-	mpPlayer->setMute(flag, id);
+	
+	for (int i = 0; i < mpPlayer->audioStreamCount(); i++)
+	{
+		mpPlayer->setMute(m_isMute, i);
+	}
 }
 
 void VideoGroup::intervalTimerExpired()
@@ -315,7 +335,10 @@ void VideoGroup::preloadSuccess()
 	// 设置播放按钮
 	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); max-height: 30px;    max-width: 30px;  }"));
 
+	// 初始化声音
 	setVolume();
+	m_isMute = !m_isMute;
+	setMute();
 
 	mpPlayer->disableAllProgram();
 

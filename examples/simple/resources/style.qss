@@ -45,6 +45,12 @@ QPushButton#mpBackwardBtn{
 	max-width: 30px;
 }
 
+QPushButton#mpMute{
+	border-image: url(:/simple/resources/unmute.png);
+	max-height: 30px;
+	max-width: 30px;
+}
+
 QPushButton#mpFullscreenBtn{
 	border-image: url(:/simple/resources/full.png);
 	max-height: 30px;

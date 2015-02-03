@@ -46,7 +46,7 @@ public:
 
 private slots:
 	void setVolume();
-	void onItemMuteClick(int id, bool flag);
+	void setMute();
 	void intervalTimerExpired();
 private:
 	virtual void resizeEvent(QResizeEvent *event);
@@ -59,13 +59,14 @@ private:
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider, *mpVolumeSlider;
 	QPushButton *mpOne, *mpTwo, *mpThree, *mpFour, *mpNine;
-	QPushButton *mpPlayPause, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn;// *mpStop,
+	QPushButton *mpPlayPause, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn, *mpMute;
 
 	QSplitter*   m_pSplitter;
 
 	QList<QtAV::VideoRenderer*> mRenderers;
 	bool m_isFullscreen;
 	int m_currentScreens;
+	bool m_isMute;
 	QTimer*      m_intervalTimer;
 };
 
