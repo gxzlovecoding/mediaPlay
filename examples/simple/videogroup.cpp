@@ -180,8 +180,12 @@ QWidget(parent)
 
 VideoGroup::~VideoGroup()
 {
-	delete view;
-	delete mpBar;
+	if (!mpPlayer->isLoaded())
+	{
+		return;
+	}
+
+	mpPlayer->stop();
 }
 
 void VideoGroup::setVolume()
