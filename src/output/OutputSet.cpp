@@ -28,6 +28,7 @@ namespace QtAV {
 
 OutputSet::OutputSet(AVPlayer *player):
     QObject(player)
+	, m_firstImage(0)
   , mCanPauseThread(false)
   , mpPlayer(player)
   , mPauseCount(0)
@@ -37,6 +38,8 @@ OutputSet::OutputSet(AVPlayer *player):
 
 OutputSet::~OutputSet()
 {
+	if (m_firstImage)
+		delete m_firstImage;
     mCond.wakeAll();
     //delete? may be deleted by vo's parent
     clearOutputs();
