@@ -19,6 +19,7 @@ const qreal kVolumeInterval = 0.05;
 
 VideoGroup::VideoGroup(QWidget *parent) :
 QWidget(parent)
+, mpPlayer(0)
 , view(0)
 , m_isFullscreen(false)
 , m_currentScreens(4)
@@ -31,8 +32,6 @@ QWidget(parent)
 	//setLayout(mainLayout);
 	mainWidget = new QWidget();
 	mainWidget->setLayout(mainLayout);
-
-	mpPlayer = new AVPlayer(this);
 
 	mpBar = new QWidget(0, Qt::WindowStaysOnTopHint);
 	mpBar->setMaximumHeight(40);
@@ -99,18 +98,13 @@ QWidget(parent)
 	connect(mpNine, SIGNAL(clicked()), SLOT(set9Renderer()));
 	connect(mpFullscreenBtn, SIGNAL(clicked()), SLOT(setFullscreen()));
 	connect(mpPlayPause, SIGNAL(clicked()), this, SLOT(onPauseResumeClick()));
-	//connect(mpStop, SIGNAL(clicked()), mpPlayer, SLOT(stop()));
-	connect(mpPlayer, SIGNAL(preloadSuccess()), this, SLOT(preloadSuccess()));
-	connect(mpPlayer, SIGNAL(started()), this, SLOT(onStartPlay()));
-	connect(mpPlayer, SIGNAL(stopped()), this, SLOT(onStopPlay()));
-	connect(mpPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(onPositionChange(qint64)));
 	connect(mpTimeSlider, SIGNAL(sliderPressed()), SLOT(seek()));
 	connect(mpTimeSlider, SIGNAL(sliderReleased()), SLOT(seek()));
-	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
-	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
 	connect(mpMute, SIGNAL(clicked()), this, SLOT(setMute()));
 	connect(mpVolumeSlider, SIGNAL(sliderPressed()), SLOT(setVolume()));
 	connect(mpVolumeSlider, SIGNAL(valueChanged(int)), SLOT(setVolume()));
+
+	resetPlayer();
 
 	mpBar->layout()->addWidget(mpOne);
 	mpBar->layout()->addWidget(mpTwo);
@@ -186,6 +180,24 @@ VideoGroup::~VideoGroup()
 	}
 
 	mpPlayer->stop();
+}
+
+void VideoGroup::resetPlayer(void)
+{
+	if (mpPlayer && mpPlayer->isLoaded())
+	{
+		mpPlayer->stop();
+		delete mpPlayer;
+		mpPlayer = NULL;
+	}
+
+	mpPlayer = new AVPlayer(this);
+	connect(mpPlayer, SIGNAL(preloadSuccess()), this, SLOT(preloadSuccess()));
+	connect(mpPlayer, SIGNAL(started()), this, SLOT(onStartPlay()));
+	connect(mpPlayer, SIGNAL(stopped()), this, SLOT(onStopPlay()));
+	connect(mpPlayer, SIGNAL(positionChanged(qint64)), this, SLOT(onPositionChange(qint64)));
+	connect(mpForwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekForward()));
+	connect(mpBackwardBtn, SIGNAL(clicked()), mpPlayer, SLOT(seekBackward()));
 }
 
 void VideoGroup::setVolume()
@@ -328,6 +340,8 @@ void VideoGroup::play(const QString &file)
 
 void VideoGroup::preload(const QString& file)
 {
+	resetPlayer();
+
 	mpPlayer->preLoad(file);
 }
 

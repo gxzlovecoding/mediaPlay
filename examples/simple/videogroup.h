@@ -49,6 +49,7 @@ private slots:
 	void setMute();
 	void intervalTimerExpired();
 private:
+	void resetPlayer(void);
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
 	int timer_id;
