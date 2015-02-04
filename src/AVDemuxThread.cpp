@@ -104,11 +104,12 @@ void AVDemuxThread::onFirstFrameDelivered(AVThread* thread)
 	if (programLoadFirstFrameList.find(thread) != programLoadFirstFrameList.end())
 		return;
 
-	disconnect(thread, SIGNAL(frameDelivered()), this, SLOT(onFirstFrameDelivered()));
+	disconnect(thread, SIGNAL(frameDelivered(AVThread*)), this, SLOT(onFirstFrameDelivered(AVThread*)));
 	programLoadFirstFrameList.insert(thread);
 	if (this->demuxer->videoStreams().size() == programLoadFirstFrameList.size())
 	{
 		m_isPreLoad = false;
+		programLoadFirstFrameList.clear();
 		emit onPreLoadSuccess();
 	}
 }
