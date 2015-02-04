@@ -28,6 +28,7 @@
 #include <QtCore/QThread>
 #include <QtCore/QQueue>
 #include <QtCore/QRunnable>
+#include <QSet>
 #include <QMap>
 #include <utils/BlockingQueue.h>
 
@@ -100,6 +101,7 @@ private:
     QAtomicInt nb_next_frame;
     friend class SeekTask;
 
+	QSet<AVThread*> programLoadFirstFrameList;
 	bool m_isPreLoad;
 };
 

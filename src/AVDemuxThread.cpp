@@ -101,8 +101,6 @@ void AVDemuxThread::setPreLoad(bool flag)
 
 void AVDemuxThread::onFirstFrameDelivered(AVThread* thread)
 {
-	static QSet<AVThread*> programLoadFirstFrameList;
-
 	if (programLoadFirstFrameList.find(thread) != programLoadFirstFrameList.end())
 		return;
 
