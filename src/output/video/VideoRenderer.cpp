@@ -44,11 +44,13 @@ namespace QtAV {
 
 VideoRenderer::VideoRenderer()
     :AVOutput(*new VideoRendererPrivate)
+	, m_programIndex(-1)
 {
 }
 
 VideoRenderer::VideoRenderer(VideoRendererPrivate &d)
     :AVOutput(d)
+	, m_programIndex(-1)
 {
 }
 

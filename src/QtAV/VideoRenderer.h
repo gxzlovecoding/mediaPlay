@@ -188,7 +188,8 @@ public:
     bool setHue(qreal hue);
     qreal saturation() const;
     bool setSaturation(qreal saturation);
-
+	inline void setProgramIndex(int index){ m_programIndex = index; }
+	inline int getProgramIndex(void){ return m_programIndex; }
 protected:
     VideoRenderer(VideoRendererPrivate &d);
     virtual bool receiveFrame(const VideoFrame& frame) = 0;
@@ -241,6 +242,7 @@ private:
     //the size of decoded frame. get called in receiveFrame(). internal use only
     void setInSize(const QSize& s);
     void setInSize(int width, int height);
+	int m_programIndex;
 };
 
 } //namespace QtAV

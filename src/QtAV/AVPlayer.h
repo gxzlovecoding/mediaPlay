@@ -180,6 +180,7 @@ public:
     bool isPaused() const;
 
 	void enableProgram(int index = 0);
+	void disableProgram(int index = 0);
 	void disableAllProgram();
 
     // TODO: use id as parameter and return ptr?

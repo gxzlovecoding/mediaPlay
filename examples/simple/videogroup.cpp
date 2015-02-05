@@ -368,9 +368,10 @@ void VideoGroup::preloadSuccess()
 		m_playList->addItem(QString::fromLocal8Bit(streamName.c_str()), mpPlayer->getFirstImage(i));
 	}
 
-	for (int i = 0; i < m_currentScreens && i < mpPlayer->videoStreamCount(); i++)
+	for (int i = 0; i < m_currentScreens && i < 1; i++)
 	{
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
+		mRenderers[i]->setProgramIndex(i);
 		mpPlayer->setRenderer(mRenderers[i], i);
 		mpPlayer->enableProgram(i);
 	}
@@ -442,9 +443,33 @@ void VideoGroup::setRenderByDrag(QtAV::VideoRenderer* render)
 	int renderIndex = mRenderers.indexOf(render);
 	int programIndex = m_playList->currentRow();
 
+	// 关闭目标render当前节目
+	int oldProgramIndex = render->getProgramIndex(); 
+	if (oldProgramIndex >= 0)
+	{
+		// 把源来的program关闭
+		mpPlayer->disableProgram(oldProgramIndex);
+		mpPlayer->setRenderer(0, oldProgramIndex);
+	}
+
+	// 关闭源render当前节目
+	// 根据列表节目，找出这个节目的源render
+	QtAV::VideoRenderer* oldRender = mpPlayer->renderer(programIndex);
+
+	// 目标render设置
 	mRenderers[renderIndex]->receive(mpPlayer->getFirstFrame(programIndex));
+	mRenderers[renderIndex]->setProgramIndex(programIndex);
 	mpPlayer->setRenderer(mRenderers[renderIndex], programIndex);
 	mpPlayer->enableProgram(programIndex);
+
+	//把源render黑掉
+	if (oldRender)
+	{
+		//VideoFrame *temp = new VideoFrame();
+		VideoFrame temp;
+		oldRender->receive(temp);
+		oldRender->setProgramIndex(-1);
+	}
 }
 
 void VideoGroup::updateScreen(int num)

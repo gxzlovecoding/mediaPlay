@@ -180,6 +180,11 @@ VideoRenderer *AVPlayer::renderer(int index)
     return static_cast<VideoRenderer*>(d->vos[index]->outputs().last());
 }
 
+void AVPlayer::disableProgram(int index)
+{
+	d->read_thread->programEnable[index] = false;
+}
+
 void AVPlayer::enableProgram(int index)
 {
 	d->read_thread->programEnable[index] = true;
