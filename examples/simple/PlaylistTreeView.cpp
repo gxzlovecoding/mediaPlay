@@ -25,8 +25,16 @@ PlaylistTreeView::PlaylistTreeView(QWidget *parent)
 
 void PlaylistTreeView::addItem(QString itemName, QImage *image)
 {
+	QString name = itemName;
+	if (!itemName.isEmpty())
+	{
+		int i = itemName.indexOf(QString("&"));
+		//QString index = itemName.right(itemName.size() - i - 1);
+		name = itemName.left(i);
+	}
+
 	//生成QListWidgetItem对象(注意：其Icon图像进行了伸缩[96*96])---scaled函数
-	QListWidgetItem *pItem = new QListWidgetItem(QIcon(QPixmap::fromImage(image->scaled(QSize(W_ICONSIZE, H_ICONSIZE)))), itemName);
+	QListWidgetItem *pItem = new QListWidgetItem(QIcon(QPixmap::fromImage(image->scaled(QSize(W_ICONSIZE, H_ICONSIZE)))), name);
 	//设置单元项的宽度和高度
 	pItem->setSizeHint(QSize(W_ICONSIZE, H_ICONSIZE + 20));
 	this->insertItem(this->count(), pItem);
