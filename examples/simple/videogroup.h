@@ -43,6 +43,7 @@ public:
 	void preload(const QString& file);
 	void onPauseResumeClick();
 	void setFullscreen();
+	QString about(void);
 
 private slots:
 	void setVolume();

@@ -338,6 +338,11 @@ void VideoGroup::play(const QString &file)
 	//TODO 真正设置好每个画面对应某个节目后才开始播放。
 }
 
+QString VideoGroup::about(void)
+{
+	return QString("version : 2015-02-05_1");
+}
+
 void VideoGroup::preload(const QString& file)
 {
 	resetPlayer();
