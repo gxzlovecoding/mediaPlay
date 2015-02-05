@@ -504,8 +504,16 @@ void VideoGroup::updateScreen(int num)
 		while (mRenderers.size() > num)
 		{
 			VideoRenderer *r = mRenderers.takeLast();
-			// TODO 删除这个窗口前，把这个窗口从播放线程中释放。
-			//mpPlayer->removeVideoRenderer(r);
+			// 删除这个窗口前，把这个窗口从播放线程中释放
+			// 关闭目标render当前节目
+			int oldProgramIndex = r->getProgramIndex();
+			if (oldProgramIndex >= 0)
+			{
+				// 把源来的program关闭
+				mpPlayer->disableProgram(oldProgramIndex);
+				mpPlayer->setRenderer(0, oldProgramIndex);
+			}
+
 			if (view)
 			{
 				view->layout()->removeWidget(r->widget());
