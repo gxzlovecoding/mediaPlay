@@ -92,6 +92,7 @@ bool VideoOutputEventFilter::eventFilter(QObject *watched, QEvent *event)
         }
     }
         break;
+	/*
     case QEvent::MouseButtonDblClick:
         switchFullScreen();
         break;
@@ -126,6 +127,7 @@ bool VideoOutputEventFilter::eventFilter(QObject *watched, QEvent *event)
         window->move(x + dx, y + dy);
     }
         break;
+	*/
     default:
         break;
     }
@@ -139,6 +141,9 @@ void VideoOutputEventFilter::stopFiltering()
 
 void VideoOutputEventFilter::switchFullScreen()
 {
+	// 暂时不支持双击全屏
+	return;
+
     if (!mpRenderer || !mpRenderer->widget())
         return;
     QWidget *window = mpRenderer->widget()->window();
