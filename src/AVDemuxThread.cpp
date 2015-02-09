@@ -523,7 +523,7 @@ void AVDemuxThread::run()
              * vqueue will block demuex thread
              */
 			if (audio_thread[programIndex]->packetQueue()) {
-				if (!audio_thread[programIndex] || !programEnable[programIndex] || !audio_thread[programIndex]->isRunning()) {
+				if (!audio_thread[programIndex] || !audio_thread[programIndex]->isRunning()) {
 					audio_thread[programIndex]->packetQueue()->clear();
                     continue;
                 }
