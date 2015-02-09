@@ -340,7 +340,7 @@ void VideoGroup::play(const QString &file)
 
 QString VideoGroup::about(void)
 {
-	return QString("version : 2015-02-05_1");
+	return QString("version : 2015-02-09_1");
 }
 
 void VideoGroup::preload(const QString& file)
