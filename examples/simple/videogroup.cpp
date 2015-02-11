@@ -17,6 +17,61 @@
 using namespace QtAV;
 const qreal kVolumeInterval = 0.05;
 
+static QFile *logFile;
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#define qInstallMessageHandler qInstallMsgHandler
+void Logger(QtMsgType type, const char *msg)
+{
+#else
+void Logger(QtMsgType type, const QMessageLogContext &, const QString& qmsg)
+{
+	//const char* msg = qUtf8Printable(qmsg);
+#endif
+	fprintf(stdout, "%s", QDateTime::currentDateTime().toString("[yyyy-MM-dd hh:mm:ss.zzz]  ").toStdString().c_str());
+	if (logFile->isOpen())
+	{
+		QTextStream fout(&(*logFile));
+		fout << QDateTime::currentDateTime().toString("[yyyy-MM-dd hh:mm:ss.zzz]  ");
+	}
+
+	switch (type) {
+	case QtDebugMsg:
+		fprintf(stdout, "Debug: %s\n", qmsg);
+		if (logFile->isOpen())
+		{
+			QTextStream fout(&(*logFile));
+			fout << "Debug: " << qmsg << endl;
+		}
+		break;
+	case QtWarningMsg:
+		fprintf(stdout, "Warning: %s\n", qmsg);
+		if (logFile->isOpen())
+		{
+			QTextStream fout(&(*logFile));
+			fout << "Warning: " << qmsg << endl;
+		}
+		break;
+	case QtCriticalMsg:
+		fprintf(stderr, "Critical: %s\n", qmsg);
+		if (logFile->isOpen())
+		{
+			QTextStream fout(&(*logFile));
+			fout << "Critical: " << qmsg << endl;
+		}
+		break;
+	case QtFatalMsg:
+		fprintf(stderr, "Fatal: %s\n", qmsg);
+		if (logFile->isOpen())
+		{
+			QTextStream fout(&(*logFile));
+			fout << "Fatal: " << qmsg << endl;
+		}
+		abort();
+	}
+	fflush(0);
+}
+
 VideoGroup::VideoGroup(QWidget *parent) :
 QWidget(parent)
 , mpPlayer(0)
@@ -26,6 +81,21 @@ QWidget(parent)
 , m_isMute(false)
 , m_intervalTimer(new QTimer(this))
 {
+	QString runPath = QCoreApplication::applicationDirPath();
+	runPath.append("/log.txt");
+	logFile = new QFile(runPath);//"log.txt");
+	
+	if (!logFile->open(QIODevice::WriteOnly))
+	{
+		qWarning("Failed to open log file");
+	}
+	else
+	{
+		qInstallMessageHandler(Logger);
+	}
+
+	qDebug("init.......");
+
 	QVBoxLayout *mainLayout = new QVBoxLayout();
 	mainLayout->setSpacing(0);
 	mainLayout->setMargin(0);

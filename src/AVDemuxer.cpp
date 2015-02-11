@@ -1102,11 +1102,19 @@ bool AVDemuxer::findStreams()
         type = format_context->streams[i]->codec->codec_type;
         if (type == AVMEDIA_TYPE_VIDEO) {
             video_streams.push_back(i);
+			if (format_context->streams[i]->codec->codec_descriptor)
+			{
+				qDebug("Find video : %s", format_context->streams[i]->codec->codec_descriptor->long_name);
+			}
             if (video_stream < 0) {
                 video_stream = i;
             }
         } else if (type == AVMEDIA_TYPE_AUDIO) {
             audio_streams.push_back(i);
+			if (format_context->streams[i]->codec->codec_descriptor)
+			{
+				qDebug("Find audio : %s", format_context->streams[i]->codec->codec_descriptor->long_name);
+			}
             if (audio_stream < 0) {
                 audio_stream = i;
             }
