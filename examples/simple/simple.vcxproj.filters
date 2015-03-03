@@ -79,6 +79,15 @@
     <ClCompile Include="dragicon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_StyleButton.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_StyleButton.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="StyleButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="PlaylistTreeView.h">
@@ -94,6 +103,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="dragicon.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="StyleButton.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

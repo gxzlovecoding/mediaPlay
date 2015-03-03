@@ -114,19 +114,19 @@ QWidget(parent)
 	mpTimeSlider->setOrientation(Qt::Horizontal);
 	mpTimeSlider->setMinimum(0);
 
-	mpOne = new QPushButton();
+	mpOne = new StyleButton();
 	mpOne->setMaximumSize(40, 40);
 	mpOne->setObjectName("mpOne");
-	mpTwo = new QPushButton();
+	mpTwo = new StyleButton();
 	mpTwo->setMaximumSize(40, 40);
 	mpTwo->setObjectName("mpTwo");
-	mpThree = new QPushButton();
+	mpThree = new StyleButton();
 	mpThree->setMaximumSize(40, 40);
 	mpThree->setObjectName("mpThree");
-	mpFour = new QPushButton();
+	mpFour = new StyleButton();
 	mpFour->setMaximumSize(40, 40);
 	mpFour->setObjectName("mpFour");
-	mpNine = new QPushButton();
+	mpNine = new StyleButton();
 	mpNine->setMaximumSize(40, 40);
 	mpNine->setObjectName("mpNine");
 
@@ -143,9 +143,10 @@ QWidget(parent)
 	mpBackwardBtn->setMaximumSize(40, 40);
 	mpBackwardBtn->setObjectName("mpBackwardBtn");
 
-	mpMute = new QPushButton();
+	mpMute = new StyleButton();
 	mpMute->setMaximumSize(40, 40);
 	mpMute->setObjectName("mpMute");
+	setMuteButtonStyle();
 
 	mpVolumeSlider = new Slider();
 	//mpVolumeSlider->hide();
@@ -157,9 +158,10 @@ QWidget(parent)
 	mpVolumeSlider->setMaximumWidth(88);
 	mpVolumeSlider->setValue(int(1.0 / kVolumeInterval*qreal(kVolumeSliderMax) / 100.0));
 
-	mpFullscreenBtn = new QPushButton();
+	mpFullscreenBtn = new StyleButton();
 	mpFullscreenBtn->setMaximumSize(40, 40);
 	mpFullscreenBtn->setObjectName("mpFullscreenBtn");
+	setFullScreenButtonStyle();
 
 	connect(mpOne, SIGNAL(clicked()), SLOT(set1Renderer()));
 	connect(mpTwo, SIGNAL(clicked()), SLOT(set2Renderer()));
@@ -290,14 +292,7 @@ void VideoGroup::setVolume()
 void VideoGroup::setMute()
 {
 	m_isMute = !m_isMute;
-	if (m_isMute)
-	{
-		mpMute->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/mute.png); max-height: 30px;    max-width: 30px;  }"));
-	}
-	else
-	{
-		mpMute->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/unmute.png); max-height: 30px;    max-width: 30px;  }"));
-	}
+	setMuteButtonStyle();
 
 	if (!mpPlayer->isLoaded())
 	{
@@ -371,6 +366,7 @@ void VideoGroup::setFullscreen()
 		m_pSplitter->setSizes(size);
 	}
 	m_isFullscreen = !m_isFullscreen;
+	setFullScreenButtonStyle();
 }
 
 void VideoGroup::onPauseResumeClick()
@@ -621,4 +617,32 @@ void VideoGroup::updateScreen(int num)
 	}
 
 	preloadSuccess();
+}
+
+void VideoGroup::setMuteButtonStyle(void)
+{
+	if (m_isMute)
+	{
+		mpMute->setStyle(QString("QPushButton {border-image: url(:/simple/resources/mute_down.png);}"), \
+			QString("QPushButton {border-image: url(:/simple/resources/mute.png);}"));
+	}
+	else
+	{
+		mpMute->setStyle(QString("QPushButton {border-image: url(:/simple/resources/unmute_down.png);}"), \
+			QString("QPushButton {border-image: url(:/simple/resources/unmute.png); }"));
+	}
+}
+
+void VideoGroup::setFullScreenButtonStyle(void)
+{
+	if (!m_isFullscreen)
+	{
+		mpFullscreenBtn->setStyle(QString("QPushButton {border-image: url(:/simple/resources/full_down.png);}"), \
+			QString("QPushButton {border-image: url(:/simple/resources/full.png);}"));
+	}
+	else
+	{
+		mpFullscreenBtn->setStyle(QString("QPushButton {border-image: url(:/simple/resources/unFull_down.png);}"), \
+			QString("QPushButton {border-image: url(:/simple/resources/unFull.png);}"));
+	}
 }

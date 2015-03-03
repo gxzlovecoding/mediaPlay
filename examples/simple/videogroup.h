@@ -12,6 +12,7 @@
 #include <QtAV/WidgetRenderer.h>
 #include "Slider.h"
 #include "PlaylistTreeView.h"
+#include "StyleButton.h"
 
 
 class VideoGroup : public QWidget, public QAxBindable
@@ -50,6 +51,8 @@ private slots:
 	void setMute();
 	void intervalTimerExpired();
 private:
+	void setMuteButtonStyle(void);
+	void setFullScreenButtonStyle(void);
 	void resetPlayer(void);
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -60,8 +63,9 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider, *mpVolumeSlider;
-	QPushButton *mpOne, *mpTwo, *mpThree, *mpFour, *mpNine;
-	QPushButton *mpPlayPause, *mpForwardBtn, *mpBackwardBtn, *mpFullscreenBtn, *mpMute;
+	StyleButton *mpOne, *mpTwo, *mpThree, *mpFour, *mpNine;
+	QPushButton *mpPlayPause, *mpForwardBtn, *mpBackwardBtn;
+	StyleButton *mpFullscreenBtn, *mpMute;
 
 	QSplitter*   m_pSplitter;
 
