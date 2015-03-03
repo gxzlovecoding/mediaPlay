@@ -48,7 +48,7 @@ Slider::Slider(QWidget *parent):
 		"     border: 1px solid #999999;                             "
 		"     height: 2px;                                           "
 		"     margin: 0px 0;                                         "
-		"     left: 0px; right: 0px;                               "
+		"     left: 3px; right: 3px;                               "
 		" }                                                          "
 		"QSlider::handle:horizontal {                                "
 		"     border: 1px solid #5c5c5c;                             "
