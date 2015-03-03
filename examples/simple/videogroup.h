@@ -25,12 +25,7 @@ public:
 	void play(const QString& file);
 
 	public slots:
-	// TODO下面这5个函数很龊，要优化一下
-	void set1Renderer();
-	void set2Renderer();
-	void set3Renderer();
-	void set4Renderer();
-	void set9Renderer();
+	void setRenderer(QString name);
 
 	void openUrl();
 	void openLocalFile();
@@ -53,6 +48,7 @@ private slots:
 private:
 	void setMuteButtonStyle(void);
 	void setFullScreenButtonStyle(void);
+	void setSplitScreenButtonStyle(int num);
 	void resetPlayer(void);
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -63,7 +59,7 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider, *mpVolumeSlider;
-	StyleButton *mpOne, *mpTwo, *mpThree, *mpFour, *mpNine;
+	StyleButton *mpSplitScreen[10];
 	QPushButton *mpPlayPause, *mpForwardBtn, *mpBackwardBtn;
 	StyleButton *mpFullscreenBtn, *mpMute;
 

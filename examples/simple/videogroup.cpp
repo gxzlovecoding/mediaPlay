@@ -114,22 +114,6 @@ QWidget(parent)
 	mpTimeSlider->setOrientation(Qt::Horizontal);
 	mpTimeSlider->setMinimum(0);
 
-	mpOne = new StyleButton();
-	mpOne->setMaximumSize(40, 40);
-	mpOne->setObjectName("mpOne");
-	mpTwo = new StyleButton();
-	mpTwo->setMaximumSize(40, 40);
-	mpTwo->setObjectName("mpTwo");
-	mpThree = new StyleButton();
-	mpThree->setMaximumSize(40, 40);
-	mpThree->setObjectName("mpThree");
-	mpFour = new StyleButton();
-	mpFour->setMaximumSize(40, 40);
-	mpFour->setObjectName("mpFour");
-	mpNine = new StyleButton();
-	mpNine->setMaximumSize(40, 40);
-	mpNine->setObjectName("mpNine");
-
 	mpPlayPause = new QPushButton();
 	mpPlayPause->setMaximumSize(40, 40);
 	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
@@ -163,11 +147,6 @@ QWidget(parent)
 	mpFullscreenBtn->setObjectName("mpFullscreenBtn");
 	setFullScreenButtonStyle();
 
-	connect(mpOne, SIGNAL(clicked()), SLOT(set1Renderer()));
-	connect(mpTwo, SIGNAL(clicked()), SLOT(set2Renderer()));
-	connect(mpThree, SIGNAL(clicked()), SLOT(set3Renderer()));
-	connect(mpFour, SIGNAL(clicked()), SLOT(set4Renderer()));
-	connect(mpNine, SIGNAL(clicked()), SLOT(set9Renderer()));
 	connect(mpFullscreenBtn, SIGNAL(clicked()), SLOT(setFullscreen()));
 	connect(mpPlayPause, SIGNAL(clicked()), this, SLOT(onPauseResumeClick()));
 	connect(mpTimeSlider, SIGNAL(sliderPressed()), SLOT(seek()));
@@ -178,11 +157,17 @@ QWidget(parent)
 
 	resetPlayer();
 
-	mpBar->layout()->addWidget(mpOne);
-	mpBar->layout()->addWidget(mpTwo);
-	mpBar->layout()->addWidget(mpThree);
-	mpBar->layout()->addWidget(mpFour);
-	mpBar->layout()->addWidget(mpNine);
+	for (int i = 0; i < 10; i++)
+	{
+		mpSplitScreen[i] = NULL;
+		if (i == 1 || i == 2 || i == 3 || i == 4 || i == 9)
+		{
+			mpSplitScreen[i] = new StyleButton(QString("%1").arg(i));
+			mpSplitScreen[i]->setMaximumSize(40, 40);
+			connect(mpSplitScreen[i], SIGNAL(onClick(QString)), SLOT(setRenderer(QString)));
+			mpBar->layout()->addWidget(mpSplitScreen[i]);
+		}
+	}
 	QSpacerItem *left = new QSpacerItem(80, 50, QSizePolicy::Expanding, QSizePolicy::Minimum);
 	mpBar->layout()->addItem(left);
 	mpBar->layout()->addWidget(mpBackwardBtn);
@@ -488,25 +473,9 @@ void VideoGroup::openLocalFile()
 	preload(file);
 }
 
-void VideoGroup::set1Renderer()
+void VideoGroup::setRenderer(QString name)
 {
-	updateScreen(1);
-}
-void VideoGroup::set2Renderer()
-{
-	updateScreen(2);
-}
-void VideoGroup::set3Renderer()
-{
-	updateScreen(3);
-}
-void VideoGroup::set4Renderer()
-{
-	updateScreen(4);
-}
-void VideoGroup::set9Renderer()
-{
-	updateScreen(9);
+	updateScreen(name.toInt());
 }
 
 void VideoGroup::setRenderByDrag(QtAV::VideoRenderer* render)
@@ -616,6 +585,7 @@ void VideoGroup::updateScreen(int num)
 		}
 	}
 
+	setSplitScreenButtonStyle(num);
 	preloadSuccess();
 }
 
@@ -645,4 +615,20 @@ void VideoGroup::setFullScreenButtonStyle(void)
 		mpFullscreenBtn->setStyle(QString("QPushButton {border-image: url(:/simple/resources/unFull_down.png);}"), \
 			QString("QPushButton {border-image: url(:/simple/resources/unFull.png);}"));
 	}
+}
+
+void VideoGroup::setSplitScreenButtonStyle(int num)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (mpSplitScreen[i])
+		{
+			mpSplitScreen[i]->setStyle(QString("QPushButton {border-image: url(:/simple/resources/%1_down.png);}").arg(i), \
+				QString("QPushButton {border-image: url(:/simple/resources/%1.png);}").arg(i));
+		}
+	}
+
+	if (mpSplitScreen[num])
+		mpSplitScreen[num]->setStyle(QString("QPushButton {border-image: url(:/simple/resources/%1_down.png);}").arg(num), \
+		QString("QPushButton {border-image: url(:/simple/resources/%1_down.png);}").arg(num));
 }
