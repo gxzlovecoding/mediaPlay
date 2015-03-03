@@ -29,6 +29,7 @@
         <file>resources/full_down.png</file>
         <file>resources/unFull.png</file>
         <file>resources/unFull_down.png</file>
+        <file>resources/stop_down.png</file>
         <file>resources/style.qss</file>
     </qresource>
 </RCC>

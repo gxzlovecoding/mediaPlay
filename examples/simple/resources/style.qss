@@ -1,24 +1,3 @@
-QPushButton#mpOne{ border-image: url(:/simple/resources/1.png);	max-height: 30px;	max-width: 30px;}
-QPushButton#mpOne:hover{ border-image: url(:/simple/resources/1_down.png);	max-height: 30px;	max-width: 30px;}
-
-QPushButton#mpTwo{ border-image: url(:/simple/resources/2.png);	max-height: 30px;	max-width: 30px;}
-QPushButton#mpTwo:hover{ border-image: url(:/simple/resources/2_down.png);	max-height: 30px;	max-width: 30px;}
-
-QPushButton#mpThree{ border-image: url(:/simple/resources/3.png);	max-height: 30px;	max-width: 30px;}
-QPushButton#mpThree:hover{ border-image: url(:/simple/resources/3_down.png);	max-height: 30px;	max-width: 30px;}
-
-QPushButton#mpFour{	border-image: url(:/simple/resources/4.png);	max-height: 30px;	max-width: 30px;}
-QPushButton#mpFour:hover{ border-image: url(:/simple/resources/4_down.png);	max-height: 30px;	max-width: 30px;}
-
-QPushButton#mpNine{ border-image: url(:/simple/resources/9.png);	max-height: 30px;	max-width: 30px;}
-QPushButton#mpNine:hover{ border-image: url(:/simple/resources/9_down.png);	max-height: 30px;	max-width: 30px;}
-
-QPushButton#mpStop{
-	border-image: url(:/simple/resources/stop.png);
-	max-height: 30px;
-	max-width: 30px;
-}
-
 QPushButton#mpForwardBtn{
 	border-image: url(:/simple/resources/next.png);
 	max-height: 30px;

@@ -18,6 +18,7 @@ using namespace QtAV;
 const qreal kVolumeInterval = 0.05;
 
 static QFile *logFile;
+static QMutex mutex;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #define qInstallMessageHandler qInstallMsgHandler
@@ -26,6 +27,7 @@ void Logger(QtMsgType type, const char *msg)
 #else
 void Logger(QtMsgType type, const QMessageLogContext &, const QString& qmsg)
 {
+	mutex.lock();
 	//const char* msg = qUtf8Printable(qmsg);
 #endif
 	fprintf(stdout, "%s", QDateTime::currentDateTime().toString("[yyyy-MM-dd hh:mm:ss.zzz]  ").toStdString().c_str());
@@ -70,6 +72,7 @@ void Logger(QtMsgType type, const QMessageLogContext &, const QString& qmsg)
 		abort();
 	}
 	fflush(0);
+	mutex.unlock();
 }
 
 VideoGroup::VideoGroup(QWidget *parent) :
@@ -114,16 +117,16 @@ QWidget(parent)
 	mpTimeSlider->setOrientation(Qt::Horizontal);
 	mpTimeSlider->setMinimum(0);
 
-	mpPlayPause = new QPushButton();
+	mpPlayPause = new StyleButton();
 	mpPlayPause->setMaximumSize(40, 40);
-	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
+	setPlayPauseButtonStyle();
 	//mpStop = new QPushButton();
 	//mpStop->setMaximumSize(40, 40);
 	//mpStop->setObjectName("mpStop");
-	mpForwardBtn = new QPushButton();
+	mpForwardBtn = new StyleButton();
 	mpForwardBtn->setMaximumSize(40, 40);
 	mpForwardBtn->setObjectName("mpForwardBtn");
-	mpBackwardBtn = new QPushButton();
+	mpBackwardBtn = new StyleButton();
 	mpBackwardBtn->setMaximumSize(40, 40);
 	mpBackwardBtn->setObjectName("mpBackwardBtn");
 
@@ -356,22 +359,19 @@ void VideoGroup::setFullscreen()
 
 void VideoGroup::onPauseResumeClick()
 {
-	if (!mpPlayer->isLoaded())
+	if (mpPlayer && mpPlayer->isLoaded())
 	{
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
-		return;
+		if (mpPlayer->isPaused())
+		{
+			mpPlayer->play();
+		}
+		else
+		{
+			mpPlayer->pause(true);
+		}
 	}
 
-	if (mpPlayer->isPaused())
-	{
-		mpPlayer->play();
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/pause.png); max-height: 30px;    max-width: 30px;  }"));
-	}
-	else
-	{
-		mpPlayer->pause(true);
-		mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); max-height: 30px;    max-width: 30px;  }"));
-	}
+	setPlayPauseButtonStyle();
 }
 
 void VideoGroup::resizeEvent(QResizeEvent *event)
@@ -407,7 +407,7 @@ void VideoGroup::preloadSuccess()
 		return;
 
 	// 设置播放按钮
-	mpPlayPause->setStyleSheet(QString("QPushButton {color: red;  border-image: url(:/simple/resources/play.png); max-height: 30px;    max-width: 30px;  }"));
+	setPlayPauseButtonStyle();
 
 	// 初始化声音
 	setVolume();
@@ -631,4 +631,18 @@ void VideoGroup::setSplitScreenButtonStyle(int num)
 	if (mpSplitScreen[num])
 		mpSplitScreen[num]->setStyle(QString("QPushButton {border-image: url(:/simple/resources/%1_down.png);}").arg(num), \
 		QString("QPushButton {border-image: url(:/simple/resources/%1_down.png);}").arg(num));
+}
+
+void VideoGroup::setPlayPauseButtonStyle(void)
+{
+	if (mpPlayer && mpPlayer->isLoaded() && mpPlayer->isPaused())
+	{
+		mpPlayPause->setStyle(QString("QPushButton {border-image: url(:/simple/resources/play_down.png);}"), \
+			QString("QPushButton {border-image: url(:/simple/resources/play.png);}"));
+	}
+	else
+	{
+		mpPlayPause->setStyle(QString("QPushButton {border-image: url(:/simple/resources/pause_down.png);}"), \
+			QString("QPushButton {border-image: url(:/simple/resources/pause.png);}"));
+	}
 }

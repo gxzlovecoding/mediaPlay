@@ -49,6 +49,7 @@ private:
 	void setMuteButtonStyle(void);
 	void setFullScreenButtonStyle(void);
 	void setSplitScreenButtonStyle(int num);
+	void setPlayPauseButtonStyle(void);
 	void resetPlayer(void);
 	virtual void resizeEvent(QResizeEvent *event);
 	void updateScreen(int num);
@@ -59,9 +60,7 @@ private:
 	QWidget *mainWidget;
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider, *mpVolumeSlider;
-	StyleButton *mpSplitScreen[10];
-	QPushButton *mpPlayPause, *mpForwardBtn, *mpBackwardBtn;
-	StyleButton *mpFullscreenBtn, *mpMute;
+	StyleButton *mpSplitScreen[10], *mpForwardBtn, *mpBackwardBtn, *mpPlayPause, *mpFullscreenBtn, *mpMute;
 
 	QSplitter*   m_pSplitter;
 
