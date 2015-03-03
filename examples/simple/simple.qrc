@@ -1,20 +1,29 @@
 <RCC>
     <qresource prefix="/simple">
-        <file>resources/background.png</file>
-        <file>resources/next.png</file>
-        <file>resources/play.png</file>
-        <file>resources/pre.png</file>
-        <file>resources/stop.png</file>
-        <file>resources/pause.png</file>
-        <file>resources/full.png</file>
-        <file>resources/9.png</file>
         <file>resources/1.png</file>
+        <file>resources/1_down.png</file>
         <file>resources/2.png</file>
+        <file>resources/2_down.png</file>
         <file>resources/3.png</file>
+        <file>resources/3_down.png</file>
         <file>resources/4.png</file>
+        <file>resources/4_down.png</file>
+        <file>resources/9.png</file>
+        <file>resources/9_down.png</file>
+        <file>resources/background.png</file>
+        <file>resources/full.png</file>
         <file>resources/mute.png</file>
-        <file>resources/unmute.png</file>
+        <file>resources/next.png</file>
+        <file>resources/next_down.png</file>
+        <file>resources/pause.png</file>
+        <file>resources/pause_down.png</file>
+        <file>resources/play.png</file>
+        <file>resources/play_down.png</file>
+        <file>resources/pre.png</file>
+        <file>resources/pre_down.png</file>
         <file>resources/slider_button.png</file>
+        <file>resources/stop.png</file>
+        <file>resources/unmute.png</file>
         <file>resources/style.qss</file>
     </qresource>
 </RCC>
