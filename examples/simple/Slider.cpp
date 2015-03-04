@@ -43,6 +43,14 @@ Slider::Slider(QWidget *parent):
     setOrientation(Qt::Horizontal);
     setMouseTracking(true); //mouseMoveEvent without press.
 
+	QFile styleSheet(":/simple/resources/qsliderStyle.qss");
+	if (!styleSheet.open(QIODevice::ReadOnly))
+	{
+		qWarning("Can't open the style sheet file.");
+	}
+	this->setStyleSheet(styleSheet.readAll());
+
+	/*
 	this->setStyleSheet(QString(
 		"QSlider::groove:horizontal {                                "
 		"     border: 1px solid #999999;                             "
@@ -66,6 +74,7 @@ Slider::Slider(QWidget *parent):
 		//" background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(27, 5, 27, 255), stop:0.25 rgba(99, 20, 102, 255), stop:0.5 rgba(154, 30, 158, 255), stop:1 rgba(173, 57, 176, 255));                      "
 		"}"
 		));
+		*/
 }
 
 Slider::~Slider()

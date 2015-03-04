@@ -31,5 +31,6 @@
         <file>resources/unFull_down.png</file>
         <file>resources/stop_down.png</file>
         <file>resources/style.qss</file>
+        <file>resources/qsliderStyle.qss</file>
     </qresource>
 </RCC>
