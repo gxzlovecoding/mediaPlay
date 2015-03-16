@@ -257,8 +257,11 @@ bool AVPlayer::Private::setupAudioThread(AVPlayer *player)
 	{
 		// TODO all audio will be add
 		AVCodecContext *aCodecCtx = demuxer.audioCodecContext(*it);
-		if (!aCodecCtx) {
-			return false;
+		if (!aCodecCtx || aCodecCtx->bit_rate <= 0 || aCodecCtx->sample_rate <= 0) {
+			//return false;
+			index--;
+			demuxer.removeAudioStream(*it);
+			continue;
 		}
 		qDebug("has audio");
 		if (!adec[index]) {
