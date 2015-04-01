@@ -185,6 +185,11 @@ void AVPlayer::disableProgram(int index)
 	d->read_thread->programEnable[index] = false;
 }
 
+bool AVPlayer::isEnableProgram(int index)
+{
+	return d->read_thread->programEnable[index];
+}
+
 void AVPlayer::enableProgram(int index)
 {
 	d->read_thread->programEnable[index] = true;
