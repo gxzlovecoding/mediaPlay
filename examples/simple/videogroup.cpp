@@ -9,6 +9,7 @@
 #include <ActiveQt/QAxFactory>
 #include <QDesktopWidget>
 #include <QApplication>
+#include <QToolTip>
 
 #include <QtAV/VideoRendererTypes.h>
 #include <QtAV/GLWidgetRenderer2.h>
@@ -19,6 +20,11 @@ const qreal kVolumeInterval = 0.05;
 
 static QFile *logFile;
 static QMutex mutex;
+
+// 支持中文
+#if _MSC_VER >= 1600  
+#pragma execution_character_set("utf-8")  
+#endif  
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #define qInstallMessageHandler qInstallMsgHandler
@@ -363,6 +369,18 @@ void VideoGroup::onPauseResumeClick()
 	{
 		if (mpPlayer->isPaused())
 		{
+			// 如果主显示区域没有拖视频窗口进来，提示用户
+			int enableProgramCount = 0;
+			for (int i = 0; i < m_currentScreens ; i++)
+			{
+				enableProgramCount += mpPlayer->isEnableProgram(i) ? 1 : 0;
+			}
+
+			if (enableProgramCount == 0)
+			{
+				QToolTip::showText(QCursor::pos(), tr("请拖动视频进显示区播放！"));
+				return;
+			}
 			mpPlayer->play();
 		}
 		else
