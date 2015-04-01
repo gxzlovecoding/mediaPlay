@@ -69,6 +69,7 @@ private:
 	int m_currentScreens;
 	bool m_isMute;
 	QTimer*      m_intervalTimer;
+	QString m_url;
 };
 
 #endif // TESTAX_H

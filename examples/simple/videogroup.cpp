@@ -417,6 +417,8 @@ void VideoGroup::preload(const QString& file)
 	resetPlayer();
 
 	mpPlayer->preLoad(file);
+
+	m_url = file;
 }
 
 void VideoGroup::preloadSuccess()
@@ -441,6 +443,18 @@ void VideoGroup::preloadSuccess()
 		std::string streamName = mpPlayer->getVideoStreamName(i);
 		m_playList->addItem(QString::fromLocal8Bit(streamName.c_str()), mpPlayer->getFirstImage(i));
 	}
+
+	// 如果是udp直播 就把快进快退disable掉
+	if (m_url.startsWith("udp:"))
+	{
+		mpForwardBtn->setDisabled(true);
+		mpBackwardBtn->setDisabled(true);
+	}
+	else
+	{
+		mpForwardBtn->setEnabled(true);
+		mpBackwardBtn->setEnabled(true);
+	}	
 
 	// 初始化时显示区域为空
 	/*
