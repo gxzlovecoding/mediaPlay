@@ -424,6 +424,8 @@ void VideoGroup::preloadSuccess()
 		m_playList->addItem(QString::fromLocal8Bit(streamName.c_str()), mpPlayer->getFirstImage(i));
 	}
 
+	// 初始化时显示区域为空
+	/*
 	for (int i = 0; i < m_currentScreens && i < 1; i++)
 	{
 		mRenderers[i]->receive(mpPlayer->getFirstFrame(i));
@@ -431,6 +433,7 @@ void VideoGroup::preloadSuccess()
 		mpPlayer->setRenderer(mRenderers[i], i);
 		mpPlayer->enableProgram(i);
 	}
+	*/
 }
 
 void VideoGroup::onStartPlay()
