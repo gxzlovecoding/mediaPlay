@@ -89,6 +89,7 @@ QWidget(parent)
 , m_currentScreens(4)
 , m_isMute(false)
 , m_intervalTimer(new QTimer(this))
+, m_isLive(true)
 {
 	QString runPath = QCoreApplication::applicationDirPath();
 	runPath.append("/log.txt");
@@ -165,6 +166,12 @@ QWidget(parent)
 	connect(mpVolumeSlider, SIGNAL(valueChanged(int)), SLOT(setVolume()));
 
 	resetPlayer();
+
+	// 添加时间显示
+	mpTimeLabel = new QLabel("0:0/0:0");
+	mpTimeLabel->setMinimumWidth(80);
+	mpTimeLabel->setAlignment(Qt::AlignCenter);
+	mpBar->layout()->addWidget(mpTimeLabel);
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -449,12 +456,18 @@ void VideoGroup::preloadSuccess()
 	{
 		mpForwardBtn->setDisabled(true);
 		mpBackwardBtn->setDisabled(true);
+		m_isLive = true;
+		m_duration = 0;
 	}
 	else
 	{
 		mpForwardBtn->setEnabled(true);
 		mpBackwardBtn->setEnabled(true);
+		m_isLive = false;
+		m_duration = mpPlayer->duration() / 1000;
 	}	
+
+	mpTimeLabel->setText(QString("0:0/%1:%2").arg(m_duration / 60).arg(m_duration % 60));
 
 	// 初始化时显示区域为空
 	/*
@@ -486,6 +499,13 @@ void VideoGroup::onStopPlay()
 void VideoGroup::onPositionChange(qint64 pos)
 {
 	mpTimeSlider->setValue(pos);
+
+	if (!m_isLive)
+	{
+		int currentTime = pos / 1000;
+		mpTimeLabel->setText(QString("%1:%2/%3:%4")\
+			.arg(currentTime / 60).arg(currentTime % 60).arg(m_duration / 60).arg(m_duration % 60));
+	}
 }
 
 void VideoGroup::seek()

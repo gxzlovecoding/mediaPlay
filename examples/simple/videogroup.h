@@ -5,6 +5,7 @@
 #include <QSplitter>
 #include <QSlider>
 #include <QList>
+#include <QLabel>
 #include <QTimer>
 #include <QtWidgets/QWidget>
 #include <ActiveQt/QAxBindable>
@@ -61,6 +62,7 @@ private:
 	PlaylistTreeView    *m_playList;
 	Slider *mpTimeSlider, *mpVolumeSlider;
 	StyleButton *mpSplitScreen[10], *mpForwardBtn, *mpBackwardBtn, *mpPlayPause, *mpFullscreenBtn, *mpMute;
+	QLabel *mpTimeLabel;
 
 	QSplitter*   m_pSplitter;
 
@@ -70,6 +72,8 @@ private:
 	bool m_isMute;
 	QTimer*      m_intervalTimer;
 	QString m_url;
+	bool m_isLive;
+	int m_duration; // µ•Œª√Î
 };
 
 #endif // TESTAX_H
