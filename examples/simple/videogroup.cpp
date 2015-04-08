@@ -374,7 +374,7 @@ void VideoGroup::onPauseResumeClick()
 {
 	if (mpPlayer && mpPlayer->isLoaded())
 	{
-		if (mpPlayer->isPaused())
+		if (mpPlayer->isPlaying())
 		{
 			// 如果主显示区域没有拖视频窗口进来，提示用户
 			int enableProgramCount = 0;
@@ -388,11 +388,12 @@ void VideoGroup::onPauseResumeClick()
 				QToolTip::showText(QCursor::pos(), tr("请拖动视频进显示区播放！"));
 				return;
 			}
-			mpPlayer->play();
+
+			mpPlayer->pause(!mpPlayer->isPaused());
 		}
 		else
 		{
-			mpPlayer->pause(true);
+			mpPlayer->play();
 		}
 	}
 
