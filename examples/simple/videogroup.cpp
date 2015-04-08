@@ -495,6 +495,17 @@ void VideoGroup::onStopPlay()
 	mpTimeSlider->setValue(0);
 	qDebug(">>>>>>>>>>>>>>disable slider");
 	mpTimeSlider->setDisabled(true);
+
+	// 停止播放后，回到初始状态
+	for (int i = 0; i < m_currentScreens ; i++)
+	{
+		if (mpPlayer->isEnableProgram(i))
+		{
+			mpPlayer->renderer(i)->receive(mpPlayer->getFirstFrame(i));
+		}
+	}
+	// 播放按键也回到初始状态
+	setPlayPauseButtonStyle();
 }
 
 void VideoGroup::onPositionChange(qint64 pos)
@@ -691,7 +702,7 @@ void VideoGroup::setSplitScreenButtonStyle(int num)
 
 void VideoGroup::setPlayPauseButtonStyle(void)
 {
-	if (mpPlayer && mpPlayer->isLoaded() && mpPlayer->isPaused())
+	if (mpPlayer && mpPlayer->isLoaded() && (mpPlayer->isPaused() | !mpPlayer->isPlaying()))
 	{
 		mpPlayPause->setStyle(QString("QPushButton {border-image: url(:/simple/resources/play_down.png);}"), \
 			QString("QPushButton {border-image: url(:/simple/resources/play.png);}"));
