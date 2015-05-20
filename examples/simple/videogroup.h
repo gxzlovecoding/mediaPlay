@@ -23,6 +23,7 @@ public:
 	explicit VideoGroup(QWidget *parent = 0);
 	~VideoGroup();
 
+	virtual bool eventFilter(QObject *watched, QEvent *event);
 	void play(const QString& file);
 
 	public slots:

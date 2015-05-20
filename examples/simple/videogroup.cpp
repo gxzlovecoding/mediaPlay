@@ -255,6 +255,33 @@ VideoGroup::~VideoGroup()
 	mpPlayer->stop();
 }
 
+bool VideoGroup::eventFilter(QObject *watched, QEvent *event)
+{
+	switch (event->type())
+	{
+		case QEvent::KeyPress: 
+		{
+			QKeyEvent *key_event = static_cast<QKeyEvent*>(event);
+			int key = key_event->key();
+			switch (key) 
+			{
+				case Qt::Key_F:
+					;
+				//setFullscreen();
+			}
+			break;
+		}
+		case QEvent::MouseButtonDblClick:
+			//对关窗口双击全屏
+			setFullscreen();
+			break;
+		default:
+			break;
+	}
+
+	return false;
+}
+
 void VideoGroup::resetPlayer(void)
 {
 	if (mpPlayer && mpPlayer->isLoaded())
@@ -603,6 +630,9 @@ void VideoGroup::updateScreen(int num)
 			mRenderers.append(renderer);
 			renderer->widget()->setAttribute(Qt::WA_DeleteOnClose);
 			renderer->widget()->setWindowFlags(renderer->widget()->windowFlags() | Qt::FramelessWindowHint);
+
+			// render的事件注册到本类
+			renderer->installEventFilter(this);
 		}
 	}
 	else
