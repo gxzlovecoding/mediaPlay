@@ -151,17 +151,10 @@ if errorlevel 1 goto VCEnd
       <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_AXSERVER_LIB;QAXSERVER;QT_AXBASE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>$(QTDIR)\bin\idc.exe $(TargetPath) /idl $(IntDir)simpleax.idl -version 1.0
-if errorlevel 1 goto VCEnd
- midl $(IntDir)simpleax.idl /nologo /tlb $(IntDir)simpleax.tlb
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\idc.exe $(TargetPath) /tlb $(IntDir)simpleax.tlb
-if errorlevel 1 goto VCEnd
- $(QTDIR)\bin\idc.exe $(TargetPath) /regserver</Command>
-      <Message>$(QTDIR)\bin\idc.exe $(TargetPath) /idl $(IntDir)simpleax.idl -version 1.0
- midl $(IntDir)simpleax.idl /nologo /tlb $(IntDir)simpleax.tlb
- C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /tlb $(IntDir)simpleax.tlb
- C:\qt\qt5.3.1\5.3\msvc2013_opengl\bin\idc.exe $(TargetPath) /regserver</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
