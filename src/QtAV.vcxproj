@@ -208,8 +208,6 @@
     <ClCompile Include="AudioResamplerTypes.cpp" />
     <ClCompile Include="AudioThread.cpp" />
     <ClCompile Include="..\contrib\libchardet\src\CharDistribution.cpp" />
-    <ClCompile Include="output\video\OpenGLWidgetRenderer.cpp" />
-    <ClCompile Include="output\video\OpenGLWindowRenderer.cpp" />
     <ClCompile Include="subtitle\CharsetDetector.cpp" />
     <ClCompile Include="ColorTransform.cpp" />
     <ClCompile Include="CommonTypes.cpp" />
